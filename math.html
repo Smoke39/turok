@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Math Namespace - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.sqrt
+		{
+			border-top: 1px solid black;
+			padding: 0 0.25em 0 0.15em;
+		}
+	</style>
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Constants">Constants</a></li>
+		<li><a href="#Arithmetic">Basic Arithmetic</a></li>
+		<li><a href="#Trig">Trigonometry</a></li>
+		<li><a href="#RNG">Random Numbers</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> Math Namespace</h2>
+
+<p>The <code>Math</code> namespace provides an assortment of common math functions and constants.</p>
+
+
+<h3 id="Constants">Constants</h3>
+
+<p>As you can see, these aren't actually declared <code>const</code>.  Please don't modify their values.</p>
+
+<h4 class="funcDec">float <em>pi</em></h4>
+<p><code>3.141593</code></p>
+
+<h4 class="funcDec">kVec3 <em>vecZero</em></h4>
+<p><code>(0,0,0)</code></p>
+
+
+<h3 id="Arithmetic">Basic Arithmetic</h3>
+
+<h4 class="funcDec collapse">int <strong>Abs</strong>( int <em>i</em> )</h4>
+<h4 class="funcDec">float <strong>Fabs</strong>( float <em>f</em> )</h4>
+<p>absolute value</p>
+
+<h4 class="funcDec collapse">float <strong>Ceil</strong>( float <em>f</em> )</h4>
+<h4 class="funcDec">float <strong>Floor</strong>( float <em>f</em> )</h4>
+<p>ceiling (round up) and floor (round down)</p>
+
+<h4 class="funcDec collapse">float <strong>Sqrt</strong>( float <em>f</em> )</h4>
+<h4 class="funcDec">float <strong>InvSqrt</strong>( float <em>f</em> )</h4>
+<!--<p>&radic;<span class="sqrt"><code>f</code></span> and 1/&radic;<span class="sqrt"><code>f</code></span></p>-->
+<p>&radic;<span class="sqrt"><code>f</code></span> and <span class="numerator">1</span>&frasl;<span class="denominator">&radic;<span class="sqrt"><code>f</code></span></span></p>
+<p><code>1/Math::Sqrt(0)</code> crashes the game, but <code>Math::InvSqrt(0)</code> returns a large number</p>
+
+<h4 class="funcDec">float <strong>Pow</strong>( float <em>base</em>, float <em>exp</em> )</h4>
+<p>returns <code>base</code> raised to the power of <code>exp</code></p>
+<h4 class="funcDec">float <strong>Log</strong>( float <em>f</em> )</h4>
+<p>natural logarithm (base <em>e</em>)</p>
+
+<h4 class="funcDec">float <strong>IncMax</strong>( <!--const -->float <em>val</em>, <!--const -->float <em>inc</em>, <!--const -->float <em>max</em> )</h4>
+<p>returns <code>val+inc</code>, capped to <code>max</code></p>
+
+<h4 class="funcDec">float <strong>Lerp</strong>( float <em>a</em>, <!--const -->float <em>b</em>, <!--const -->float <em>pct</em> )</h4>
+<p>linear interpolation</p>
+<p>returns a value a fraction of the way from <code>a</code> to <code>b</code>:</p>
+<pre><code>a + pct*(b-a)</code></pre>
+
+<h4></h4>
+<aside class="unimportant">
+	<p><code>void Clamp( floa t&amp;out val, <!--const -->float min, <!--const -->float max )</code> is broken, because <code>val</code> isn't <code>&amp;inout</code></p>
+	<p><code>float NLerp( <!--const -->float, <!--const -->float, <!--const -->float )</code> seems to just return the third parameter</p>
+</aside>
+
+
+<h3 id="Trig">Trigonometry</h3>
+
+<h4 class="funcDec collapse">float <strong>Sin</strong>( float <em>radians</em> )</h4>
+<h4 class="funcDec collapse">float <strong>Cos</strong>( float <em>radians</em> )</h4>
+<h4 class="funcDec">float <strong>Tan</strong>( float <em>radians</em> )</h4>
+<p>sine, cosine, tangent</p>
+<h4 class="funcDec">float <strong>ACos</strong>( float <em>f</em> )</h4>
+<p>arc (inverse) cosine (in radians)</p>
+<h4 class="funcDec">float <strong>ATan2</strong>( float <em>y</em>, float <em>x</em> )</h4>
+<p>angle (in radians) between the positive x-axis and (<code>x</code>,<code>y</code>)</p>
+
+<h4 class="funcDec collapse">float <strong>Deg2Rad</strong>( float <em>degrees</em> )</h4>
+<h4 class="funcDec">float <strong>Rad2Deg</strong>( float <em>radians</em> )</h4>
+<p>convert between radians and degrees</p>
+
+<h4 class="funcDec">float <strong>CosTween</strong>( <!--const -->float <em>[unknown]</em> )</h4>
+<h4 class="funcDec">float <strong>CosArc</strong>( <!--const -->float <em>[unknown]</em> )</h4>
+
+
+<h3 id="RNG">Random Numbers</h3>
+
+<p>Floating point ranges are given in <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals">interval notation</a>: parentheses denote exclusive endpoints, and square brackets denote inclusive endpoints.</p>
+<p>Take any exclusive endpoints with a grain of salt &ndash; it's possible I just never rolled them while testing.</p>
+
+<h4 class="funcDec collapse">int <strong>Rand</strong>()</h4>
+<h4 class="funcDec">int <strong>SysRand</strong>()</h4>
+<p><code>0</code> to <code>32767</code></p>
+<p>anecdotally, <code>Rand()</code> seems to have a hard time hitting <code>0</code> (faster but with less even distribution?)</p>
+
+<h4 class="funcDec">uint8 <strong>RandByte</strong>()</h4>
+<p><code>0</code> to <code>255</code></p>
+
+<h4 class="funcDec">int <strong>RandMax</strong>( <!--const -->int <em>max</em> )</h4>
+<p><code>0</code> to <code>max-1</code></p>
+
+<h4 class="funcDec">float <strong>RandFloat</strong>()</h4>
+<p>( <code>0.0</code>, <code>1.0</code> )</p>
+<h4 class="funcDec">float <strong>RandCFloat</strong>()</h4>
+<p>[ <code>-1.0</code>, <code>1.0</code> )</p>
+<h4 class="funcDec">float <strong>RandRange</strong>( <!--const -->float <em>min</em>, <!--const -->float <em>max</em> )</h4>
+<p>( <code>min</code>, <code>max</code> ]</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ScriptObject - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> ScriptObject</h2>
+
+<p>This is the base class for all scripts that correspond to a <a href="kActor.html">kActor</a>.</p>
+
+<p>Script objects get a handle to their associated kActor in their constructor, which is typically stored in a member variable named <code>self</code>.</p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnTick</strong>()</h4>
+<p>gets called every <a href="scripts.html#TickRate">tick</a></p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSpawn</strong>()</h4>
+<p>gets called when the actor is spawned</p>
+<aside>
+	<a href="kActor.html#Flags">flags</a> and <a href="kActor.html#TID">tag ID</a> aren't initialized until <code>OnBeginLevel()</code> &ndash; possibly other properties, too
+</aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnBeginLevel</strong>()</h4>
+<p>gets called when the map starts, after <code>OnSpawn()</code></p>
+<p>only gets called for actors placed in the map file, not dynamically spawned actors</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnPostBeginLevel</strong>()</h4>
+<p>gets called after <code>OnBeginLevel()</code></p>
+<p>this gets called for all actors &ndash; not just those placed in the map file &ndash; so you can think of it as a general "on-post-spawn"</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnEndLevel</strong>()</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnActivate</strong>()</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnDeactivate</strong>()</h4>
+
+<h4 id="OnDamage" class="funcDec collapse"><span class="unimportant">void</span> <strong>OnDamage</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em>, <span class="unimportant">const</span> int <em>damage</em> )</h4>
+<h4 id="OnDeath" class="funcDec"><span class="unimportant">void</span> <strong>OnDeath</strong>( <a href="kActor.html">kActor</a>@ <em>killer</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em> )</h4>
+<p>gets called when taking damage, before the actor's <a href="kActor.html#Health">health</a> gets decremented</p>
+<p><code>damageDef</code> stores <a href="defs.html#damageInfo">damage type</a> properties</p>
+<p>if the actor dies, <code>OnDeath()</code> is called before <code>OnDamage()</code></p>
+<aside>
+	<code>OnDamage()</code> doesn't get called for the <a href="ScriptObjectPlayer.html">player</a> if he's invincible
+</aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSleep</strong>()</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnWake</strong>()</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnRestore</strong>()</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnTouch</strong>( <a href="kActor.html">kActor</a>@ <em>theActorThatTouchedMe</em> )</h4>
+<h4 id="OnCollide" class="funcDec"><span class="unimportant">void</span> <strong>OnCollide</strong>( <a href="kCModel.html">kCModel</a>@ <em>pCModel</em> )</h4>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

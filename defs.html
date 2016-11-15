@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Defs - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+<h2>Defs</h2>
+
+<table>
+	<tr>
+		<td>actors</td>
+		<td>defines all the things than can exist in the world (pickups, enemies, decorations...)</td>
+	</tr>
+	<tr>
+		<td><a href=#ammoInfo>ammoInfo</a></td>
+		<td>defines ammo types</td>
+	</tr>
+	<tr>
+		<td><a href=#damageInfo>damageInfo</a></td>
+		<td>defines damage type properties</td>
+	</tr>
+	<tr>
+		<td><a href="#mapInfo">mapInfo</a></td>
+		<td>bundles maps together into the actual levels of the game</td>
+	</tr>
+	<tr>
+		<td><a href=#textureSetInfo>textureSetInfo</a></td>
+		<td>defines texture variants and animations</td>
+	</tr>
+	<tr>
+		<td><a href=#weaponInfo>weaponInfo</a></td>
+		<td>defines player weapons</td>
+	</tr>
+</table>
+
+
+<h3 id=ammoInfo>ammoInfo</h3>
+
+<p>Defines ammo types.</p>
+<p>Specifies max ammo (with and without backpack) and HUD icon.</p>
+<p>New ammo types can be created by simply adding their names to this file and listing their properties within their block.</p>
+<p>Referenced by weapon definitions in <a href=#weaponInfo>weaponInfo</a> (which ammo types the weapon will draw from) and weapon/ammo pickup actor defs.</p>
+
+
+<h3 id=damageInfo>damageInfo</h3>
+
+<p>Defines damage type properties.</p>
+<p>Referred to by <a href=fx.html#Events>fx events</a> (and probably elsewhere, e.g., for melee).</p>
+<p>Most damage types are fairly generic, and may be referenced by several projectile types, so be careful when changing values here.  It's often preferable to change which damage type a projectile refers to, rather than changing the properties of the damage type here.</p>
+<p>New damage types can be defined by simply adding its name to this file, and listing its properties within its block.</p>
+<p>New damage properties can also be created by simply adding them to a damage type's definition.  They won't do anything by default, but you'll be able to test for them in an actor's script to program new reactions.</p>
+<table>
+	<tr>
+		<td>damage</td>
+		<td>base damage</td>
+	</tr>
+	<tr>
+		<td>randomFactor</td>
+		<td>
+			<p>minimum random damage scalar</p>
+			<p>damage will be randomized within the range <code>randomFactor*damage</code> to <code>damage</code></p>
+			<p>values &geq; <code>1.0</code> will always result in <code>damage</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>bExplode</td>
+		<td>
+			<p>Set to <code>1</code> to deal damage in a radius.</p>
+			<p>Causes enemies (and bodies) to fly into the air on death.</p>
+			<p>scripts/misc/destructibles (trees, rocks blocking the minigun on level 2, etc.) also looks for this flag to determine if it should be destroyed when taking damage.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>radius</td>
+		<td>how wide of an area to deal damage in if <code>bExplode</code> is <code>1</code></td>
+	</tr>
+	<tr>
+		<td>bNoDamageSource</td>
+		<td>set to <code>1</code> to not damage whoever caused this damage (e.g., shockwave weapon splash damage does not affect the player because of this)</td>
+	</tr>
+	<tr>
+		<td>bNoAIBlast</td>
+		<td>
+			<p>If <code>bExplode</code> is <code>1</code>, do not cause enemies to fly into the air on death.</p>
+			<p>Only affects kill shots &ndash; carcasses will still fly into the air if damaged.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>bAccelerator</td>
+		<td>Causes shockwave weapon death effects.  Reacted to in <code><a href="ScriptObject.html#OnDeath">OnDeath()</a></code> in a few actor scripts.</td>
+	</tr>
+	<tr>
+		<td>bCauseSpecialAnimation</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bKnockback</td>
+		<td>
+			<p>Set to <code>1</code> to push enemies back on impact.</p>
+			<p>Does not affect velocity &ndash; it immediately sets the enemy to a new location a fixed distance away.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>knockBackForce</td>
+		<td>how far to move enemies back if <code>bKnockback</code> is <code>1</code></td>
+	</tr>
+	<tr>
+		<td>bShove</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bQuake</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bTargetPlayer</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>sound</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>soundInterval</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bImpact</td>
+		<td rowspan=3>
+			<p>Used by arrow.kfx.</p>
+			<p>Presumably related to damage scaling based on velocity.</p>
+			<p>I haven't worked out the math behind these.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>impactDamp</td>
+	</tr>
+	<tr>
+		<td>impactFallof</td>
+	</tr>
+</table>
+
+
+<h3 id="mapInfo">mapInfo</h3>
+
+<p>Bundles maps together into the actual levels of the game.</p>
+<p>Levels are defined by a name and a level number, followed by a block containing level properties.</p>
+<table>
+	<tr>
+		<td>title</td>
+		<td>only shown in save file names; hub plaques use localized strings</td>
+	</tr>
+	<tr>
+		<td><p>map_1<br>...<br>map_N</p></td>
+		<td>maps that belong to this level</td>
+	</tr>
+	<tr id="mapid">
+		<td><p>mapid_1<br>...<br>mapid_N</p></td>
+		<td>map IDs to assign to the maps defined above</td>
+	</tr>
+	<tr>
+		<td><p>maxDistance_1<br>...<br>maxDistance_N</p></td>
+		<td>fog distance for each map</td>
+	</tr>
+	<tr>
+		<td>warptid</td>
+		<td>tag ID of warp exit point marking level start</td>
+	</tr>
+	<tr>
+		<td>keys</td>
+		<td>total number of keys to find on this level</td>
+	</tr>
+	<tr>
+		<td><p>script_1<br>...<br>script_N</p></td>
+		<td>script file for each map</td>
+	</tr>
+</table>
+
+
+<h3 id=textureSetInfo>textureSetInfo</h3>
+
+<p>Defines texture variants and animations.</p>
+<p>Texture sets are defined by a parent texture, followed by a block containing animation properties and a list of texture variants.</p>
+<p>Any surface in the game using a parent texture listed in this file will have access to the variants in its set, and animate if set.</p>
+<p>Any texture without any variants or animation can be added to this list, and any surface in the game that uses it will then be affected by it automatically.</p>
+<table>
+	<tr>
+		<td>animated</td>
+		<td>
+			<p>Set to <code>1</code> to have the game cycle through each variant.</p>
+			<p><strong>note:</strong> <code>texture_1</code> of animated textures is ignored for some reason.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>speed</td>
+		<td>how long to display each frame if <code>animated</code> is <code>1</code> (larger values mean slower animation)</td>
+	</tr>
+	<tr>
+		<td><p>texture_1</br>...</br>texture_N</p></td>
+		<td>
+			<p>Texture variants.</p>
+			<p>You can have as many of these as you want.</p>
+			<p>Variants can be applied from a script with <code><a href="kRenderModel.html#SetTexture">kRenderModel::SetTexture()</a></code>.</p>
+		</td>
+	</tr>
+</table>
+
+
+<h3 id=weaponInfo>weaponInfo</h3>
+
+<p>Defines player weapons.</p>
+<p>These are the things that actually get used by the player.  Weapon pickup actor defs refer to these to tell the game which weapon to give the player when picked up.</p>
+<p>New weapons can be defined by adding their name followed by their slot number, and listing their properties within their block.</p>
+<p>Slot number determines order within the weapon selection wheel, and key bind.</p>
+<p>Make sure your weapons' slot numbers are reflected in the <code>turokWeapons</code> enum in <a href="scripts.html#common_weapons">scripts/common</a>.</p>
+<table>
+	<tr>
+		<td>offset</td>
+		<td rowspan=4>1st person model display properties</td>
+	</tr>
+	<tr>
+		<td>model</td>
+	</tr>
+	<tr>
+		<td>anim</td>
+	</tr>
+	<tr>
+		<td>scale</td>
+	</tr>
+	<tr>
+		<td>icon</td>
+		<td>HUD icon for the weapon selection wheel</td>
+	</tr>
+	<tr>
+		<td>defaultWeapon</td>
+		<td>no discernable effect?</td>
+	</tr>
+	<tr>
+		<td>owned</td>
+		<td>set to <code>1</code> to start the game with this weapon</td>
+	</tr>
+	<tr>
+		<td>initialAmmoAmount</td>
+		<td>
+			<p>How much of this weapon's primary ammo type to start the game with.</p>
+			<p>Only applies if <code>owned</code> is set to <code>1</code>?</p>
+			<aside>Pickup ammo amount is defined in weapon pickup actor defs.</aside>
+		</td>
+	</tr>
+	<tr>
+		<td>actorType</td>
+		<td>
+			<p>Unique ID number for this weapon type.</p>
+			<p>These are named in the <code>turokActorTypes</code> enum in <a href="scripts.html#common_actors">scripts/common</a>, but I don't think they're actually referred to anywhere.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>readySound</td>
+		<td><a href="sounds.html">sound</a> played when selecting the weapon</td>
+	</tr>
+	<tr>
+		<td>ammo</td>
+		<td>primary ammo type, from <a href=#ammoInfo>ammoInfo</a></td>
+	</tr>
+	<tr>
+		<td>altAmmo</td>
+		<td>alt ammo type, from <a href=#ammoInfo>ammoInfo</a></td>
+	</tr>
+	<tr>
+		<td>scriptClass</td>
+		<td>which class controls this weapon's operation</td>
+	</tr>
+</table>
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

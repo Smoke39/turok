@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ScriptObjectPlayer - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2>
+	<span class="breadcrumb"><a href="scripts.html">Scripts</a>
+	<a href="ScriptObject.html">ScriptObject</a></span>
+	ScriptObjectPlayer
+</h2>
+
+<p>Base class for player script.  Subclassed by TurokPlayer, which is defined in scripts/player.</p>
+
+<p class="collapse">Related classes:</p>
+<ul>
+	<li><a href="kPuppet.html">kPuppet</a> &ndash; physical player actor</li>
+	<li><a href="kPlayer.html">kPlayer</a> &ndash; meta object for managing player state</li>
+</ul>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnPickup</strong>( <a href="kActor.html">kActor</a>@ <em>pickup</em> )</h4>
+<p>called when the player collects <code>pickup</code></p>
+
+<h4 id="OnArmorDamage" class="funcDec"><span class="unimportant">void</span> <strong>OnArmorDamage</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em>, <span class="unimportant">const</span> int <em>damage</em> )</h4>
+<p>gets called instead of <code><a href="ScriptObject.html#OnDamage">OnDamage()</a></code>, if the player has any armor</p>
+<p>gets called before <a href="kPlayer.html#Armor">armor</a> value gets decremented</p>
+<p><code>damageDef</code> stores <a href="defs.html#damageInfo">damage type</a> properties</p>
+<p>all damage is absorbed, even if it's greater than the player's armor</p>
+<aside>
+	does not get called if the player is invincible
+</aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnEnterWater</strong>()</h4>
+<p>called when the player goes underwater</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

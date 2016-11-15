@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kDictMem - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+		<li><a href="#kDict">kDict</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kDictMem</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Associative_array">Associative array</a> of strings.</p>
+
+<p>kDictMems are used for storing <a href="defs.html#damageInfo">damage type</a> properties.</p>
+
+<p>There is a global kDict, <code>GameVariables</code>, for storing persistent, per-save data, like collected chronosceptor pieces.</p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec collapse">bool <strong>GetFloat</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em>, float&amp;<!--out--> <em>val</em>, <!--const -->float <em class="hasDef">default</em> = <em class="defVal">0</em> )</h4>
+<h4 class="funcDec collapse">bool <strong>GetInt</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em>, int&amp;<!--out--> <em>val</em>, <!--const -->int <em class="hasDef">default</em> = <em class="defVal">0</em> )</h4>
+<h4 class="funcDec collapse">bool <strong>GetBool</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em>, bool&amp;<!--out--> <em>val</em>, <!--const -->bool <em class="hasDef">default</em> = <em class="defVal">false</em> )</h4>
+<h4 class="funcDec collapse">bool <strong>GetString</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em>, <a href="kStr.html">kStr</a>&amp;<!--out--> <em>val</em> )</h4>
+<h4 class="funcDec">bool <strong>GetVector</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em>, <a href="kVec3.html">kVec3</a>&amp;<!--out--> <em>val</em> )</h4>
+<p>look up <code>key</code></p>
+<p>if it exists, parse its associated string and store the result in <code>val</code>, otherwise store <code>default</code></p>
+<p>return whether <code>key</code> was found</p>
+
+
+<h3>kDict</h3>
+
+<p>These methods are exclusive to kDict.</p>
+
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>Add</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>val</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetValue</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>val</em> )</h4>
+<p>add or update an entry in the array</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>Empty</strong>()</h4>
+
+<h4 class="funcDec"><!--const -->bool <strong>HasKey</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em> )</h4>
+<p>whether <code>key</code> exists in the array</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

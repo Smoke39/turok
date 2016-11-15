@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kActor - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		ol.bits
+		{
+			list-style-type: none;
+			display: table;
+		}
+		ol.bits li
+		{
+			display: table-row;
+		}
+		ol.bits li span
+		{
+			display: table-cell;
+		}
+		ol.bits li span:first-child
+		{
+			font-weight: bold;
+			text-align: right;
+			padding-right: 0.5em;
+		}
+		ol.bits li span:first-child::before
+		{
+			content: "0x";
+		}
+		ol.bits li span:first-child::after
+		{
+			content: ":";
+		}
+	</style>
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Core">Core</a></li>
+		<li><a href="#Display">Display</a></li>
+		<li><a href="#Movement">Movement</a></li>
+		<li><a href="#Collision">Collision</a></li>
+		<li><a href="#Sound">Sound</a></li>
+		<li><a href="#Spatial">Spatial</a></li>
+		<li><a href="#Targeting">Targeting</a></li>
+		<li><a href="#Other">Other Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kActor</h2>
+
+<p>kActors are the internal representation of objects in the game.  They're controlled by a combination of native code (in sobek.exe), and an associated <a href="ScriptObject.html">script object</a>, which gets a handle to its kActor in its constructor.</p>
+
+
+
+<h3 id="Core">Core</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>Remove</strong>()</h4>
+<h4 class="funcDec"><!--const -->bool <strong>IsStale</strong>()</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>MarkPersistentBit</strong>( <!--const -->bool <em>b</em> )</h4>
+<h4 class="funcDec"><!--const -->bool <strong>IsPersistentMarked</strong>()</h4>
+
+<h4 class="funcDec"><a href="kDictMem.html">kDictMem</a>@ <strong>Definition</strong>()</h4>
+<h4 class="funcDec">kActor@ <strong>CastToActor</strong>()</h4>
+<h4 class="funcDec"><a href="kAI.html">kAI</a>@ <strong>CastToAI</strong>()</h4>
+<h4 class="funcDec">int&amp; <strong>Type</strong>()</h4>
+
+<h4 id="TID" class="funcDec"><!--const -->int <strong>TID</strong>()</h4>
+<p>actor tag ID</p>
+
+<h4 class="funcDec">kScriptObject@ <strong>ScriptObject</strong>()</h4>
+<h4 class="funcDec">bool <strong>InstanceOf</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>className</em> )</h4>
+<p>returns whether this actor's type is <code>className</code>, or a subclass thereof</p>
+<aside>
+	<p><code>className</code> should be a <code>kex</code>-prefixed class (as defined in defs/actors), not a <code>k</code>-prefixed class (like we use for variable types, from the <a href="scripts.html#ClassTree">class tree</a>).</p>
+	<p>I'm not sure what the relation between <code>k</code> and <code>kex</code> classes is.  There're too many classes for each object.</p>
+</aside>
+
+<h4 class="funcDec"><!--const -->int <strong>GameTicks</strong>()</h4>
+<p>how many <a href="scripts.html#TickRate">ticks</a> the actor has existed for</p>
+
+<h4 id="Health" class="funcDec">int16&amp; <strong>Health</strong>()</h4>
+<p>actor's health</p>
+
+<h4 id="Flags" class="funcDec">uint&amp; <strong>Flags</strong>()</h4>
+<p><a href="scripts.html#BitFields">bit field</a> of actor flags:</p>
+<ul class="enum">
+	<li>
+		<span>AF_SOLID</span>
+	</li>
+	<li>
+		<span>AF_DORMANT</span>
+	</li>
+	<li>
+		<span>AF_SNAPTOFLOOR</span>
+	</li>
+	<li>
+		<span>AF_WOUNDEDMORTALLY</span>
+	</li>
+	<li>
+		<span>AF_CASTSHADOW</span>
+	</li>
+	<li>
+		<span>AF_TRIGGERSTUFF</span>
+	</li>
+	<li>
+		<span>AF_HIDDEN</span>
+	</li>
+	<li>
+		<span>AF_ACTIVATED</span>
+	</li>
+	<li>
+		<span>AF_DISABLED</span>
+	</li>
+	<li>
+		<span>AF_ENTEREDAREAEVENT</span>
+	</li>
+	<li>
+		<span>AF_REMOVEONCOMPLETION</span>
+	</li>
+	<li>
+		<span>AF_NOBLOOD</span>
+	</li>
+	<li>
+		<span>AF_AVOIDWATER</span>
+	</li>
+	<li>
+		<span>AF_FLOATINWATERONDEATH</span>
+	</li>
+	<li>
+		<span>AF_DEAD</span>
+	</li>
+	<li>
+		<span>AF_STATIONARY</span>
+	</li>
+	<li>
+		<span>AF_ALIGNTOFLOOR</span>
+	</li>
+	<li>
+		<span>AF_NODRAW</span>
+	</li>
+	<li>
+		<span>AF_NONSHOOTABLE</span>
+	</li>
+	<li>
+		<span>AF_FULLVOLUME</span>
+	</li>
+	<li>
+		<span>AF_CANBETOUCHED</span>
+	</li>
+	<li>
+		<span>AF_IGNORESOUNDEVENTS</span>
+	</li>
+	<li>
+		<span>AF_TRIGGERANIMATION</span>
+	</li>
+	<li>
+		<span>AF_HOLDTRIGGERANIM</span>
+	</li>
+	<li>
+		<span>AF_TRIGGERNAIMDELAY</span>
+	</li>
+	<li>
+		<span>AF_STAYINWATER</span>
+	</li>
+	<li>
+		<span>AF_ALWAYSACTIVE</span>
+	</li>
+	<li>
+		<span>AF_COLLIDEDWITHWALL</span>
+	</li>
+	<li>
+		<span>AF_INVINCIBLE</span>
+	</li>
+	<li>
+		<span>AF_ALLOWTINYENEMYCHEAT</span>
+	</li>
+	<li>
+		<span>AF_NOMOVEMENT</span>
+	</li>
+</ul>
+
+<h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags1</strong>()</h4>
+<h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags2</strong>()</h4>
+<h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags3</strong>()</h4>
+<h4 class="funcDec"><!--const -->int16 <strong>SpawnParams</strong>( <!--const -->int <em>param</em> )</h4>
+<p>generic space for various actor properties</p>
+<p>different classes seem to use these for different things</p>
+
+
+
+
+<h3 id="Display">Display</h3>
+
+<h4 id="RenderModel" class="funcDec"><a href="kRenderModel.html">kRenderModel</a>@ <strong>RenderModel</strong>()</h4>
+<p>returns a handle to the actor's <a href="kRenderModel.html">render model</a></p>
+
+<h4 class="funcDec">int&amp; <strong>ModelVariation</strong>()</h4>
+<p>which model variant to use (e.g., regular or cyborg variant of raptor)</p>
+
+<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Scale</strong>()</h4>
+
+<h4 id="AnimState" class="funcDec"><a href="kAnimState.html">kAnimState</a>&amp; <strong>AnimState</strong>()</h4>
+<p>returns a reference to the actor's <a href="kAnimState.html">anim state</a></p>
+
+<h4 class="funcDec">float&amp; <strong>AnimSpeed</strong>()</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>RunFxEvent</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>effectName</em> )</h4>
+<p>apply an actor effect, defined in actorfx/*.kafx</p>
+<p>todo: link to actorfx reference</p>
+
+
+
+<h3 id="Movement">Movement</h3>
+
+<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Origin</strong>()</h4>
+<p>current location of the actor</p>
+
+<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>PrevOrigin</strong>()</h4>
+<p>location of the actor before the last move</p>
+<p>for objects in motion, this is the location from the previous <a href="scripts.html#TickRate">tick</a> &ndash; the value will get stale when the object comes to rest</p>
+<aside>
+	One quirk: when trying to swim up while already at the surface, <code>self.Origin() - self.PrevOrigin()</code> results in a positive number.  Is each coordinate updated independently, only when successfully changed?
+</aside>
+
+<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Movement</strong>()</h4>
+<p>almost the change in location during the last <a href="scripts.html#TickRate">tick</a>, but not quite</p>
+<p>for the <a href="kPuppet.html">player</a>, this will be the horizontal offset only, except when in the air or swimming</p>
+<p>when swimming, the z component will reflect the <em>attempted</em> offset &ndash; it'll still be non-zero when swimming up at the surface or down at the floor</p>
+
+<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Velocity</strong>()</h4>
+<p>attempted delta per <a href="scripts.html#TickRate">tick</a></p>
+<p>For the <a href="kPuppet.html">player</a>, this will always be <code>(0,0,0)</code>, except for the z component when in the air.  When knocked back by a purlin, it'll also show the entire velocity imparted by the attack.</p>
+
+<h4 class="funcDec">float&amp; <strong>Gravity</strong>()</h4>
+<p>positive is down</p>
+<p>only takes effect when in the air</p>
+
+<h4 class="funcDec">float&amp; <strong>StepHeight</strong>()</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>MoveToPosition</strong>( <!--const -->float <em>newX</em>, <!--const -->float <em>newY</em> )</h4>
+<p>tries to move to the given global horizontal coordinates</p>
+<p>will move up and down slopes, but will be stopped by any obstructions along the way</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>newLoc</em> )</h4>
+<p>set location to an arbitrary point</p>
+<p>if the actor gets stuck in a wall or actor, or outside the map, the game will try to find a reasonable place to move it back into bounds</p>
+<aside>
+	seems equivalent to <code>self.Origin() = newLoc;</code>
+</aside>
+
+<h4 class="funcDec collapse"><a href="kAngle.html">kAngle</a>&amp; <strong>Yaw</strong>()</h4>
+<h4 class="funcDec collapse"><a href="kAngle.html">kAngle</a>&amp; <strong>Pitch</strong>()</h4>
+<h4 class="funcDec"><a href="kAngle.html">kAngle</a>&amp; <strong>Roll</strong>()</h4>
+<p>orientation of the actor, applied in the order listed</p>
+<p>for the <a href="kPuppet.html">player</a>, this reflects where the player is looking</p>
+
+<h4 class="funcDec"><a href="kQuat.html">kQuat</a>&amp; <strong>Rotation</strong>()</h4>
+<p>orientation of the actor</p>
+<p>for the <a href="kPuppet.html">player</a>, this reflects where the player is looking</p>
+
+<h4 class="funcDec">bool <strong>OnGround</strong>()</h4>
+<p>on the ground, on a climbable wall, or swimming along the ground underwater</p>
+
+<h4 class="funcDec"><!--const -->bool <strong>InWater</strong>()</h4>
+<p>swimming underwater</p>
+
+<h4 class="funcDec"><!--const -->int <strong>GetWaterLevel</strong>()</h4>
+<p>info related to <a href="kWorld.html#AAF_WATER">water</a> areas (excluding <code><a href="kWorld.html#AAF_SHALLOWWATER">AAF_SHALLOWWATER</a></code> areas)</p>
+<p>possible values are:</p>
+<ul class="enum">
+	<li>
+		<span>WLT_INVALID</span>
+		<span>&ndash;</span>
+		<span>not in a water area</span>
+	</li>
+	<li>
+		<span>WLT_OVER</span>
+		<span>&ndash;</span>
+		<span>in the air above water surface</span>
+	</li>
+	<li>
+		<span>WLT_BETWEEN</span>
+		<span>&ndash;</span>
+		<span>walking in shallow water, or swimming above the surface</span>
+	</li>
+	<li>
+		<span>WLT_UNDER</span>
+		<span>&ndash;</span>
+		<span>submerged</span>
+	</li>
+</ul>
+
+<h4 id="AreaID" class="funcDec collapse"><!--const -->int <strong>AreaID</strong>()</h4>
+<h4 id="SectorIndex" class="funcDec"><!--const -->int <strong>SectorIndex</strong>()</h4>
+<p>actor's <a href="kWorld.html#MapStructure">area and sector</a>, respectively</p>
+
+<h4 id="GetSectorIndexAtLocation" class="funcDec"><!--const -->int <strong>GetSectorIndexAtLocation</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, uint <em class="hasDef">[unknown]</em> = <em class="defVal">0</em> )</h4>
+<p>returns the <a href="kWorld.html#MapStructure">sector</a> that contains <code>loc</code></p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetSector</strong>( <!--const -->uint <em>i</em> )</h4>
+
+<h4 class="funcDec">float&amp; <strong>Friction</strong>()</h4>
+<h4 class="funcDec">float&amp; <strong>BounceDamp</strong>()</h4>
+
+
+
+<h3 id="Collision">Collision</h3>
+
+<h4 class="funcDec">float&amp; <strong>Radius</strong>()</h4>
+<h4 class="funcDec">float&amp; <strong>Height</strong>()</h4>
+<h4 class="funcDec">float&amp; <strong>WallRadius</strong>()</h4>
+
+<h4 class="funcDec collapse">float&amp; <strong>FloorHeight</strong>()</h4>
+<h4 class="funcDec collapse"><!--const -->float <strong>GetFloorHeight</strong>()</h4>
+<h4 class="funcDec collapse">float&amp; <strong>CeilingHeight</strong>()</h4>
+<h4 class="funcDec"><!--const -->float <strong>GetCeilingHeight</strong>()</h4>
+<p>global z-coordinate of the floor or ceiling at the current location</p>
+<p><code>CeilingHeight()</code>'s value is only updated when the actor enters a new <a href="kWorld.html#MapStructure">sector</a>, making it coarse and imprecise</p>
+<aside>
+	modifying the refence values does nothing
+</aside>
+<p></p>
+<aside>
+	areas without a <a href="kWorld.html#AAF_CEILING">ceiling</a> have a junk ceiling height value
+</aside>
+
+<h4 class="funcDec">bool <strong>CheckPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec">bool <strong>CheckPosition</strong>( <!--const -->float <em>f</em>, <!--const -->float <em>f</em> )</h4>
+
+<h4 class="funcDec"><!--const -->float <strong>GetWaterHeight</strong>()</h4>
+<p>global z-coordinate of current area's water surface</p>
+<aside>
+	non-<a href="kWorld.html#AAF_WATER">water</a> areas will contain a junk water height value
+</aside>
+
+<h4 id="ImpactType" class="funcDec">int&amp; <strong>ImpactType</strong>()</h4>
+<p>defines which <a href="fx.html#onImpact">onImpact</a> sub-block <a href="fx.html">effects</a> use when colliding with this actor</p>
+<p>possible values are:</p>
+<ul class="enum">
+	<li><span>IT_DEFAULT</span></li>
+	<li><span>IT_WATER</span></li>
+	<li><span>IT_METAL</span></li>
+	<li><span>IT_STONE</span></li>
+	<li><span>IT_FLESH_HUMAN</span></li>
+	<li><span>IT_FLESH_CREATURE</span></li>
+	<li><span>IT_FLESH_UNDEAD</span></li>
+	<li><span>IT_LAVA</span></li>
+	<li><span>IT_SLIME</span></li>
+	<li><span>IT_FORCEFIELD</span></li>
+</ul>
+
+<h4 class="funcDec">uint&amp; <strong>ClipFlags</strong>()</h4>
+<p><a href="scripts.html#BitFields">bit field</a> of clipping flags:</p>
+<ul class="enum">
+	<li>
+		<span>CF_CLIPEDGES</span>
+	</li>
+	<li>
+		<span>CF_IGNOREBLOCKERS</span>
+	</li>
+	<li>
+		<span>CF_DROPOFF</span>
+	</li>
+	<li>
+		<span>CF_NOENTERWATER</span>
+	</li>
+	<li>
+		<span>CF_NOEXITWATER</span>
+	</li>
+	<li>
+		<span>CF_NOCLIPSTATICS</span>
+	</li>
+	<li>
+		<span>CF_NOCLIPACTORS</span>
+	</li>
+	<li>
+		<span>CF_WALKWALLS</span>
+	</li>
+	<li>
+		<span>CF_COLLIDEFLOORS</span>
+	</li>
+	<li>
+		<span>CF_HITSCAN</span>
+	</li>
+	<li>
+		<span>CF_ALLOWCLIMB</span>
+	</li>
+	<li>
+		<span>CF_ALLOWCRAWL</span>
+	</li>
+	<li>
+		<span>CF_NOSTEPDOWN</span>
+	</li>
+	<li>
+		<span>CF_NOSLOPESTEP</span>
+	</li>
+	<li>
+		<span>CF_COLLIDEHEIGHT</span>
+	</li>
+	<li>
+		<span>CF_COLLIDECORPSES</span>
+	</li>
+	<li>
+		<span>CF_NOEXITWALLS</span>
+	</li>
+	<li>
+		<span>CF_NOCOLLIDEFUNC</span>
+	</li>
+	<li>
+		<span>CF_NOFLOORADJUST</span>
+	</li>
+	<li>
+		<span>CF_NOCEILINGADJUST</span>
+	</li>
+	<li>
+		<span>CF_COLLIDEWATER</span>
+	</li>
+</ul>
+
+
+
+<h3 id="Sound">Sound</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>PlaySound</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
+<p>play a sound by file path</p>
+<p>e.g., <code>self.PlaySound( "sounds/shaders/pistol_shot.ksnd" );</code></p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>PlaySoundWithLookupID</strong>( <!--const -->int <em>ID</em> )</h4>
+<p>play a sound by ID number, as defined in defs/fileLookup</p>
+
+<div id="stopping_sounds"><!-- for linking to sound-stopping functions as a whole -->
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>StopSound</strong>()</h4>
+<p>stop all sounds this actor is playing, looping or otherwise</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>StopLoopingSounds</strong>()</h4>
+<p>stop only looping sounds this actor is playing</p>
+</div>
+
+
+
+<h3 id="Spatial">Spatial</h3>
+
+<h4 class="funcDec"><a href="kVec3.html">kVec3</a> <strong>GetTransformedVector</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>localOffset</em> )</h4>
+<p>multiplies <code>localOffset</code> by <code>Scale()</code>, converts to global coordinates based on orientation (<code>Yaw()</code>?  not <code>Rotation()</code>, since it doesn't take player view pitch into account), and returns the result added to <code>Origin()</code></p>
+
+<h4 class="funcDec">float <strong>GetTurnYaw</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec">float <strong>GetAvoidanceAngle</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
+<h4 class="funcDec">float <strong>DistanceToPoint</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec">float <strong>DistanceToPoint</strong>( <!--const -->float <em>f1</em>, <!--const -->float <em>f2</em>, <!--const -->float <em>f3</em> )</h4>
+
+
+
+<h3 id="Targeting">Targeting</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetTarget</strong>( kActor@ <em>a</em> )</h4>
+<h4 class="funcDec">kActor@ <strong>GetTarget</strong>()</h4>
+
+<h4 class="funcDec collapse"><!--const -->bool <strong>CanSee</strong>( kActor@ <em>a</em>, <!--const -->uint <em class="hasDef">i</em> = <em class="defVal">0</em> )</h4>
+<h4 class="funcDec"><!--const -->bool <strong>CanSee</strong>( <a href="kPuppet.html">kPuppet</a>@ <em>p</em>, <!--const -->uint <em class="hasDef">i</em> = <em class="defVal">0</em> )</h4>
+<aside>
+	the <code>kPuppet</code> version is only available in kActor, not subclasses
+</aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetHeadTrackTarget</strong>( kActor@ <em>a</em> )</h4>
+
+
+
+<h3 id="Other">Other Methods</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>q</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>InflictGenericDamage</strong>( kActor@ <em>a</em>, <!--const -->int <em>i</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>InteractActorsAtPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const -->float <em class="hasDef">f1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">f2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">f3</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">f4</em> = <em class="defVal">0</em> )</h4>
+
+<h4 class="funcDec">bool <strong>RandomDecision</strong>( <!--const -->int <em>i</em> )</h4>
+<p>probability of returning true is 1 / 2<sup><code>i</code>-1</sup>, except when <code>i</code> is <code>0</code>, in which case the probability is nearly 0</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

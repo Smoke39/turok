@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kPuppet - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a> <a href="kActor.html">kActor</a></span> kPuppet</h2>
+
+</p>player's physical <a href="kActor.html">actor</a></p>
+
+<p class="collapse">related classes:</p>
+<ul>
+	<li><a href="ScriptObjectPlayer.html">ScriptObjectPlayer</a> &ndash; script object associated with kPuppet</li>
+	<li><a href="kPlayer.html">kPlayer</a> &ndash; meta object for managing player state</li>
+</ul>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec">float&amp; <strong>ViewHeight</strong>()</h4>
+<p>player view height, relative to player's location</p>
+<p>automatically moves back toward default over time</p>
+
+<h4 class="funcDec"><!--const -->float <strong>LandingViewOffset</strong>()</h4>
+<p>player view height offset caused by hitting the ground</p>
+
+<h4 class="funcDec">float&amp; <strong>RecoilPitch</strong>()</h4>
+<p>player view pitch offset, in radians</p>
+<p>automatically moves back toward 0 over time</p>
+
+<h4 class="funcDec">uint&amp; <strong>PlayerFlags</strong>()</h4>
+<p><a href="scripts.html#BitFields">bit field</a> of player state flags:</p>
+<ul class="enum">
+	<li>
+		<span>PF_NOCLIP</span>
+		<span>&ndash;</span>
+		<span><a href="console.html#noclip">noclip</a> is enabled</span>
+	</li>
+	<li>
+		<span>PF_FLY</span>
+		<span>&ndash;</span>
+		<span><a href="console.html#fly">fly mode</a> is enabled</span>
+	</li>
+	<li>
+		<span>PF_DEAD</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>PF_GOD</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>PF_JUMPING</span>
+		<span>&ndash;</span>
+		<span>it's the first few frames of a jump, and the <a href="kPlayer.html#BC_JUMP">jump button</a> is still pressed</span>
+	</li>
+	<li>
+		<span>PF_HASJUMPED</span>
+		<span>&ndash;</span>
+		<span>in the air from jumping (not from walking off a ledge)</span>
+	</li>
+	<li>
+		<span>PF_INWARPAREA</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>PF_CLIMBTHRUST</span>
+		<span>&ndash;</span>
+		<span>player is on a <a href="kWorld.html#AAF_CLIMB">climbable</a> surface and holding <a href="kPlayer.html#BC_FORWARD">forward</a><br>(true even during pause between actual motions)</span>
+	</li>
+	<li>
+		<span>PF_NOAIRFRICTION</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li id="PF_CRAWLING">
+		<span>PF_CRAWLING</span>
+		<span>&ndash;</span>
+		<span>in a <a href="kWorld.html#AAF_CRAWL">crawl</a> space, like the small passages in the catacombs</span>
+	</li>
+	<li>
+		<span>PF_PREVENTDEATHCAM</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>PF_FIREDPROJECTILE</span>
+		<span></span>
+		<span></span>
+	</li>
+</ul>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>QuietNoiseAlert</strong>()</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>LoudNoiseAlert</strong>()</h4>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

@@ -1,0 +1,550 @@
+body
+{
+	background: url(tex0011_00.png) repeat;
+	background-size: 96px;
+	background-color: #283828;
+	font-family: sans-serif;
+	font-size: 11pt;
+}
+
+#container
+{
+	max-width: 860px;
+	margin: auto;
+	background-color: white;
+	box-shadow: 0 0 30px;
+	border-radius: 10px;
+	border-top-left-radius: 46px;
+}
+
+h1
+{
+	padding: 13px 0 0 15px;
+	font-size: 35px;
+	margin: 0;
+	border-bottom: 2px groove grey;
+/*	color: #5C0;
+	text-shadow: 0 0 5px #8F4;*/
+
+/*	border: 1px solid #DDD;
+	color: #8F0;
+	text-shadow: 2px 2px 2px black, -2px -1px 2px grey;
+	font-variant: small-caps;
+	font-weight: 900;
+	background: linear-gradient( #777, #EEE );
+	background-color: #BBB;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 46px;*/
+}
+h1 span
+{
+	position: relative;
+	top: -20px;
+}
+h1 span.TX
+{
+	font-variant: small-caps;
+	font-weight: 900;
+	color: #7C0;
+/*	text-shadow: 0 0 5px #8F4;*/
+}
+h1 span.MG
+{
+	font-weight: normal;
+	font-style: italic;
+	color: #444;
+}
+h1 a
+{
+	color: inherit;
+}
+h1 a, h1 a:hover
+{
+	text-decoration: none;
+}
+h1 img
+{
+	display: inline;
+	height: 64px;
+	padding-right: 0.35em;
+	box-shadow: 0 0 0;
+}
+
+#main
+{
+	padding: 30px;
+	padding-top: 0;
+/*	border-top: 2px groove grey;
+	background-color: white;
+	border-radius: 0 0 10px 10px;*/
+}
+
+/******************************************************************************/
+/* BREADCRUMB */
+
+.breadcrumb
+{
+	font-size: 55%;
+	position: absolute; /* take the breadcrumb section out of the flow, */
+	                    /* so the actual title won't be offset */
+}
+.breadcrumb a
+{
+	position: relative; /* then relatively offset the actual text */
+	top: -1.2em;
+}
+.breadcrumb a::after
+{
+	content: " >";
+}
+
+/******************************************************************************/
+/* NAV */
+
+nav
+{
+	float: right;
+	display: inline-block;
+	margin: 0 0 1em 1em;
+/*	margin: 1.25em 0 1em 1em;*/
+	padding: 0 1.5em;
+	border: 1px solid grey;
+	background-color: #F8F8F8;
+}
+nav h3
+{
+	font-size: 100%;
+	margin: 1em 0 -0.5em 0;
+}
+nav h3+ul, nav h3+ol
+{
+	list-style-position: inside;
+	padding-left: 0;
+}
+/* first section of an article outside the intro should clear the nav box */
+nav ~ h3:first-of-type
+{
+	clear: both;
+}
+
+/******************************************************************************/
+
+h3
+{
+	margin-top: 2em;
+	border-bottom: 1px solid grey;
+}
+/* extra space above, less below */
+h4
+{
+	margin-top: 1.8em;
+	margin-bottom: 1em;
+}
+/* less spacing */
+h5
+{
+	margin: 1em 0;
+}
+/* little extra for func decs, since their base font size is smaller */
+h4.funcDec
+{
+	margin-top: 2em;
+	margin-bottom: 1.1em;
+}
+h5.funcDec
+{
+	margin: 1.1em 0;
+}
+
+/* pre-formatted text goes in an indented block */
+pre
+{
+	margin-left: 30px;
+	margin-right: 30px;
+/*	padding: 5px 10px 5px 10px;
+	box-shadow: 3px 3px 0 #DDD;*/
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+}
+pre *:first-child
+{
+	margin-top: 0;
+}
+pre *:last-child
+{
+	margin-bottom: 0;
+}
+
+/*pre,*/ code
+{
+	background-color: #EEE;
+}
+
+code
+{
+	font-family: monospace;
+	padding: 0 3px;
+}
+pre code
+{
+	/*padding: 0;*/ /* handled by pre */
+	/*box-shadow: 0 0 0;*/
+
+	font-size: 90%;
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	box-shadow: 3px 3px 0 #DDD;
+}
+
+img
+{
+	display: block;
+	margin: auto;
+	box-shadow: 1px 1px 10px #666;
+}
+
+.important
+{
+	background-color: #FFA; /*#FFF4D0;*/
+}
+.important code
+{
+	background-color: #E5E5AA;
+}
+
+.unimportant
+{
+	font-size: 80%;
+	color: #444;
+}
+aside.unimportant
+{
+	border-color: #BBB;
+	border-radius: 1em;/*10px;*/
+}
+
+.void
+{
+	background-color: #F8F8F8;
+	color: grey;
+}
+/*tr.void td:nth-child(2)
+{
+	text-align: center;
+}*/
+
+/******************************************************************************/
+/* LINKS */
+
+a
+{
+	text-decoration: none;
+	color: #36F;
+}
+a:hover
+{
+	text-decoration: underline;
+}
+a:visited
+{
+	color: #33C;
+}
+
+/* external links */
+a[href^="http://"], a[href^="https://"]
+{
+	border-bottom: 1px dashed #36F;
+}
+a[href^="http://"]:visited, a[href^="https://"]:visited
+{
+	border-bottom-color: #33C;
+}
+/*a[href^="http://"]:hover, a[href^="https://"]:hover
+{
+	text-decoration: underline overline;
+}*/
+/*a[href^="http://"]:hover::after, a[href^="https://"]:hover::after
+{
+	content: " [ext]";
+	font-size: 75%;
+	position: relative;
+	bottom: 1.25em;
+	margin-right: -2em;
+}*/
+
+/******************************************************************************/
+/* FIDDLY SHIT */
+
+/* additional heading versions are required to have enough specificity to override heading.funcDec */
+.collapse, h4.collapse, h5.collapse
+{
+	margin-bottom: 0;
+}
+.collapse + *, h4.collapse + *, h5.collapse + *
+{
+	margin-top: 0;
+}
+
+ol.noIndent, ul.noIndent, .collapse + ul, .collapse + ol
+{
+	list-style-position: inside;
+	padding-left: 0;
+}
+
+/* BOLD NUMBERED LIST */
+/* remove automatic prefix, so we can add out own bold one */
+ol.bold
+{
+	list-style-type: none;
+}
+/* set up our own counter */
+ol.bold > li
+{
+	counter-increment: oli;
+}
+/* display our bold number */
+ol.bold > li::before
+{
+	content: counter(oli) ": ";
+	font-weight: bold;
+}
+/* account for zero-based lists */
+ol.bold > li[value="0"]
+{
+	counter-reset: oli -1; /* -1, so increment rule above will bring it up to 0 */
+}
+
+/******************************************************************************/
+/* ASIDE */
+
+aside
+{
+	display: inline-block;
+	font-size: 90%;
+	/* margins apparently don't get merged with display: inline-block */
+	/*margin: 1em 0;*/
+	padding: 0.5em 0.75em;
+	border: 1px solid grey;
+	background-color: #F8F8F8;
+}
+aside *:first-child
+{
+	margin-top: 0;
+}
+aside *:last-child
+{
+	margin-bottom: 0;
+}
+
+aside code
+{
+	background-color: #E5E5E5
+}
+aside pre code
+{
+	box-shadow: 3px 3px 0 #D5D5D5;
+}
+
+/* don't reduce font size for important notes */
+aside.important
+{
+	font-size: 100%;
+}
+
+/******************************************************************************/
+/* TABLES */
+
+table
+{
+	font-size: 95%;
+	border-collapse: collapse;
+/*	box-shadow: 0 0 5px #AAA;*/
+	box-shadow: 5px 5px 0 #DDD;
+}
+td
+{
+	padding: 0.75em;
+	border: 1px solid grey;
+}
+td:first-child
+{
+	font-weight: bold;
+}
+/* EXPERIMENTAL */
+td:first-child *
+{
+	display:inline-block;
+	text-align:center;
+}
+
+td strong
+{
+	font-weight: bold; /* browser default: bolder */
+}
+td *:first-child
+{
+	margin-top: 0;
+}
+td *:last-child
+{
+	margin-bottom: 0;
+}
+
+/******************************************************************************/
+/* FUNCTION DECLARATIONS */
+
+/* de-emphasize most of the declaration */
+.funcDec, .opDec
+{
+	font-size: 90%;
+	/* indent wrapped lines */
+	text-indent: -4em;
+	padding-left: 4em;
+}
+.funcDec strong, .funcDec em, .opDec strong
+{
+	font-size: 111%;
+}
+/* function name */
+.funcDec strong
+{
+	color: /*#F0A;*/ #05F; /*#1A0;*/ /*#00F;*/
+	font-weight: inherit;
+}
+.opDec strong
+{
+	color: red;
+	font-weight: inherit;
+}
+/* function parameters */
+.funcDec em
+{
+	color: #F80; /*#FA0;*/
+	font-style: normal;
+}
+.funcDec em.hasDef
+{
+	color: #F0A; /*#2A0;*/
+	font-size: inherit;
+}
+/* parameter default values */
+.funcDec em.defVal
+{
+	color: #2A0; /*#F0A;*/
+	font-size: inherit;
+}
+
+.funcDec .unimportant
+{
+/*	font-weight: normal;
+	font-size: inherit;
+	color: inherit;*/
+	font-size: inherit;
+	color: #555;
+}
+
+/* type links */
+.funcDec a, .opDec a
+{
+	color: #609; /*#30B;*/
+	/*color: inherit;
+	text-decoration: underline;*/
+}
+
+/* don't enlarge highlighted parts so much for h5 */
+h5.funcDec strong, h5.funcDec em
+{
+	font-size: 106%;
+}
+
+/******************************************************************************/
+/* ENUM */
+
+ul.enum
+{
+	list-style-type: none;
+	display: table;
+	font-size: 90%;
+	background-color: #EEE;
+	box-shadow: 3px 3px 0 #DDD;
+	padding: 5px;
+	margin-left: 2em;
+}
+.enum li
+{
+	display: table-row;
+}
+/*
+.enum li:first-child span
+{
+	padding-top: 0;
+}
+.enum li:last-child span
+{
+	padding-bottom: 0;
+}
+*/
+.enum li span
+{
+	display: table-cell;
+	/*vertical-align: middle;
+	padding: 2px 0;*/
+}
+.enum li span
+{
+	padding: 0 5px;
+/*	background-color: white;
+	padding-left: 1em;*/
+}
+.enum li span:first-child
+{
+/*	background-color: #EEE;*/
+	font-family: monospace;
+}
+
+.enum code
+{
+	padding: 0;
+}
+
+/*
+.enum li:first-child span:first-child
+{
+	padding-top: 5px;
+}
+.enum li:last-child span:first-child
+{
+	padding-bottom: 5px;
+}
+
+.enum li span:first-child
+{
+	background-color: #EEE;
+	font-family: monospace;
+	padding: 0 10px;
+	box-shadow: 3px 3px 0 #DDD;
+}
+*/
+
+/******************************************************************************/
+/* FRACTIONS */
+/*
+sup
+{
+	vertical-align: baseline;
+}
+*/
+.numerator, .denominator/*, sup*/
+{
+	font-size: 75%;
+	position: relative;
+}
+.numerator/*, sup*/
+{
+	bottom: 0.5em;
+}
+.denominator
+{
+	top: 0.25em;
+}

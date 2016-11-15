@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kGame - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kGame</h2>
+
+<p>stored in global var <code>Game</code></p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>CallDelayedMapScript</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const -->float <em>delay</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>CallDelayedMapScript</strong>( <!--const -->int <em>scriptID</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const -->float <em>delay</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>HaltMapScript</strong>( <!--const -->int <em>scriptID</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ChangeMap</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
+
+<h4 class="funcDec"><!--const -->int <strong>GetMapNumberFromName</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
+
+<h4 class="funcDec"><!--const -->int <strong>GetCurrentMapID</strong>()</h4>
+
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>PlayMusic</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <!--const -->bool <em>bLoop</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>StopMusic</strong>()</h4>
+
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>Restart</strong>()</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ShowMainMenu</strong>()</h4>
+
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>PrintLine</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>msg</em>, <!--const -->int <em>lineNum</em>, <!--const -->int <em class="hasDef">ticks</em> = <em class="defVal">120</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>PrintHelp</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>msg</em>, <!--const -->bool <em class="hasDef">bEndGame</em> = <em class="defVal">false</em> )</h4>
+
+<h4 class="funcDec"><a href="kStr.html">kStr</a> <strong>GetLocalizedText</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>key</em> )</h4>
+
+
+<h4 class="funcDec"><!--const -->int <strong>GetDifficulty</strong>()</h4>
+<p>current difficulty setting</p>
+<p>possible values are:</p>
+<ul class="enum">
+	<li>DIFFICULTY_EASY</li>
+	<li>DIFFICULTY_NORMAL</li>
+	<li>DIFFICULTY_HARD</li>
+	<li>DIFFICULTY_HARDCORE</li>
+</ul>
+
+<h4 class="funcDec">bool <strong>GetHubKeyInfo</strong>( <!--const -->uint <em>levelNum</em>, int&amp;<!--out--> <em>keys</em>, int&amp;<!--out--> <em>remaining</em>, int&amp;<!--out--> <em>lockBits</em> )</h4>
+<p>gets info on level keys:</p>
+<ul>
+	<li><code>levelNum</code> is the number of the level to check, as defined in defs/mapInfo</li>
+	<li><code>keys</code> will be set to the total number of keys on the level, as defined in defs/mapInfo</li>
+	<li><code>remaining</code> will be set to how many keys are left to find on the level</li>
+	<li><code>lockBits</code> will be a <a href="scripts.html#BitFields">bit field</a> of which keys required to enter the level have been found</li>
+</ul>
+<p>returns whether <code>levelNum</code> is defined</p>
+
+
+<h4 class="funcDec">
+	<span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>vel</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>rot</em> )
+</h4>
+<h4 class="funcDec">
+	<span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <a href="kPuppet.html">kPuppet</a>@ <em>instigator</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>vel</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--><em>rot</em> )
+</h4>
+<h4 class="funcDec">
+	<span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--><em>rot</em> )
+</h4>
+
+<h4 class="funcDec">
+	<span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <a href="kPuppet.html">kPuppet</a>@ <em>instigator</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--><em>rot</em> )
+</h4>
+<h4 class="funcDec">
+	<span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const -->float <em>f1</em>, <!--const -->float <em>f2</em> )
+</h4>
+<h4 class="funcDec">
+	<span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <a href="kPuppet.html">kPuppet</a>@ <em>instigator</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const -->float <em>f1</em>, <!--const -->float <em>f2</em> )
+</h4>
+<h4 class="funcDec">
+	<span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const -->int <em>sector</em> )
+</h4>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

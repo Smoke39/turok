@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kPlayLoop - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kPlayLoop</h2>
+
+<p>stored in global var <code>PlayLoop</code></p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec"><!--const -->int <strong>Ticks</strong>()</h4>
+<p>number of <a href="scripts.html#TickRate">ticks</a> since the current map started</p>
+
+<h4 class="funcDec"><!--const --><span class="unimportant">void</span> <strong>TagActorForBossBar</strong>( <a href="kActor.html">kActor</a>@ <em>boss</em> )</h4>
+<p>show boss health bar on the HUD, tracking <code>boss</code>'s <a href="kActor.html#Health">health</a></p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>RemoveBossActor</strong>()</h4>
+<p>remove boss health bar from the HUD</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>CheckKeys</strong>()</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>StartWarp</strong>( <a href="kActor.html">kActor</a>@ <em>a</em>, <!--const -->int <em>warpTID</em>, <!--const -->int <em>mapID</em> )</h4>
+<p>teleport the player to the warp exit point with the given <a href="kActor.html#TID">tag ID</a>, on the map with the given <a href="defs.html#mapid">map ID</a></p>
+<p><code>a</code> must be non-null, but otherwise doesn't seem to matter</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>StartFreeWarp</strong>( <a href="kActor.html">kActor</a>@ <em>a</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>dest</em>, <!--const -->float <em>yaw</em>, <!--const -->int <em>sector</em>, <!--const -->int <em>mapID</em> )</h4>
+<p>teleport the player to an arbitrary point in the given <a href="kWorld.html#MapStructure">sector</a>, on the map with the given <a href="defs.html#mapid">map ID</a>, and facing the given direction</p>
+<p><code>a</code> must be non-null, but otherwise doesn't seem to matter</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>HandlePlayerDeath</strong>( <!--const -->bool <em class="hasDef">[unknown]</em> = <em class="defVal">true</em> )</h4>
+<p>called by map scripts at the end of custom player death cutscenes</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

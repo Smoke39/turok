@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kAngle - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Constructors">Constructors</a></li>
+		<li><a href="#Methods">Methods</a></li>
+		<li><a href="#Operators">Operators</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kAngle</h2>
+
+<p>A kAngle is simply a float that stays within <code>&plusmn;&pi;</code>.  Values outside the range aren't simply clamped, but rather converted to an equivalent angle within the range.</p>
+<p>This saves you from having to worry about things like equivalent angles offset by multiples of 2&pi;, and the difference between two angles will always be the shorter offset.  For example, <code>-0.75&pi; - 0.75&pi;</code> will return <code>&pi;</code>, not <code>-1.5&pi;</code>.</p>
+
+
+<h3 id="Constructors">Constructors</h3>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>kAngle</strong>( float <em>radians</em> )</h4>
+<p>initialize to <code>radians</code>, converted to an equivalent angle within <code>&plusmn;&pi;</code></p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>kAngle</strong>( <!--const -->kAngle&amp;<!--in--> <em>angle</em> )</h4>
+<p>copy constructor</p>
+
+
+<h3 id="Methods">Methods</h3>
+<h4 class="funcDec collapse">float <strong>Diff</strong>( <!--const -->float <em>angle</em> )</h4>
+<h4 class="funcDec">float <strong>Diff</strong>( <!--const -->kAngle&amp;<!--in--> <em>angle</em> )</h4>
+<p>returns <code>angle - this</code>, with the result converted to the range <code>&plusmn;&pi;</code></p>
+
+<h4 class="funcDec">float <strong>Interpolate</strong>( <!--const -->float <em>dest</em>, <!--const -->float <em>pct</em> )</h4>
+<p>linear interpolation &ndash; returns an angle a fraction of the way to <code>dest</code></p>
+<p>uses kAngles, so the shortest offset will be used, and the result will be within <code>&plusmn;&pi;</code></p>
+
+
+<h3 id="Operators">Operators</h3>
+<h4 class="opDec"><strong>float(</strong> kAngle <strong>)</strong></h4>
+<p>cast to float (can be done implicitly)</p>
+
+<h4 class="opDec collapse">kAngle <strong>+</strong> float</h4>
+<h4 class="opDec collapse">kAngle <strong>+</strong> kAngle</h4>
+<h4 class="opDec collapse">kAngle <strong>+=</strong> float</h4>
+<h4 class="opDec collapse">kAngle <strong>+=</strong> kAngle</h4>
+<h4 class="opDec collapse">kAngle <strong>-</strong> float</h4>
+<h4 class="opDec collapse">kAngle <strong>-</strong> kAngle</h4>
+<h4 class="opDec collapse">kAngle <strong>-=</strong> float</h4>
+<h4 class="opDec">kAngle <strong>-=</strong> kAngle</h4>
+<p>ordinary float addition and subtraction, but with the result converted to the range <code>&plusmn;&pi;</code></p>
+
+<h4 class="opDec"><strong>-</strong>kAngle</h4>
+<p>negation</p>
+
+<h4 class="opDec collapse">kAngle <strong>=</strong> float</h4>
+<h4 class="opDec">kAngle <strong>=</strong> kAngle</h4>
+<p>assignment</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kWeapon - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a> <a href="kActor.html">kActor</a></span> kWeapon</h2>
+
+<p><a href="kActor.html">actor</a> type used for the player's held weapons (not weapon pickups)</p>
+
+<p>kWeapons are associated with a <a href="ScriptObjectWeapon.html">ScriptObjectWeapon</a></p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 id="Owner" class="funcDec"><!--const --><a href="kPlayer.html">kPlayer</a>&amp; <strong>Owner</strong>()</h4>
+<p>returns a reference to the <a href="kPlayer.html">kPlayer</a> that owns this weapon</p>
+<aside>
+	technically, since Turok is single-player only, this will always be the same as the global <code>Player</code> variable
+</aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>FireProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em>, <!--const -->float <em>x</em>, <!--const -->float <em>y</em>, <!--const -->float <em>z</em>, <!--const -->bool <em class="hasDef">b</em> = <em class="defVal">false</em> )</h4>
+<h4 class="funcDec">kVec3 <strong>TransformToOwnerPosition</strong>()</h4>
+<h4 class="funcDec">kVec3 <strong>TransformToOwnerPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

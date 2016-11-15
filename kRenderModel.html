@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kRenderModel - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kRenderModel</h2>
+
+<p>You can get a handle to an actor's render model with <code><a href="kActor.html#RenderModel">kActor::RenderModel()</a></code>.</p>
+
+<p>See also <a href="kAnimState.html">kAnimState</a> for animating the model.</p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetModel</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>modelPath</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>animPath</em> )</h4>
+<p>change which model to display</p>
+<p>e.g.,</p>
+<pre><code>self.RenderModel().SetModel(
+	"models/dyn_grenade_launcher.bin",
+	"anims/dyn_grenade_launcher_anim.bin" );</code></pre>
+
+<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Offset</strong>()</h4>
+<p>offset from the actor's location to render the model, in global coordinates</p>
+
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>SetRotationOffset</strong>( <!--const -->int <em>node</em>, <!--const -->float <em>radians</em>, <!--const -->float <em>axisX</em>, <!--const -->float <em>axisY</em>, <!--const -->float <em>axisZ</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetRotationOffset</strong>( <!--const -->int <em>node</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>offset</em> )</h4>
+<p>change the orientation of a part of the model, in local coordinates</p>
+
+<h4 id="SetTexture" class="funcDec"><span class="unimportant">void</span> <strong>SetTexture</strong>( <!--const -->int <em>node</em>, <!--const -->int <em>variant</em> )</h4>
+<p>set the <a href="defs.html#textureSetInfo">texture variant</a> to use for all textures on a part of the model</p>
+
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>SetVisibility</strong>( <!--const -->int <em>node</em>, <!--const -->bool <em>bVisible</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>HideSection</strong>( <!--const -->int <em>node</em>, <!--const -->int <em>section</em>, <!--const -->bool <em>bHide</em> )</h4>
+<p>set the visibility of a part of the model, or a portion thereof</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>AddTrailEffect</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>effectName</em>, <!--const -->int <em>node</em> )</h4>
+<p>attach a trail effect to a part of the model</p>
+<p>todo: link to trails reference</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>RemoveTrailEffect</strong>()</h4>
+<p>remove all attached trail effects</p>
+
+<h4 class="funcDec"><!--const -->int <strong>GetNumAttachedTrails</strong>()</h4>
+<p>return the number of trail effects currently attached to the model</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

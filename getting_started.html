@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Getting Started - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#FilePriority">File Priority</a></li>
+		<li><a href="#DevMode">Setting Developer Mode</a></li>
+		<li><a href="#Extracting">Extracting the Data</a></li>
+		<li><a href="#MakingChanges">Making Changes</a></li>
+		<li><a href="#Distribution">Distributing Your Mod</a></li>
+	</ul>
+</nav>
+
+
+<h2>Getting Started</h2>
+
+<p>This guide covers the very basics of modding Turok EX.  It explains how to get at the game's data files, how to override and modify those files, and how to package your mod for distribution.</p>
+
+
+<h3 id="FilePriority">File Priority</h3>
+
+<p>Turok EX has three places it looks for modifiable files, in the following order:</p>
+<ol>
+	<li>Unpackaged Files</li>
+	<li>Mod Packages</li>
+	<li>game.kpf</li>
+</ol>
+<p>The game stops going down the list as soon as it finds the file it's looking for, so files higher on the list override those which are lower on the list.</p>
+
+<h4>game.kpf</h4>
+<p>A package in the game's root directory where all the game's default data is stored.  Mods override the files in this package, and any files which aren't overridden will fall back on the versions in game.kpf.</p>
+<p>You should not modify this file.  Doing so is inconvenient and inefficient, both for modders and for players.</p>
+
+<h4>Mod Packages</h4>
+<p>Custom kpf files contained in a folder named "mods" in the game's root directory.  These packages contain modified versions of a subset of the files contained in game.kpf (and potentially all new files), mirroring the folder structure inside game.kpf.  Any files not present in these packages will fall back on the defaults in game.kpf.</p>
+<p>When you're ready to release your mod, this is the format you should distribute it in.</p>
+
+<h4>Unpackaged Files</h4>
+<p>Files based in the game's root directory (following the same folder structure as inside game.kpf) have top priority, and will even override mod packages.  <strong>These files will <em>only</em> be loaded if dev mode is active.</strong></p>
+<p>These are your work-in-progress files, and what you'll primarily be working with.</p>
+
+<aside class="important">
+	<strong>Note:</strong> on Windows, unpackaged file names are <em>not</em> case-sensitive; however, when packaged in a kpf, they <em>are</em> case-sensitive.  When working on your mod, <em>always</em> treat files as if they are case-sensitive.
+</aside>
+
+
+<h3 id="DevMode">Setting Developer Mode</h3>
+
+<p>The first thing we want to do is enable dev mode so the game will load our unpackaged, work-in-progress files.</p>
+<!--<ol>
+	<li>-->
+		<p>Open config.cfg in the game's root directory.  Search for <code>dev</code>.  You should find the following line:</p>
+			<pre><code>seta developer "0"</code></pre>
+<!--	</li>
+	<li>-->
+		<p>Change the <code>0</code> to a <code>1</code>:</p>
+			<pre><code>seta developer "1"</code></pre>
+<!--	</li>
+</ol>-->
+<p>If the line doesn't exist, simply add it yourself.</p>
+
+
+<h3 id="Extracting">Extracting the Data</h3>
+
+<p>Before we start making changes, we'll generally want to make a copy of a file from game.kpf to use as a starting point.  kpf files are just zip files with a different extension.  You can open them manually in an archive manager, or you can rename their extension from kpf to zip and double click them.  Just make sure you change it back to kpf when you're done if you use the latter method.</p>
+
+<aside>
+	<strong>Optional:</strong> it can be convenient to have unpackaged copies of game.kpf's contents for easier access.  You can put the extracted data wherever you want, as long as it isn't the game's root directory.  I personally keep these copies in a folder named "export":
+</aside>
+<p></p>
+<img src="export.png" alt="game.kpf contents, extracted to Turok\export">
+
+
+<h3 id="MakingChanges">Making Changes</h3>
+
+<p>Now let's bring it all together and make a simple change to the game.  We'll modify the pistol and assault rifle to leave blood on walls instead of making a spark.</p>
+
+<p>Create a folder named "fx" in the game's root directory, and copy fx/bullet.kfx from game.kpf (or your extracted copy) into this new folder.  Note how the folder structure mirrors that of game.kpf:</p>
+<p><img src="bullet.kfx-packaged.png" alt="bullet.kfx in game.kpf/fx/"></p>
+<p><img src="bullet.kfx-copy.png" alt="copy of bullet.kfx in Turok/fx/"></p>
+
+<br>
+<p>Open the copy of bullet.kfx you just made in a text editor like Notepad.  Search for:</p>
+	<pre><code>fx = "fx/spark.kfx"</code></pre>
+<p>and change it to:</p>
+	<pre><code>fx = "fx/blood.kfx"</code></pre>
+
+<br>
+<p>Save the file, start the game, and try out the new effect:</p>
+<img src="BulletBlood.png" alt="screenshot of modified bullet hit effect">
+
+
+<h3 id="Distribution">Distributing Your Mod</h3>
+
+<p>Once you're ready to share your mod, you should package it in its own kpf file.</p>
+<p>Create a new zip file, and put all your modified files in it.  As always, make sure to maintain the folder structure inside your zip file.  Once you have all your files zipped up, change the zip file's extension to kpf.  Create a "mods" folder in the game's root directory, and put your mod's kpf file in it.</p>
+<p>Here's what our sample mod looks like once it's been packed up and placed in the mods folder:</p>
+<img src="tutorial.kpf.png" alt="screenshot of Turok/mods/tutorial.kpf, which contains fx/bullet.kfx">
+
+<p>Now you'll want to check that your packaged mod still functions as expected.</p>
+<p>Disable dev mode by reversing the <a href="#DevMode">config change</a> you made earlier.  This ensures that we're <em>only</em> loading our packaged mod, and not our unpackaged work-in-progress files.  Start the game and confirm that your mod is still working properly.  If everything's in order, then your kpf is ready for distribution!</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

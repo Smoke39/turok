@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Scripts - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		ul.files
+		{
+			padding-left: 0;
+		}
+		.files li
+		{
+			list-style-type: none;
+		}
+		.folder::before
+		{
+			content: "[";
+		}
+		.folder::after
+		{
+			content: "]";
+		}
+		.txt::after
+		{
+			content: ".txt";
+		}
+
+		.tree li
+		{
+			list-style-type: none;
+		}
+		ul.tree
+		{
+			padding-left: 0;
+		}
+		.tree ul
+		{
+			padding-left: 0.25em;
+		}
+		.tree li li
+		{
+			border-left: 1px solid grey;
+			padding-left: 2em;
+		}
+/*
+		.tree li:last-child
+		{
+			border-left: white;
+		}
+*/
+		.tree .unimportant, .tree .unimportant li
+		{
+			border-color: #DDD;
+		}
+	</style>
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#General">General</a>
+			<ul>
+				<li><a href="#AngelScript">AngelScript</a></li>
+				<li><a href="#BitFields">Bit Fields</a></li>
+				<li><a href="#TickRate">Tick Rate</a></li>
+			</ul>
+		</li>
+		<li><a href="#Global">Global</a>
+			<ul>
+				<li><a href="#Math">Math Namespace</a></li>
+				<li><a href="#common">common.txt</a></li>
+				<li><a href="#Constants">Constants</a></li>
+				<li><a href="#Objects">Objects</a></li>
+			</ul>
+		</li>
+		<li><a href="#ClassTree">Class Tree</a></li>
+	</ul>
+</nav>
+
+
+<h2>Scripts</h2>
+
+<p>Objects in the game are represented by <a href="kActor.html">kActor</a>, which are controlled by a combination of native code (in sobek.exe), and scripts.</p>
+<p><a href="ScriptObject.html">Script objects</a> get a handle to their associated kActor in their constructor, which is typically stored in a member variable named <code>self</code>.</p>
+
+<!--<aside>
+	This guide omits <code>const</code> declarations where they have no practical impact (e.g., data passed by value), and where testing seems to contradict them.  Check <a href="https://www.dropbox.com/s/6nvxxczvi8j9shu/ScriptAPI.txt?dl=0">BehemothProgrammer's notes</a> if you want to see the raw signatures taken from the game's exe.
+</aside>-->
+
+
+
+<h3 id="General">General</h3>
+
+<h4 id="AngelScript">AngelScript</h4>
+
+<p><a href="http://www.angelcode.com/angelscript/sdk/docs/manual/doc_script.html">AngelScript</a> is the scripting engine used by Turok EX.  It has a fairly familiar C-style syntax.</p>
+
+<p>One feature to be aware of is <a href="http://www.angelcode.com/angelscript/sdk/docs/manual/doc_script_handle.html">handles</a>.  Handles basically work like C++ references, except they can be modified to refer to different objects after initialization (and therefore also allow null initialization).</p>
+
+<pre><code>obj a, b;
+obj@ h;   // null handle
+@h = @a;  // h now refers to a
+h = b;    // a is now a copy of b</code></pre>
+
+
+<h4 id="BitFields">Bit Fields</h3>
+
+<p>Turok EX uses bit fields for a variety of things, so here's a very quick primer on them.</p>
+
+<p>Bit fields essentially treat each bit in an integer as a boolean value, rather than interpreting all the bits together as a single number.  Individual bits can be managed using "bitwise" arithmetic.</p>
+
+<p>Bits can be tested using the "bitwise and" operator, <code>&amp;</code>:</p>
+<pre><code>if ( Player.Buttons() &amp; BC_FORWARD )
+	// player is holding "forward"</code></pre>
+
+<p>Bits can be combined or set using the "bitwise or" operator, <code>|</code>:</p>
+<pre><code>// combine "loop" and "root motion" flags
+self.AnimState().Blend( anim_aiRunning, 4.0f, 8.0f, ANF_LOOP|ANF_ROOTMOTION );
+
+// set the "no interrupt" flag
+self.AnimState().flags |= ANF_NOINTERRUPT;</code></pre>
+
+<p>Bits can be cleared with <code>&amp;</code> and the "bitwise not" operator, <code>~</code>:</p>
+<pre><code>// clear the "no interrupt" flag
+self.AnimState().flags &amp;= ~ANF_NOINTERRUPT;</code></pre>
+
+<p>Bits can be toggled with the "bitwise exclusive or (xor)" operator, <code>^</code>:<p>
+<pre><code>// toggle the "paused" flag
+self.AnimState().flags ^= ANF_PAUSED;</code></pre>
+
+
+<h4 id="TickRate">Tick Rate</h4>
+
+<p>The basic structure of a main game loop is:</p>
+<ol>
+	<li>Update game state</li>
+	<li>Render scene</li>
+	<li>Repeat</li>
+</ol>
+<p>A single iteration of the "update" phase is called a <strong>tick</strong>.</p>
+<p>In some engines, the "update" phase occures once per frame.  If the game is designed with a fixed framerate, it will assume a specific, set amount of time has passed since the previous tick.  If the game is designed to allow a variable framerate, it will track the amount of time that's passed since the previous tick, and scale its calculations by that time.</p>
+<p>Turok EX allows a variable framerate, but its tick rate is fixed at 60hz.  If the framerate drops below 60fps, the game will run the update phase multiple times per frame to ensure the overall tick rate remains constant.</p>
+
+
+
+<h3 id="Global">Global</h3>
+
+<h4 id="Math">Math Namespace</h4>
+<p>The <a href="math.html"><code>Math</code> namespace</a> provides an assortment of common math functions and constants.</p>
+
+
+<h4 id="common">common.txt</h4>
+
+<p>This file contains a bunch of enums which give names to various constants, like actor IDs.</p>
+<p>You should always use these names when referring to such constants in your scripts.  Likewise, when modifying the <a href="defs.html">defs</a> files, you should make sure any changes you make are reflected here.</p>
+
+<p>Weapons in particular have a lot of numbers associated with them, so here's a quick reference on those:</p>
+<table>
+	<tr id="common_weapons">
+		<td>turokWeapons</td>
+		<td>
+			<code>TW_WEAPON_[...]</code><br>
+			weapon <em>slot</em> numbers
+		</td>
+	</tr>
+	<tr id ="common_actors">
+		<td>turokActorTypes</td>
+		<td>
+			<p><code>AT_WEAPON_[...]</code><br>
+			actor IDs of the weapons the player actually <em>uses</em><br>
+			(I don't think these are actually referred to anywhere)</p>
+			<p><code>AT_PICKUP_[...]</code><br>
+			actor IDs of weapon/ammo/item <em>pickups</em></p>
+		</td>
+	</tr>
+</table>
+
+
+<h4 id="Constants">Constants</h4>
+
+<h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_DELTA_TIME</em> = <em class="defVal">1/60</em></h5>
+<p>length of a <a href="#TickRate">tick</a>, in seconds</p>
+
+<h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_SECONDS</em> = <em class="defVal">1/15</em></h5>
+<p>Time unit for <a href="fx.html">effects</a>.  Not sure what significance it has in scripts.</p>
+
+<h5 class="funcDec collapse"><span class="unimportant">const</span> float <em>GAME_FRAME_TIME</em> = <em class="defVal">1/4</em></h4>
+<h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_FRAME_UNIT</em> = <em class="defVal">4</em></h5>
+<p>relations between <code>GAME_DELTA_TIME</code> and <code>GAME_SECONDS</code>?</p>
+
+<h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_SCALE</em> = <em class="defVal">10.24</em></h5>
+<p>some kind of distance scalar</p>
+
+
+<h4 id="Objects">Objects</h4>
+
+<h5 class="funcDec collapse"><a href="kActorFactory.html">kActorFactory</a> <em>ActorFactory</em></h5>
+<h5 class="funcDec collapse"><a href="kCModel.html">kCModel</a> <em>CModel</em></h5>
+<h5 class="funcDec collapse"><a href="kCamera.html">kCamera</a> <em>Camera</em></h5>
+<h5 class="funcDec collapse"><a href="kGame.html">kGame</a> <em>Game</em></h5>
+<h5 class="funcDec collapse"><a href="kDictMem.html#kDict">kDict</a> <em>GameVariables</em></h5>
+<h5 class="funcDec collapse"><a href="kPlayer.html">kPlayer</a> <em>Player</em></h5>
+<h5 class="funcDec collapse"><a href="kPlayLoop.html">kPlayLoop</a> <em>PlayLoop</em></h5>
+<h5 class="funcDec collapse"><a href="kSys.html">kSys</a> <em>Sys</em></h5>
+<h5 class="funcDec"><a href="kWorld.html">kWorld</a> <em>World</em></h5>
+
+
+
+<h3 id="ClassTree">Class Tree</h3>
+<ul class="tree">
+	<li><a href="kActor.html">kActor</a>
+		<ul>
+			<li><a href="kWeapon.html">kWeapon</a></li>
+			<li><a href="kPuppet.html">kPuppet</a></li>
+			<li><a href="kAI.html">kAI</a></li>
+		</ul>
+	</li>
+	<li><a href="kActorFactory.html">kActorFactory</a></li>
+	<li><a href="kAngle.html">kAngle</a></li>
+	<li><a href="kAnimState.html">kAnimState</a></li>
+	<li><a href="kCamera.html">kCamera</a></li>
+	<li><a href="kCModel.html">kCModel</a></li>
+	<li><a href="kDictMem.html">kDictMem</a>
+		<ul>
+			<li><a href="kDictMem.html#kDict">kDict</a></li>
+		</ul>
+	</li>
+	<li><a href="kGame.html">kGame</a></li>
+	<li><a href="kPlayer.html">kPlayer</a></li>
+	<li><a href="kPlayLoop.html">kPlayLoop</a></li>
+	<li><a href="kQuat.html">kQuat</a></li>
+	<li><a href="kRenderModel.html">kRenderModel</a></li>
+	<li>kScriptObject</li>
+	<li>kSelectionListInt</li>
+	<li>kSelectionListFloat</li>
+	<li><a href="kStr.html">kStr</a></li>
+	<li><a href="kSys.html">kSys</a></li>
+	<li><a href="kVec3.html">kVec3</a></li>
+	<li><a href="kWorld.html">kWorld</a></li>
+	<li><a href="ScriptObject.html">ScriptObject</a>
+		<ul>
+			<li>GenericAnimal</li>
+			<li>TurokAnimal</li>
+			<li>TurokFish</li>
+			<li>TurokPickupSpawner</li>
+			<li><a href="ScriptObjectPlayer.html">ScriptObjectPlayer</a>
+				<ul>
+					<li>TurokPlayer</li>
+				</ul>
+			</li>
+			<li><a href="ScriptObjectWeapon.html">ScriptObjectWeapon</a>
+				<ul class="unimportant">
+					<li>TurokWeapon
+						<ul>
+							<li>TurokKnife</li>
+							<li>TurokBow</li>
+							<li>TurokPistol</li>
+							<li>TurokShotgun</li>
+							<li>TurokAutoShotgun</li>
+							<li>TurokRifle</li>
+							<li>TurokPulseRifle</li>
+							<li>TurokMinigun</li>
+							<li>TurokGrenadeLauncher</li>
+							<li>TurokAlienRifle</li>
+							<li>TurokRocketLauncher</li>
+							<li>TurokAccelerator</li>
+							<li>TurokFusionCannon</li>
+							<li>TurokChrono</li>
+						</ul>
+					</li><!-- TurokWeapon -->
+				</ul>
+			</li><!-- ScriptObjectWeapon -->
+			<li>TurokEnemy
+				<ul>
+					<li>TurokCampainger</li>
+					<li>TurokHummer</li>
+					<li>TurokLongHunter</li>
+					<li>TurokMantis</li>
+					<li>TurokTRex</li>
+					<li>TurokAlien</li>
+					<li>TurokStalker</li>
+					<li>TurokGrunt</li>
+					<li>TurokInsect</li>
+					<li>TurokPurlin</li>
+					<li>TurokRaptor</li>
+					<li>TurokDimetrodon</li>
+					<li>TurokRider</li>
+					<li>TurokSandWorm</li>
+					<li>TurokSentry</li>
+					<li>TurokSewerCrab</li>
+					<li>TurokTurret</li>
+				</ul>
+			</li>
+			<li>TurokCatacombWater</li>
+			<li>TurokDestructible</li>
+			<li>TurokGiblet</li>
+			<li>TurokIggy</li>
+			<li>TurokLevelPortal</li>
+			<li>TurokMantisKeyPlaque</li>
+			<li>TurokMantisStatue</li>
+			<li>TurokMantisWall</li>
+			<li>TurokFloorMover
+				<ul class="unimportant">
+					<li>TurokFloorMoverLowerOnce</li>
+					<li>TurokFloorMoverLowerChangeWaitRaise</li>
+					<li>TurokFloorMoverPerpetual</li>
+					<li>TurokPortalPanel</li>
+				</ul>
+			</li>
+			<li>TurokPortalPlaque</li>
+			<li>PortalGate</li>
+			<li>TurokQuakeSource</li>
+			<li>TurokTrap</li>
+			<li>TurokLaserWall</li>
+			<li>TurokWarpPortal</li>
+			<li>TurokDoor</li>
+			<li>TurokTimerEvent</li>
+			<li>TurokTimerEventConstant</li>
+			<li>TurokPressureEvent</li>
+		</ul><!-- ScriptObject child list -->
+	</li><!-- ScriptObject -->
+</ul><!-- class tree -->
+
+
+<!-- CLASSES BY FILE
+<ul class="files">
+	<li><span class="folder">bosses</span>
+		<ul>
+			<li><span class="txt">campainger</span>
+				<ul>
+					<li>TurokCampainger</li>
+				</ul>
+			</li>
+			<li><span class="txt">hummer</span>
+				<ul>
+					<li>TurokHummer</li>
+				</ul>
+			</li>
+			<li><span class="txt">longhunter</span>
+				<ul>
+					<li>TurokLongHunter</li>
+				</ul>
+			</li>
+			<li><span class="txt">mantis</span>
+				<ul>
+					<li>TurokMantis</li>
+				</ul>
+			</li>
+			<li><span class="txt">trex</span>
+				<ul>
+					<li>TurokTRex</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><span class="folder">enemy</span>
+		<ul>
+			<li><span class="txt">alien</span>
+				<ul>
+					<li>TurokAlien</li>
+					<li>TurokStalker</li>
+				</ul>
+			</li>
+			<li><span class="txt">enemy</span>
+				<ul>
+					<li>TurokEnemy</li>
+				</ul>
+			</li>
+			<li><span class="txt">grunt</span>
+				<ul>
+					<li>TurokGrunt</li>
+				</ul>
+			</li>
+			<li><span class="txt">insect</span>
+				<ul>
+					<li>TurokInsect</li>
+				</ul>
+			</li>
+			<li><span class="txt">purlin</span>
+				<ul>
+					<li>TurokPurlin</li>
+				</ul>
+			</li>
+			<li><span class="txt">raptor</span>
+				<ul>
+					<li>TurokRaptor</li>
+					<li>TurokDimetrodon</li>
+				</ul>
+			</li>
+			<li><span class="txt">rider</span>
+				<ul>
+					<li>TurokRider</li>
+				</ul>
+			</li>
+			<li><span class="txt">sandworm</span>
+				<ul>
+					<li>TurokSandWorm</li>
+				</ul>
+			</li>
+			<li><span class="txt">sentry</span>
+				<ul>
+					<li>TurokSentry</li>
+				</ul>
+			</li>
+			<li><span class="txt">sewerCrab</span>
+				<ul>
+					<li>TurokSewerCrab</li>
+				</ul>
+			</li>
+			<li><span class="txt">turret</span>
+				<ul>
+					<li>TurokTurret</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><span class="folder">map</span></li>
+	<li><span class="folder">misc</span>
+		<ul>
+			<li><span class="txt">catacombWater</span>
+				<ul>
+					<li>TurokCatacombWater</li>
+				</ul>
+			</li>
+			<li><span class="txt">destructibles</span>
+				<ul>
+					<li>TurokDestructible</li>
+				</ul>
+			</li>
+			<li><span class="txt">giblet</span>
+				<ul>
+					<li>TurokGiblet</li>
+				</ul>
+			</li>
+			<li><span class="txt">iggy</span>
+				<ul>
+					<li>TurokIggy</li>
+				</ul>
+			</li>
+			<li><span class="txt">levelPortal</span>
+				<ul>
+					<li>TurokLevelPortal</li>
+				</ul>
+			</li>
+			<li><span class="txt">mantisObjects</span>
+				<ul>
+					<li>TurokMantisKeyPlaque</li>
+					<li>TurokMantisStatue</li>
+					<li>TurokMantisWall</li>
+				</ul>
+			</li>
+			<li><span class="txt">portalHub</span>
+				<ul>
+					<li>TurokPortalPanel</li>
+					<li>TurokPortalPlaque</li>
+					<li>PortalGate</li>
+				</ul>
+			</li>
+			<li><span class="txt">quakeSource</span>
+				<ul>
+					<li>TurokQuakeSource</li>
+				</ul>
+			</li>
+			<li><span class="txt">traps</span>
+				<ul>
+					<li>TurokTrap</li>
+					<li>TurokLaserWall</li>
+				</ul>
+			</li>
+			<li><span class="txt">warpPortal</span>
+				<ul>
+					<li>TurokWarpPortal</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><span class="folder">movers</span>
+		<ul>
+			<li><span class="txt">door</span>
+				<ul>
+					<li>TurokDoor</li>
+				</ul>
+			</li>
+			<li><span class="txt">floor</span>
+				<ul>
+					<li>TurokFloorMover</li>
+					<li>TurokFloorMoverLowerOnce</li>
+					<li>TurokFloorMoverLowerChangeWaitRaise</li>
+					<li>TurokFloorMoverPerpetual</li>
+				</ul>
+			</li>
+			<li><span class="txt">seqEvent</span>
+				<ul>
+					<li>TurokTimerEvent</li>
+					<li>TurokTimerEventConstant</li>
+					<li>TurokPressureEvent</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><span class="txt">animal</span>
+		<ul>
+			<li>GenericAnimal</li>
+			<li>TurokAnimal</li>
+			<li>TurokFish</li>
+		</ul>
+	</li>
+	<li><span class="txt">animations</span></li>
+	<li><span class="txt">cinematics</span></li>
+	<li><span class="txt">common</span></li>
+	<li><span class="txt">main</span></li>
+	<li><span class="txt">pickupSpawner</span>
+		<ul>
+			<li>TurokPickupSpanwer</li>
+		</ul>
+	</li>
+	<li><span class="txt">player</span>
+		<ul>
+			<li>TurokPlayer</li>
+		</ul>
+	</li>
+	<li><span class="txt">weapon</span>
+		<ul>
+			<li>TurokWeapon</li>
+			<li>TurokKnife</li>
+			<li>TurokBow</li>
+			<li>TurokPistol</li>
+			<li>TurokShotgun</li>
+			<li>TurokAutoShotgun</li>
+			<li>TurokRifle</li>
+			<li>TurokPulseRifle</li>
+			<li>TurokMinigun</li>
+			<li>TurokGrenadeLauncher</li>
+			<li>TurokAlienRifle</li>
+			<li>TurokRocketLauncher</li>
+			<li>TurokAccelerator</li>
+			<li>TurokFusionCannon</li>
+			<li>TurokChrono</li>
+		</ul>
+	</li>
+</ul>-->
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

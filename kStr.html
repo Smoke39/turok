@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kStr - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Constructors">Constructors</a></li>
+		<li><a href="#Methods">Methods</a></li>
+		<li><a href="#Operators">Operators</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kStr</h2>
+
+<p>string object</p>
+
+
+<h3 id="Constructors">Constructors</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>kStr</strong>( <!--const -->kStr&amp;<!--in--> <em>str</em> )</h4>
+<p>copy constructor</p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec">int <strong>IndexOf</strong>( <!--const -->kStr&amp;<!--in--> <em>str</em> )</h4>
+<p>returns the index of the first instance of <code>str</code> in the string</p>
+
+<h4 class="funcDec"><!--const -->uint <strong>Hash</strong>()</h4>
+<p><a href="https://en.wikipedia.org/wiki/Hash_function">hash</a> the string</p>
+
+<h4 class="funcDec collapse">int <strong>Atoi</strong>()</h4>
+<h4 class="funcDec">float <strong>Atof</strong>()</h4>
+<p>parse the string as an int or float</p>
+<p>large numbers should not have commas separating digits</p>
+
+<h4 class="funcDec collapse">kStr&amp; <strong>ToUpper</strong>()</h4>
+<h4 class="funcDec">kStr&amp; <strong>ToLower</strong>()</h4>
+<p>convert the string to all upper or lower case</p>
+
+
+<h3 id="Operators">Operators</h3>
+
+<h4 class="opDec">kStr <strong>=</strong> kStr</h4>
+<p>assignment</p>
+
+<h4 class="opDec collapse">kStr <strong>+</strong> kStr</h4>
+<h4 class="opDec collapse">kStr <strong>+=</strong> kStr</h4>
+<h4 class="opDec collapse">kStr <strong>+</strong> bool</h4>
+<h4 class="opDec collapse">kStr <strong>+=</strong> bool</h4>
+<h4 class="opDec collapse">kStr <strong>+</strong> int</h4>
+<h4 class="opDec">kStr <strong>+</strong> float</h4>
+<p>concatenate</p>
+
+<aside class="unimportant">
+	<code>kStr += int</code> and <code>kStr += float</code> do not exist
+</aside>
+
+<!--int8 opIndex(const int)-->
+<h4 class="opDec">kStr<strong>[</strong> int <strong>]</strong></h4>
+<p>character code of the character at the given index</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

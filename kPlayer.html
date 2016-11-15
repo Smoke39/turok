@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kPlayer - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Inventory">Inventory Functions</a></li>
+		<li><a href="#Other">Other Functions</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kPlayer</h2>
+
+<p>meta object for managing player state</p>
+<p>stored in global var <code>Player</code></p>
+
+<p class="collapse">related classes:</p>
+<ul>
+	<li><a href="kPuppet.html">kPuppet</a> &ndash; physical player actor</li>
+	<li><a href="ScriptObjectPlayer.html">ScriptObjectPlayer</a> &ndash; script object associated with kPuppet</li>
+</ul>
+
+
+<h3 id="Inventory">Inventory Functions</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ConsumeAmmo</strong>( <!--const -->int <em>amt</em> )</h4>
+<p>draws <code>amt</code> from current weapon's alt ammo if it has any, primary otherwise</p>
+<p>negative values will add ammo to alt ammo if it has any, primary otherwise (will go over max)</p>
+
+<h4 class="funcDec collapse"><!--const -->int <strong>GetAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
+<h4 class="funcDec"><!--const -->int <strong>GetAltAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
+<p>returns how much primary or alt ammo the player has for the specified weapon<a href="#weaponSlots">*</a>, respectively</p>
+
+<h4 class="funcDec"><!--const -->bool <strong>HasAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
+<p>returns whether the specified weapon<a href="#weaponSlots">*</a> has any ammo of <em>either</em> type</p>
+
+<h4 class="funcDec collapse"><!--const -->bool <strong>HasAltAmmo</strong>()</h4>
+<h4 class="funcDec"><!--const -->bool <strong>HasAltAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
+<p>returns whether the player has any of the current or specified weapon's<a href="#weaponSlots">*</a> alt ammo type, respectively</p>
+<p>always returns false if the weapon has no alt ammo type defined</p>
+
+<h4 class="funcDec"><!--const -->int <strong>CurrentWeapon</strong>()</h4>
+<p>returns the slot number of the current weapon</p>
+
+<h4 class="funcDec"><!--const -->bool <strong>HasWeapon</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
+<p>returns whether the player has the specified weapon<a href="#weaponSlots">*</a></p>
+
+<h4 class="funcDec"><!--const -->bool <strong>GiveWeapon</strong>( <!--const -->int <em>weaponSlot</em>, <!--const -->int <em>ammoAmt</em> )</h4>
+<p>Gives the player the specified weapon<a href="#weaponSlots">*</a> with the specified amount of ammo.</p>
+<p>Ammo is given as you'd expect: if the player already has ammo for the weapon, <code>ammoAmt</code> will be added to it, and it will not go over max.</p>
+<p>Does not display pickup message.  todo: refer to Game.PrintLine()</p>
+
+<h4 id="Armor" class="funcDec">int16&amp; <strong>Armor</strong>()</h4>
+<p>returns a reference to the player's armor</p>
+<p>note that the displayed armor is <span class="numerator">1</span>&frasl;<span class="denominator">3</span> the actual armor amount</p>
+
+<h4></h4><!-- spacer -->
+<aside id="weaponSlots">
+	<h4 style="display:inline;">*weapon slots</h4> are defined in <a href="defs.html#weaponInfo">defs/weaponInfo</a>, and named in the <code>turokWeapons</code> enum in <a href="scripts.html#common_weapons">scripts/common</a> for use in scripts
+</aside>
+
+
+<h3 id="Other">Other Functions</h3>
+
+<h4 class="funcDec"><!--const --><a href="kPuppet.html">kPuppet</a>@ <strong>Actor</strong>()</h4>
+<p>returns a handle to the player's <a href="kPuppet.html">actor</a></p>
+
+<h4 class="funcDec"><!--const -->uint16 <strong>Buttons</strong>()</h4>
+<p>returns a <a href="scripts.html#BitFields">bit field</a> representing the player's input</p>
+<p>possible inputs are:</p>
+<pre><code>BC_ATTACK
+<span id="BC_JUMP">BC_JUMP</span>
+<span id="BC_FORWARD">BC_FORWARD</span>
+BC_BACKWARD
+BC_STRAFELEFT
+BC_STRAFERIGHT
+BC_WEAPONRIGHT
+BC_WEAPONLEFT
+BC_MAPZOOMIN
+BC_MAPZOOMOUT</code></pre>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>Lock</strong>()</h4>
+<p>completely halts all player/weapon simulation</p>
+<p>player freezes (even in mid air), camera locks in place (even bob effects), weapon freezes mid-animation, enemies behave as if you no longer exist, etc.</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>Unlock</strong>()</h4>
+<p>presumably undoes <code>Lock()</code></p>
+
+<h4 class="funcDec"><!--const -->bool <strong>Locked</strong>()</h4>
+<p>returns whether <code>Lock()</code> is in effect</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>Victory</strong>( <!--const -->int <em class="hasDef">warpTID</em> = <em class="defVal">-1</em>, <!--const -->int <em class="hasDef">mapID</em> = <em class="defVal">-1</em> )</h4>
+<p>plays a cutscene of Turok's boss-defeated pose, then returns control to the player</p>
+<p>parameters control an optional warp at the end</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>FX - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		ol.noIndent.bold
+		{
+			/* not needed, since .bold list-style-type is none */
+			/* saves child lists from having to fix their list-style-position */
+			list-style-position: inherit;
+		}
+	</style>
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Key">Key</a></li>
+		<li><a href="#Flags">Flags</a>
+			<ul>
+				<li><a href="#DisplayFlags">Display</a>
+				<li><a href="#PhysicsFlags">Physics</a>
+				<li><a href="#OtherFlags">Other/Unkown</a>
+			</ul>
+		</li>
+		<li><a href="#Physics">Physics</a></li>
+		<li><a href="#Existential">Existential</a></li>
+		<li><a href="#Display">Display</a>
+			<ul>
+				<li><a href="#DisplayGeneral">General</a></li>
+				<li><a href="#DisplayRotation">Rotation</a></li>
+				<li><a href="#DisplayColor">Color</a></li>
+			</ul>
+		</li>
+		<li><a href="#Collision">Collision</a></li>
+		<li><a href="#Events">Events</a></li>
+	</ul>
+</nav>
+
+
+<h2>FX</h2>
+
+<p>Each kfx file can define multiple effects to spawn when the kfx is invoked.</p>
+<p>The number of effects is specified at the beginning of the file with <code>fx[N] =</code>, followed by a block containing <code>N</code> sub blocks, each defining an effect to spawn when the kfx is invoked.</p>
+<p>The number of effect definitions <strong>must</strong> match the value of <code>N</code>, or the game will crash when the kfx is invoked.</p>
+
+
+<h3 id="Key">Key</h3>
+
+<aside id="vector">
+	<h4 class="collapse">(v)</h4>
+	vector &ndash; defined as a block of 3 floating points: <code>{ x y z }</code><br>
+	+x is right, +y is forward, +z is up (relative to effect orientation)
+</aside>
+
+<p></p>
+
+<aside id="color">
+	<h4 class="collapse">(c)</h4>
+	color &ndash; defined as a block of 3 floating points <code>{ r g b }</code> from <code>0.0</code> to <code>1.0</code>
+</aside>
+
+<p></p>
+
+<aside id="random">
+	<h4 class="collapse">*</h4>
+	These have a corresponding property with the same name, suffixed with <code>Random</code>.<br>
+	A random percentage of this gets added to the base property.
+	<p>For example:</p>
+
+<pre><code>forwardSpeed = 1000
+forwardSpeedRandom = 500</code></pre>
+
+	<p>would result in a <code>forwardSpeed</code> from <code>1000</code> to <code>1500</code>.</p>
+	<p>Vectors follow the same pattern independently for each coordinate.</p>
+</aside>
+
+
+<!-- FLAGS -------------------------------------------------------------------->
+
+<h3 id="Flags">Flags</h3>
+<p>These can be either <code>0</code> (false) or <code>1</code> (true).</p>
+<h4 id="DisplayFlags">Display</h4>
+<table>
+<!--	<tr><td colSpan="2" class="header"><h4>Display</h4></td></tr>-->
+	<tr>
+		<td>bDepthBuffer</td>
+		<td>leave at <code>0</code> to be visible through walls (e.g., parts of fusion cannon explosion)</td>
+	</tr>
+	<tr>
+		<td>bDrawOnBottom</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bFadeout</td>
+		<td>no effect?</td>
+	</tr>
+	<tr id="bLensFlares">
+		<td>bLensFlares</td>
+		<td>must be set for <a href="#lensFlares"><code>lensFlares</code></a> property to take effect</td>
+	</tr>
+	<tr>
+		<td>bOffsetFromFloor</td>
+		<td>center on the bottom of the sprite, so it doesn't clip into the ground</td>
+	</tr>
+	<tr id="bScaleLerp">
+		<td>bScaleLerp</td>
+		<td>
+			<p class="collapse">controls how <a href="#scaleDest"><code>scaleDest</code></a> continuously updates <code>scale</code>:</p>
+			<ol class="bold">
+				<li value="0"><code>scale</code> *= <code>scaleDest</code></li>
+				<li><code>scale</code> += <code>scaleDest</code> * initial scale</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>bStopAnimOnImpact</td>
+		<td>freeze sprite animation after hitting <em>specifically</em> the <em>ground</em></td>
+	</tr>
+	<tr>
+		<td>bTextureWrapMirrorWidth</td>
+		<td>
+			<p>Mirrors the sprite (horizontally <em>and</em> vertically, contrary to the name and existence of <code>bTextureWrapMirrorHeight</code>) to form a larger image (scaled to fit in the same space).</p>
+			<p>example:</p>
+			<span style="line-height:64px; margin:0 1em 0 2em; float:left;">
+				<strong>0:</strong>
+			</span>
+			<img src="fx095.png" style="display:inline; float:left; box-shadow:0 0 0;">
+			<span style="line-height:64px; margin:0 1em 0 48px; float:left;">
+				<strong>1:</strong>
+			</span>
+			<img src="fx095_mirror.png" style="height:64px; display:inline; float:left; box-shadow: 0 0 0;">
+		</td>
+	</tr>
+	<tr class="void">
+		<td>bTextureWrapMirrorHeight</td>
+		<td>[no effect]</td>
+	</tr>
+
+<!--	<tr><td colSpan="2" class="header"><h4>Physics</h4></td></tr>-->
+</table>
+<h4 id="PhysicsFlags">Physics</h4>
+<table>
+	<tr>
+		<td>bAddOffset</td>
+		<td>
+			increment location by <code>offset</code> every frame?<br>
+			(required by arrow for its programatic velocity to actually take effect)
+		</td>
+	</tr>
+	<tr id="bBullet">
+		<td>bBullet</td>
+		<td>
+			<p class="collapse">affects various behavior properties, including:</p>
+			<ul>
+				<li><a href="#airFriction"><code>airFriction</code></a> cuts <a href="#lifeTime"><code>lifeTime</code></a> short instead of affecting velocity</li>
+				<li>see notes in <a href="#Collision">Collision</a></li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>bDestroyOnWaterSurface</td>
+		<td>destroy when entering/exiting water</td>
+	</tr>
+	<tr>
+		<td>bNoHitSource</td>
+		<td>don't register collision with whatever spawned us</td>
+	</tr>
+	<tr>
+		<td>bPerPolyCollision</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bProjectile</td>
+		<td>orient toward player when spawned?</td>
+	</tr>
+
+<!--	<tr><td colSpan="2" class="header"><h4>Other/Unknown</h4></td></tr>-->
+</table>
+<h4 id="OtherFlags">Other/Unknown</h4>
+<table>
+	<tr>
+		<td>bBlood</td>
+		<td>not sure yet, but only red blood effects seem to have this, not green</td>
+	</tr>
+	<tr>
+		<td>bImpactEffect</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bNoSpawnNear</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bNoSpawnFar</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bNoWallSpawn</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bNoGroundSpawn</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bRetainVelocity</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bRestrictAim</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bNoDirection</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bAttachSource</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bStickOnTarget</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bFullScreen</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bActorInstance</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bWeaponView</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bMuzzleEffect</td>
+		<td></td>
+	</tr>
+</table>
+
+
+<!-- PHYSICS ------------------------------------------------------------------>
+
+<h3 id="Physics">Physics</h3>
+<table>
+	<tr>
+		<td>offset&nbsp;<a href="#vector">(v)</a>&nbsp;<a href="#random">*</a></td>
+		<td>where to spawn this effect, relative to where the kfx itself was spawned</td>
+	</tr>
+	<tr>
+		<td>muzzleOffset&nbsp;<a href="#vector">(v)</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>translationRandomGlobal</td>
+		<td>increment <code>translation</code> by a vector with a random direction and random extent up to this amount?</td>
+	</tr>
+	<tr>
+		<td>translation&nbsp;<a href="#vector">(v)</a>&nbsp;<a href="#random">*</a></td>
+		<td rowSpan="2">initial velocity = <code>forwardSpeed</code> * normal(<code>translation</code>)</td>
+	</tr>
+	<tr>
+		<td>forwardSpeed&nbsp;<a href="#random">*</a></td>
+	</tr>
+	<tr>
+		<td>gravity</td>
+		<td>
+			<p>acceleration along global vertical axis</p>
+			<p>negative values are down</p>
+		</td>
+	</tr>
+	<tr>
+		<td>gravityRandomScale</td>
+		<td>works like other <a href="#random">randomization properties</a>, just with a different naming convention</td>
+	</tr>
+	<tr>
+		<td>mass</td>
+		<td>
+			<p>fraction of velocity along hit surface normal to retain when bouncing (after velocity is mirrored):</p>
+			<blockquote>velocity += (1 + <code>mass</code>) * (velocity &bull; normal) * normal</blockquote>
+			<aside>testing seems to indicate this gets <code>0.05</code> added to it, perhaps to prevent rounding errors from causing the effect to stick to surfaces when <code>mass</code> is <code>0</code></aside>
+		</td>
+	</tr>
+	<tr>
+		<td>friction</td>
+		<td>fraction of horizontal velocity lost when bouncing <em>specifically</em> off the <em>ground</em></td>
+	</tr>
+	<tr id="airFriction">
+		<td>airFriction</td>
+		<td>
+			<p>acceleration opposing velocity</p>
+			<p class="collapse">seems to be constant based on <em>initial</em> velocity:</p>
+			<ul>
+				<li>will cause the effect to move backward if set too high</li>
+				<li>causes path to curve after bouncing (instead of opposing new velocity)</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>waterFriction</td>
+		<td>unlike <code>airFriction</code>, this isn't a constant force &ndash; the effect will actually come to a stop if <code>waterFriction</code> is high enough, and bouncing won't mess things up</td>
+	</tr>
+</table>
+
+
+<!-- EXISTENTIAL -------------------------------------------------------------->
+
+<h3 id="Existential">Existential</h3>
+<table>
+	<tr>
+		<td>instances&nbsp;<a href="#random">*</a></td>
+		<td>
+			<p>how many copies of this effect to spawn</p>
+			<p>any randomized properties get randomized independently for each instance (e.g., shotgun pellets don't all get the same randomized trajectory)</p>
+			<p>a negative <code>instancesRandom</code> can be used to make the effect spawn &lt; 100% of the time</p>
+		</td>
+	</tr>
+	<tr>
+		<td>restart</td>
+		<td>delay by a random percentage of this between spawning instances</td>
+	</tr>
+	<tr id="lifeTime">
+		<td>lifeTime&nbsp;<a href="#random">*</a></td>
+		<td>how many <span class="numerator">1</span>&frasl;<span class="denominator">15</span> seconds this effect exists for</td>
+	</tr>
+	<tr>
+		<td>priority</td>
+		<td>
+			<p>There's a limit to how many effects can exist at once.  Effects with a higher <code>priority</code> are given precedence when that limit is reached.</p>
+			<p>Things that affect gameplay (like projectiles) should be set to <code>100</code>.</p>
+		</td>
+	</tr>
+</table>
+
+
+<!-- DISPLAY ------------------------------------------------------------------>
+
+<h3 id="Display">Display</h3>
+<h4 id="DisplayGeneral">General</h4>
+<table>
+	<tr>
+		<td>scale&nbsp;<a href="#random">*</a></td>
+		<td>size of the sprite</td>
+	</tr>
+	<tr id="scaleDest">
+		<td>scaleDest&nbsp;<a href="#random">*</a></td>
+		<td>continuously modifies <code>scale</code>, based on <a href="#bScaleLerp"><code>bScaleLerp</code></a></td>
+	</tr>
+	<tr>
+		<td>shader</td>
+		<td>
+			<p>shader to render the sprite with</p>
+			<p>typically <code>worldfx</code> or <code>worldcolorfx</code> (the latter tends to be more colorful for translucent effects)</p>
+			<p>e.g., <code>shader = "progs/worldcolorfx"</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>sprite</td>
+		<td>
+			<p>sprite to represent the effect with</p>
+			<p>e.g., <code>sprite = "sprites/fx064"</code></p>
+		</td>
+	</tr>
+	<tr id="lensFlares">
+		<td>lensFlares</td>
+		<td>
+			<p>lens flare effect to cause</p>
+			<p>e.g., <code>lensFlares = "lensflares/turoklens.klf"</code></p>
+			<p><a href="#bLensFlares"><code>bLensFlares</code></a> must be set for this to take effect</p>
+		</td>
+	</tr>
+	<tr>
+		<td><p style="display:inline-block;text-align:center;">trailDefinition_1<br>...<br>trailDefinition_N</p></td>
+		<td>
+			<p>leave polygonal trails</p>
+			<p>e.g.,</p>
+
+<pre><code>trailDefinition_1 = "Trail_TekBow_Crossline_1"
+trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
+
+		</td>
+	</tr>
+	<tr>
+		<td>drawType</td>
+		<td>
+			<ol class="noIndent bold">
+				<li value="0">face camera</li>
+				<li>flat against floor</li>
+				<li>flat against floor</li>
+				<li>face camera</li>
+				<li>face along surface normal</li>
+				<li>face camera (billboard)</li>
+				<li>not drawn?</li>
+				<li>face camera</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>visibilityType</td>
+		<td>
+			<ol class="noIndent bold">
+				<li value="0">normal?</li>
+				<li>fade out as you get closer (full opacity is pretty far away)</li>
+				<li>normal?</li>
+				<li>hidden?</li>
+				<li>normal?</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>animType</td>
+		<td>
+			<ol class="noIndent bold">
+				<li value="0">play, then destroy when complete</li>
+				<li>play, then hold last frame until lifeTime runs out</li>
+				<li>loop</li>
+				<li>don't draw</li>
+				<li>loop, don't necessarily start at first frame?</li>
+				<li>play, then hold a random frame?</li>
+				<li>don't draw?</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>animSpeed</td>
+		<td>higher = slower sprite animation</td>
+	</tr>
+	<tr>
+		<td>animFriction</td>
+		<td>
+			<p>how much to slow animation as velocity decreases?</p>
+			<p>not sure of the details; reasonable values seem to be around <code>0</code> to <code>forwardSpeed</code>?</p>
+			<p>negative values do not appear to cause animation to speed up as velocity decreases</p>
+		</td>
+	</tr>
+</table>
+
+<h4 id="DisplayRotation">Rotation</h4>
+<table>
+	<tr>
+		<td>rotationOffset&nbsp;<a href="#random">*</a></td>
+		<td>radians, clockwise</td>
+	</tr>
+	<tr>
+		<td>rotationSpeed&nbsp;<a href="#random">*</a></td>
+		<td>radians per <span class="numerator">1</span>&frasl;<span class="denominator">15</span> seconds, clockwise</td>
+	</tr>
+	<tr>
+		<td>rotationPivotX</td>
+		<td rowSpan="2">
+			<p>offset from the effect's physical location to render the sprite</p>
+			<p>uses the same coordinate system as other <a href="#vector">vectors</a>, except relative to the camera's orientation, rather than the effect's orientation</p>
+			<p>sprite rotation orbits the effect's physical location (this is how rockets and shockwave weapon projectiles spiral)</p>
+			<p>spawned effects will center on the sprite, but hit detection, splash damage, and sounds will still be based on the effect's physical location</p>
+		</td>
+	</tr>
+	<tr>
+		<td>rotationPivotY</td>
+	</tr>
+</table>
+
+<h4 id="DisplayColor">Color</h4>
+<table>
+	<tr>
+		<td>whiteColor&nbsp;<a href="#color">(c)</a></td>
+		<td rowSpan="2">displayColor = <code>blackColor</code> + spriteColor * (<code>whiteColor</code> - <code>blackColor</code>)</td>
+	</tr>
+	<tr>
+		<td>blackColor&nbsp;<a href="#color">(c)</a></td>
+	</tr>
+	<tr>
+		<td>hueRandom</td>
+		<td rowSpan="3">does what you'd expect, but what's the scale?</td>
+	</tr>
+	<tr>
+		<td>saturationRandom</td>
+	</tr>
+	<tr>
+		<td>brightnessRandom</td>
+	</tr>
+	<tr>
+		<td>fadeInTime</td>
+		<td>fade in during first <code>fadeInTime</code> <span class="numerator">1</span>&frasl;<span class="denominator">15</span> seconds of <code>lifeTime</code></td>
+	</tr>
+	<tr>
+		<td>fadeOutTime</td>
+		<td>fade out during last <code>fadeOutTime</code> <span class="numerator">1</span>&frasl;<span class="denominator">15</span> seconds of <code>lifeTime</code></td>
+	</tr>
+</table>
+
+
+<!-- COLLISION ---------------------------------------------------------------->
+
+<h3 id="Collision">Collision</h3>
+<table>
+	<tr>
+		<td>onCollideActor</td>
+		<td rowSpan="3">
+			<ol class="noIndent bold">
+				<li value="0">ignore; pass right through</li>
+				<li>hit and disappear</li>
+				<li>same as 3?</li>
+				<li>hit and bounce
+					<ul>
+						<li><code>onImpact</code> event is ignored (unless <a href="#bBullet"><code>bBullet</code></a>, presumably)</li>
+						<li>if <a href="#bBullet"><code>bBullet</code></a>, only bounce if angle is wide</li>
+					</ul>
+				</li>
+				<li>hit and push against, dealing continuous damage</li>
+				<li>same as 4</li>
+				<li>same as 4</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>onCollideWall</td>
+	</tr>
+	<tr>
+		<td>onCollideFloor</td>
+	</tr>
+</table>
+
+
+<!-- EVENTS ------------------------------------------------------------------->
+
+<h3 id="Events">Events</h3>
+<table>
+	<tr>
+		<td id="onImpact">onImpact</td>
+		<td>
+			<p>happens when hitting an <a href="kActor.html#ImpactType">actor</a>, wall, or floor (based on the <code>onCollide</code> properties above)</p>
+			<p>contains a sub-block for each surface type it can hit:</p>
+			<ol class="bold">
+				<li value="0">grass/wood surfaces</li>
+				<li class="void" style="display:inline;">water (unused?)</li>
+				<li>metallic enemies</li>
+				<li>hard surfaces</li>
+				<li>red-blooded enemies</li>
+				<li>yellow-blooded enemies</li>
+				<li class="void" style="display:inline;">undead enemies (unused?)</li>
+				<li>lava</li>
+				<li>tar</li>
+				<li>force field</li>
+			</ol>
+<!--			<ol class="bold">
+				<li value="0">grass/wood (<code>IT_DEFAULT</code>)</li>
+				<li>unused? (<code>IT_WATER</code>)</li>
+				<li>metallic enemies (<code>IT_METAL</code>)</li>
+				<li>stone/metal walls/floors (<code>IT_STONE</code>)</li>
+				<li>red-blooded enemies (<code>IT_FLESH_HUMAN</code>)</li>
+				<li>green-blooded enemies (<code>IT_FLESH_CREATURE</code>)</li>
+				<li>unused? (<code>IT_FLESH_UNDEAD</code>)</li>
+				<li><code>IT_LAVA</code></li>
+				<li>tar (<code>IT_SLIME</code>)</li>
+				<li><code>IT_FORCEFIELD</code></li>
+			</ol>
+-->		</td>
+	</tr>
+	<tr>
+		<td>onTick</td>
+		<td>happens continuously (unless underwater?)</td>
+	</tr>
+	<tr>
+		<td>onExpire</td>
+		<td>happens when <code>lifeTime</code> runs out (unless underwater?)</td>
+	</tr>
+	<tr>
+		<td>onWaterImpact</td>
+		<td>happens when entering (or exiting?) water</td>
+	</tr>
+	<tr>
+		<td>onWaterTick</td>
+		<td>happens continuously, if underwater</td>
+	</tr>
+	<tr>
+		<td>onWaterExpire</td>
+		<td>happens when <code>lifeTime</code> runs out, if underwater</td>
+	</tr>
+</table>
+<p>Each of these blocks can contain any combination of the following:</p>
+<table>
+	<tr>
+		<td>fx</td>
+		<td>
+			<p>spawn another effect</p>
+			<p>e.g., <code>fx = "fx/blood.kfx"</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>sound</td>
+		<td>
+			<p>play a <a href="sounds.html">sound</a></p>
+			<p>e.g., <code>sound = "sounds/shaders/bullet_impact_13.ksnd"</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>damageClass</td>
+		<td>
+			<p>deal damage, from <a href="defs.html#damageInfo">defs/damageInfo</a></p>
+			<p>e.g., <code>damageClass = "S_Damage_Target_damage_10"</code></p>
+		</td>
+	</tr>
+</table>
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

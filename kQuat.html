@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kQuat - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Variables">Variables</a></li>
+		<li><a href="#Constructors">Constructors</a></li>
+		<li><a href="#Methods">Methods</a></li>
+		<li><a href="#Operators">Operators</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kQuat</h2>
+
+<p>Quaternions are a way to represent 3D transformations, especially rotations.</p>
+<p>The math behind them is fairly abstract, but the kQuat class makes it relatively easy to use them in more familiar terms of angles and axes.</p>
+
+
+<h3 id="Variables">Variables</h3>
+<h4 class="funcDec">float <em>w</em>, <em>x</em>, <em>y</em>, <em>z</em></h4>
+<p>components of the quaternion</p>
+
+
+<h3 id="Constructors">Constructors</h3>
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>kQuat</strong>( float <em>angle</em>, float <em>axisX</em>, float <em>axisY</em>, float <em>axisZ</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>kQuat</strong>( float <em>angle</em>, <a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>axis</em> )</h4>
+<p>build a quaternion representing the given rotation (in radians) about the given axis</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>kQuat</strong>( <!--const -->kQuat&amp;<!--in--> <em>q</em> )</h4>
+<p>copy constructor</p>
+
+
+<h3 id="Methods">Methods</h3>
+<h4 class="funcDec">kQuat&amp; <strong>Normalize</strong>()</h4>
+<p>normalize and return a reference to self</p>
+
+
+<h3 id="Operators">Operators</h3>
+<h4 class="opDec">kQuat <strong>*</strong> kQuat</h4>
+<p>combine the effects of sequential transformations</p>
+<aside class="unimportant">
+	<code>kQuat *= kQuat</code> doesn't exist
+</aside>
+
+<h4 class="opDec collapse"><a href="kVec3.html">kVec3</a> <strong>*</strong> kQuat</h4>
+<h4 class="opDec"><a href="kVec3.html">kVec3</a> <strong>*=</strong> kQuat</h4>
+<p>apply a transformation to a <a href="kVec3.html">vector</a></p>
+
+<h4 class="opDec">kQuat <strong>=</strong> kQuat</h4>
+<p>assignment</p>
+
+<h4 class="opDec collapse">kQuat <strong>+</strong> kQuat</h4>
+<h4 class="opDec">kQuat <strong>-</strong> kQuat</h4>
+<p>componentwise addition and subtraction</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

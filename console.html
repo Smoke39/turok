@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Console - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Commands">Commands</a>
+			<ul>
+				<li><a href="#Stats">Statistics</a></li>
+				<li><a href="#Vis">Visual Diagnostics</a></li>
+				<li><a href="#Testing">Testing</a></li>
+				<li><a href="#Binds">Key Binds</a></li>
+				<li><a href="#Cheats">Cheats</a></li>
+				<li><a href="#OtherCmds">Other Commands</a></li>
+			</ul>
+		</li>
+		<li><a href="#Variables">Variables</a>
+			<ul>
+				<li><a href="#Input">Input</a></li>
+				<li><a href="#Gameplay">Gameplay</a></li>
+				<li><a href="#Graphics">Graphics</a></li>
+				<li><a href="#Audio">Audio</a></li>
+				<li><a href="#Video">Video</a></li>
+				<li><a href="#OtherVars">Other Variables</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>
+
+
+<h2>Console</h2>
+
+<p>Open the console with the <code>~</code> key.</p>
+<p>Console commands can be added to config.cfg in the game's root directory to have them executed automatically when the game starts.</p>
+
+
+<h3 id="Commands">Commands</h3>
+
+<table>
+	<tr>
+		<td>clear</td>
+		<td>clear the console</td>
+	</tr>
+	<tr>
+		<td>listcmds</td>
+		<td>list all console commands</td>
+	</tr>
+	<tr>
+		<td>listvars</td>
+		<td>list all variables</td>
+	</tr>
+	<tr>
+		<td>help</td>
+		<td>list all console commands and variables</td>
+	</tr>
+</table>
+<p></p>
+<table>
+	<tr id="seta">
+		<td>seta &lt;variable&gt; &lt;value&gt;</td>
+		<td>set the value of a variable</td>
+	</tr>
+	<tr>
+		<td>savegame &lt;slot&gt;</td>
+		<td rowspan="2">
+			<p>save to/load from the specified slot</p>
+			<p><code>savegame</code> can save the current game state at any time, but your location will be reverted to the last checkpoint you reached or save totem you touched when loading</p>
+		</td>
+	</tr>
+	<tr>
+		<td>loadgame &lt;slot&gt;</td>
+	</tr>
+	<tr>
+		<td>screenshot</td>
+		<td>take a screenshot (stored in the game's root directory)</td>
+	</tr>
+	<tr>
+		<td>pausegame</td>
+		<td>pause/unpause the game</td>
+	</tr>
+	<tr>
+		<td>quit</td>
+		<td>close the game</td>
+	</tr>
+</table>
+
+
+<h4 id="Stats">Statistics</h4>
+<p>these toggle real-time stats on the HUD</p>
+<table>
+	<tr>
+		<td>statheap</td>
+		<td>RAM usage</td>
+	</tr>
+	<tr>
+		<td>statrhi</td>
+		<td>rendering info
+	<tr>
+		<td>statscene</td>
+		<td>how much stuff is being rendered, and how long it's taking</td>
+	</tr>
+	<tr>
+		<td>statfx</td>
+		<td>kfx pool usage</td>
+	</tr>
+	<tr>
+		<td>statsound</td>
+		<td>number of sounds playing</td>
+	</tr>
+	<tr>
+		<td>statobject</td>
+		<td>number of game objects</td>
+	</tr>
+	<tr>
+		<td id="statplayloop">statplayloop</td>
+		<td>game loop time, game speed, player location and orientation</td>
+	</tr>
+	<tr>
+		<td>stattrail</td>
+		<td>trail pool usage
+	<tr></td>
+	</tr>
+		<td>debugai</td>
+		<td rowspan="2">enables (for the nearest enemy?) and disables AI info display, repsectively </td>
+	</tr>
+	<tr>
+		<td>cleardebugai</td>
+	</tr>
+	<tr>
+		<td>statscripts</td>
+		<td>script object info?</td>
+	</tr>
+</table>
+<p>these print out info to the console</p>
+<table>
+	<tr>
+		<td>listammodefs</td>
+		<td rowspan="3">list all defined ammo types, weapons, actors</td>
+	</tr>
+	<tr>
+		<td>listweapondefs</td>
+	</tr>
+	<tr>
+		<td>listactordefs</td>
+	</tr>
+	<tr>
+		<td>listgamevars</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>printsoundinfo</td>
+		<td>audio device and total channels</td>
+	</tr>
+	<tr>
+		<td>listresolutions</td>
+		<td>list available screen resolutions</td>
+	</tr>
+	<tr>
+		<td>scriptmem</td>
+		<td>script memory usage</td>
+	</tr>
+	<tr>
+		<td>listRuntimeClasses</td>
+		<td>native classes in use, their parent class, and class number?</td>
+	</tr>
+</table>
+
+<h4 id="Vis">Visual Diagnostics</h4>
+<p>enable additional visualizations, or hide elements of the world</p>
+<table>
+	<tr>
+		<td id="showcollision">showcollision</td>
+		<td>sector wireframe; highlighting current, adjacent, and special sectors</td>
+	</tr>
+	<tr>
+		<td>showbounds</td>
+		<td>actor bounding boxes</td>
+	</tr>
+	<tr>
+		<td>showstaticbounds</td>
+		<td>level geometry bounding boxes</td>
+	</tr>
+	<tr>
+		<td>showorigins</td>
+		<td>actor origins</td>
+	</tr>
+	<tr>
+		<td>showgridbounds</td>
+		<td>sector bounding boxes?</td>
+	</tr>
+	<tr>
+		<td>showobjectradius</td>
+		<td>object collision radii</td>
+	</tr>
+	<tr>
+		<td>showlinkedareanodes</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>hidedrawmeshes</td>
+		<td>do not render level geometry</td>
+	</tr>
+	<tr>
+		<td>hidedrawactors</td>
+		<td>do not render actors</td>
+	</tr>
+	<tr>
+		<td>hidedrawfx</td>
+		<td>do not render kfx</td>
+	</tr>
+	<tr>
+		<td>disableanimation</td>
+		<td>halts all model animation, translation, and rotation</td>
+	</tr>
+</table>
+
+
+<h4 id="Testing">Testing</h4>
+<p>manually invoke various aspects of the game</p>
+<table>
+	<tr>
+		<td>testcinematic &lt;mode&gt;</td>
+		<td>
+			<p>play a cinematic:</p>
+			<ol class="bold">
+				<li value="0">death</li>
+				<li>pose</li>
+				<li>fall death</li>
+				<li>respawn</li>
+				<li>key acquired</li>
+				<li>boss defeated pose</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>spawnfx &lt;file&gt;</td>
+		<td>
+			<p>spawn a kfx at the player's location</p>
+			<p>e.g., <code>spawnfx fx/bullet.kfx</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>testsoundshader &lt;file&gt;</td>
+		<td>
+			<p>play a ksnd</p>
+			<p>e.g., <code>testsoundshader sounds/shaders/explosion_1.ksnd</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>testmusic &lt;file&gt;</td>
+		<td>
+			<p>play a music track</p>
+			<p>e.g., <code>testmusic music/track01.ogg</code></p>
+		</td>
+	</tr>
+</table>
+
+
+<h4 id="Binds">Key Binds</h4>
+<p>only controls are listed here, but any console command can be bound to a key for more convenient use</p>
+<table>
+	<tr>
+		<td>bind &lt;key&gt; &lt;command&gt;</td>
+		<td>
+			<p>bind a command to an input</p>
+			<p>multiple commands can be bound to a single input with multiple bind commands</p>
+		</td>
+	</tr>
+	<tr>
+		<td>unbind &lt;key&gt; &lt;command&gt;</td>
+		<td>unbind a command from an input</td>
+	</tr>
+	<tr>
+		<td>listbinds</td>
+		<td>lists all current key binds</td>
+	</tr>
+
+	<tr>
+		<td>forward</td>
+		<td rowspan="4">run around</td>
+	</tr>
+	<tr>
+		<td>backward</td>
+	</tr>
+	<tr>
+		<td>strafeleft</td>
+	</tr>
+	<tr>
+		<td>straferight</td>
+	</tr>
+	<tr>
+		<td>jump</td>
+		<td>jump</td>
+	</tr>
+
+	<tr>
+		<td>attack</td>
+		<td>fire the current weapon</td>
+	</tr>
+	<tr>
+		<td>weaponext</td>
+		<td rowspan="2">select next/previous weapon</td>
+	</tr>
+	<tr>
+		<td>weapprev</td>
+	</tr>
+	<tr>
+		<td>weapon &lt;weapon num&gt;</td>
+		<td>select the specified weapon</td>
+	</tr>
+
+	<tr>
+		<td>automap</td>
+		<td>toggle map display</td>
+	</tr>
+	<tr>
+		<td>mapzoomin</td>
+		<td rowspan="2">zoom map display in/out</td>
+	</tr>
+	<tr>
+		<td>mapzoomout</td>
+	</tr>
+
+	<tr>
+		<td>menu_activate</td>
+		<td>
+			if in-game, bring up the menu<br>
+			otherwise, back out one level
+		</td>
+	</tr>
+	<tr>
+		<td>menu_up</td>
+		<td rowspan="4">change menu selection</td>
+	</tr>
+	<tr>
+		<td>menu_down</td>
+	</tr>
+	<tr>
+		<td>menu_left</td>
+	</tr>
+	<tr>
+		<td>menu_right</td>
+	</tr>
+	<tr>
+		<td>menu_select</td>
+		<td>select the current menu item</td>
+	</tr>
+	<tr>
+		<td>menu_back</td>
+		<td>back out one level in the menu</td>
+	</tr>
+	<tr class="void">
+		<td>menu_cancel</td>
+		<td>does nothing?</td>
+	</tr>
+</table>
+
+
+<h4 id="Cheats">Cheats</h4>
+<p>these don't unlock the cheats, just toggle their effects</p>
+<table>
+	<tr>
+		<td>invincibility</td>
+		<td>player takes no damage</td>
+	</tr>
+	<tr>
+		<td>spiritmode</td>
+		<td>toggles spirit mode</td>
+	</tr>
+	<tr>
+		<td>giveweapons</td>
+		<td>receive all weapons</td>
+	</tr>
+	<tr>
+		<td>infiniteammo</td>
+		<td>toggle unlimited ammo</td>
+	</tr>
+	<tr>
+		<td>infinitelives</td>
+		<td>dying doesn't deduct lives</td>
+	</tr>
+	<tr>
+		<td>allkeys</td>
+		<td>receive all keys and warp to hub</td>
+	</tr>
+	<tr>
+		<td>mapall</td>
+		<td>reveal the entire map, and show actors on the map</td>
+	</tr>
+	<tr>
+		<td>bigheads</td>
+		<td>toggle big headed enemies</td>
+	</tr>
+	<tr>
+		<td>tinyenemies</td>
+		<td>toggle tiny enemies</td>
+	</tr>
+	<tr>
+		<td>purdycolors</td>
+		<td>colorizes world geometry</td>
+	</tr>
+	<tr>
+		<td>discomode</td>
+		<td>spirit mode-style lighting</td>
+	</tr>
+	<tr>
+		<td>warpcheat &lt;level num&gt;</td>
+		<td>warps you to the beginning of the specified level</td>
+	</tr>
+	<tr>
+		<td>warpboss &lt;boss num&gt;</td>
+		<td>
+			<p>warp to a boss fight:</p>
+			<ol class="bold">
+				<li value="0">longhunter</li>
+				<li>mantis</li>
+				<li>t-rex</li>
+				<li>campaigner</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>showcredits</td>
+		<td>start the ending credits sequence</td>
+	</tr>
+	<tr id="fly">
+		<td>fly</td>
+		<td>toggle fly mode</td>
+	</tr>
+	<tr>
+		<td>showenemies</td>
+		<td>show enemies on the map</td>
+	</tr>
+</table>
+<p>these are additional cheats that aren't in the cheats menu</p>
+<table>
+	<tr>
+		<td>map &lt;filename&gt;</td>
+		<td>
+			<p>load the specified map</p>
+			<p>e.g., <code>map levels/level42.map</code></p>
+		</td>
+	</tr>
+	<tr id="noclip">
+		<td>noclip</td>
+		<td>toggle player clipping</td>
+	</tr>
+	<tr>
+		<td>god</td>
+		<td>
+			<p>player takes no damage</p>
+			<p>resets on map change, unlike invincibility</p>
+		</td>
+	</tr>
+	<tr>
+		<td>giveammo</td>
+		<td>receive ammo of all types</td>
+	</tr>
+	<tr>
+		<td>gamespeed &lt;speed&gt;</td>
+		<td>change the speed of everything except Turok (like spirit mode) (<code>0.0</code> to <code>1.0</code>)</td>
+	</tr>
+	<tr>
+		<td>freezeobjects</td>
+		<td>freezes everything but the player</td>
+	</tr>
+</table>
+
+<h4 id="OtherCmds">Other Commands</h4>
+<table>
+	<tr>
+		<td>convertobj &lt;file.obj&gt;</td>
+		<td rowspan="3">model import/export functions</td>
+	</tr>
+	<tr>
+		<td>exportobj &lt;file.bin&gt;</td>
+	</tr>
+	<tr>
+		<td>exportanimobj &lt;file.bin&gt;</td>
+	</tr>
+	<tr>
+		<td>makesprite</td>
+		<td>tool for generating sprite sheets?</td>
+	</tr>
+	<tr>
+		<td>buildvis &lt;file.map&gt; &lt;subdiv samples (default = 3)&gt;</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>bugit &lt;title for the bug to report&gt;</td>
+		<td rowspan="2">bug reporting tools?</td>
+	</tr>
+	<tr>
+		<td>bugitgo &lt;x y z sector yaw pitch roll&gt;</td>
+	</tr>
+
+	<tr>
+		<td>showmenu &lt;type&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>call &lt;"function name"&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>callfile &lt;"file name"&gt; &lt;"function name"&gt;</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>dumplocalizedtext</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>purgemodels</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>puke &lt;script number&gt;</td>
+		<td></td>
+	</tr>
+</table>
+
+
+<h3 id="Variables">Variables</h3>
+<p>Enter a variable's name to see its current value, default value (in parentheses), and its description.</p>
+<p>Set a variable's value with <code><a href="#seta">seta</a></code>.</p>
+
+<h4 id="Input">Input</h4>
+<table>
+	<tr>
+		<td>cl_msensitivityx</td>
+		<td rowspan="2">mouse horizontal/vertical sensitivity</td>
+	</tr>
+	<tr>
+		<td>cl_msensitivityy</td>
+	</tr>
+	<tr>
+		<td>cl_mlookinvert</td>
+		<td>invert mouse vertical axis</td>
+	</tr>
+	<tr>
+		<td>cl_mousesmooth</td>
+		<td>
+			<p>mouse smoothing</p>
+			<p>integer from <code>0</code> to <code>4</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>cl_joylooksensitivity_x</td>
+		<td rowspan="2">joystick horizontal/vertical look sensitivity</td>
+	</tr>
+	<tr>
+		<td>cl_joylooksensitivity_y</td>
+	</tr>
+	<tr>
+		<td>cl_joymovesensitivity</td>
+		<td>joystick move sensitivity</td>
+	</tr>
+	<tr>
+		<td>cl_joystickthreshold</td>
+		<td>turn acceleration threshold</td>
+	</tr>
+	<tr>
+		<td>cvarJoyInvertLook</td>
+		<td>invert joystick vertical look axis</td>
+	</tr>
+
+	<tr>
+		<td>in_joystick_xaxis</td>
+		<td rowspan="2">turning axis</td>
+	</tr>
+	<tr>
+		<td>in_joystick_xinvert</td>
+	</tr>
+	<tr>
+		<td>in_joystick_yaxis</td>
+		<td rowspan="2">move forward/back axis</td>
+	</tr>
+	<tr>
+		<td>in_joystick_yinvert</td>
+	</tr>
+	<tr>
+		<td>in_joystick_strafeaxis</td>
+		<td rowspan="2">move left/right axis</td>
+	</tr>
+	<tr>
+		<td>in_joystick_strafeinvert</td>
+	</tr>
+	<tr>
+		<td>in_joystick_lookaxis</td>
+		<td rowspan="2">look up/down axis</td>
+	</tr>
+	<tr>
+		<td>in_joystick_lookinvert</td>
+	</tr>
+</table>
+
+<h4 id="Gameplay">Gameplay</h4>
+<table>
+	<tr>
+		<td>g_perpolyparticlecollision</td>
+		<td>
+			<p>precise projectile collision detection</p>
+			<p>only affects some projectiles (only those with <code>bPerPolyCollision</code> set?), and the difference is rarely apparent</p>
+		</td>
+	</tr>
+	<tr>
+		<td>g_extendeddrawdistance</td>
+		<td>pushes back the fog wall</td>
+	</tr>
+	<tr>
+		<td>g_showintromovie</td>
+		<td>play Night Dive intro on startup</td>
+	</tr>
+	<tr>
+		<td>g_showgameintros</td>
+		<td>play Acclaim, Iguana, and Turok intros on startup</td>
+	</tr>
+	<tr>
+		<td>g_showplayerdeath</td>
+		<td>
+			<p>play 3rd person death and respawn cutscenes</p>
+			<p>falling death cutscene will always play regardless of this setting</p>
+		</td>
+	</tr>
+	<tr>
+		<td>g_weaponbobbing</td>
+		<td>replace weapon running animation with simple weapon bob</td>
+	</tr>
+	<tr>
+		<td>g_autoswitchnewweapon</td>
+		<td>automatically switch to new weapons when picked up</td>
+	</tr>
+	<tr>
+		<td>g_environmentsounds</td>
+		<td>play environmental sounds (roars, chirps, etc.)</td>
+	</tr>
+	<tr>
+		<td>g_violencelevel</td>
+		<td>
+			<ol class="bold noIndent">
+				<li value="0">red blood</li>
+				<li>green blood</li>
+				<li>no blood (violet flashes)</li>
+			</ol>
+		</td>
+	</tr>
+	<!-- BOBBING OPTIONS -->
+	<tr>
+		<td>g_headbob</td>
+		<td>camera bobbing when running forward/backward and jumping</td>
+	</tr>
+	<tr>
+		<td>g_turnbob</td>
+		<td>camera tilt when turning</td>
+	</tr>
+	<tr>
+		<td>g_viewgroundtrack</td>
+		<td>tilt camera up/down when going up/downhill</td>
+	</tr>
+	<tr>
+		<td>g_underwaterbob</td>
+		<td>camera waver when in water + warping effect while underwater</td>
+	</tr>
+	<!-- HUD OPTIONS -->
+	<tr>
+		<td>g_showcrosshair</td>
+		<td>show a crosshair on the HUD</td>
+	</tr>
+	<tr>
+		<td>g_drawhud</td>
+		<td>
+			<p>HUD + screen coloration</p>
+			<p>turning this off completely disables the HUD, including the weapon wheel, messages, and the crosshair</p>
+			<p>it also disables view coloration (pickup/damage flashing, underwater blue tinting)</p>
+		</td>
+	</tr>
+	<tr>
+		<td>hud_opacity</td>
+		<td>
+			<p><code>0</code> to <code>255</code></p>
+			<p>affects lives, life force, health, and ammo
+			<p>does not affect messages, the weapon wheel, crosshair, or view coloration (pickup/damage flashing, underwater blue tinting)</p>
+		</td>
+	</tr>
+</table>
+
+<h4 id="Graphics">Graphics</h4>
+<table>
+	<tr>
+		<td>r_fxaa</td>
+		<td>enable anti-aliasing</td>
+	</tr>
+	<tr>
+		<td>r_bloom</td>
+		<td>enable bloom</td>
+	</tr>
+	<tr>
+		<td>r_bloomthreshold</td>
+		<td>brightness threshold for a pixel to create bloom</td>
+	</tr>
+	<tr>
+		<td>r_bloomalpha</td>
+		<td>bloom brightness (<code>0.0</code> to <code>1.0</code>)</td>
+	</tr>
+	<tr id="lightScatter">
+		<td>r_lightscatter</td>
+		<td>enable "god rays"</td>
+	</tr>
+	<tr>
+		<td>r_lightscatterexposure</td>
+		<td>"god ray" brightness</td>
+	</tr>
+	<tr>
+		<td>r_useocclusionquery</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>r_water_refraction</td>
+		<td>distortion when looking through water surfaces</td>
+	</tr>
+	<tr>
+		<td>r_water_reflection</td>
+		<td>reflective water surfaces</td>
+	</tr>
+	<tr>
+		<td>r_simpleactorshadows</td>
+		<td>blob shadows under actors (no shadows at all when disabled)</td>
+	</tr>
+	<tr>
+		<td>r_finish</td>
+		<td>force GPU command sync</td>
+	</tr>
+	<tr>
+		<td>r_fov</td>
+		<td>vertical field of view</td>
+	</tr>
+	<tr>
+		<td>r_saturation</td>
+		<td>post-process for adjusting brightness without washing out colors</td>
+	</tr>
+	<tr>
+		<td>r_saturationpower</td>
+		<td>brightness adjustment (<code>1.0</code> is no adjustment)</td>
+	</tr>
+	<tr>
+		<td>r_saturation_r</td>
+		<td rowspan="3">brightness red, green, and blue tinting</td>
+	</tr>
+	<tr>
+		<td>r_saturation_g</td>
+	</tr>
+	<tr>
+		<td>r_saturation_b</td>
+	</tr>
+</table>
+
+<h4 id="Audio">Audio</h4>
+<table>
+	<tr>
+		<td>snd_volume</td>
+		<td>effects volume scalar</td>
+	</tr>
+	<tr>
+		<td>snd_musicvolume</td>
+		<td>music volume scalar</td>
+	</tr>
+	<tr>
+		<td>snd_hardwarereverb</td>
+		<td>enable echoes in caves</td>
+	</tr>
+</table>
+
+<h4 id="Video">Video</h4>
+<table>
+	<tr>
+		<td>v_width</td>
+		<td rowspan="2">display resolution</td>
+	</tr>
+	<tr>
+		<td>v_height</td>
+	</tr>
+	<tr>
+		<td>v_refresh</td>
+		<td>full-screen refresh rate</td>
+	</tr>
+	<tr>
+		<td>v_windowed</td>
+		<td>windowed mode</td>
+	</tr>
+	<tr>
+		<td>v_borderless</td>
+		<td>in windowed mode, hide window borders</td>
+	</tr>
+	<tr>
+		<td>v_vsync</td>
+		<td>enable vsync</td>
+	</tr>
+	<tr>
+		<td>v_displaymonitor</td>
+		<td>index for which monitor to render to</td>
+	</tr>
+</table>
+
+<h4 id="OtherVars">Other Variables</h4>
+<table>
+	<tr>
+		<td>g_language</td>
+		<td>
+			<ol class="bold noIndent">
+				<li value="0">English</li>
+				<li>French</li>
+				<li>German</li>
+				<li>Italian</li>
+				<li>Spanish</li>
+			</ol>
+		</td>
+	</tr>
+
+	<tr>
+		<td>developer</td>
+		<td>
+			<p>allows the game to load <a href="getting_started.html#FilePriority">unpackaged files</a></p>
+			<p>also causes the game to output some additional information to the console</p>
+		</td>
+	</tr>
+	<tr>
+		<td>kf_basepath</td>
+		<td>
+			<p>the game's root directory</p>
+			<p>defaults to the folder the game's exe is in</p>
+			<p>can be an absolute path, or relative to the default</p>
+		</td>
+	</tr>
+
+	<tr>
+		<td>con_alwaysShowConsole</td>
+		<td>keep console output visible, even when the console is closed</td>
+	</tr>
+	<tr>
+		<td>con_showfps</td>
+		<td>show the framerate in the top-right of the HUD</td>
+	</tr>
+	<tr>
+		<td>con_stickySpeed</td>
+		<td>how long (in ms) a key needs to be held in the console before beginning to repeat</td>
+	</tr>
+	<tr>
+		<td>cl_maxfps</td>
+		<td>FPS cap (limited to 60)</td>
+	</tr>
+	<tr>
+		<td>r_testspiritcolors</td>
+		<td>activates spirit mode lighting</td>
+	</tr>
+
+	<tr>
+		<td>cl_bugreportsavebackbuffer</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>cl_maxlatetics</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>r_zfarextent</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>r_gridboundocclusionmultiplier</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>r_waterplaneocclusionmultiplier</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>r_maxocclusionunit</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>jobs_prioritize</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>v_depthsize</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>v_stencilsize</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>v_buffersize</td>
+		<td></td>
+	</tr>
+	<tr class="void">
+		<td>v_displayrestart</td>
+		<td>internal use only</td>
+	</tr>
+	<tr>
+		<td>in_profilejoybuttons</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>g_dumpmapscripts</td>
+		<td></td>
+	</tr>
+</table>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

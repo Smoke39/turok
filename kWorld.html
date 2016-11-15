@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kWorld - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#MapStructure">Map Structure</a></li>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kWorld</h2>
+
+<p>class relating to the level itself, and its occupants</p>
+
+<p>stored in global var <code>World</code></p>
+
+
+<h3 id="MapStructure">Map Structure</h3>
+
+<p>A map's floor plan is made up of <strong>areas</strong>.  Each area is triangulated into <strong>sectors</strong>.  You can get an actor's area and sector with <code><a href="kActor.html#AreaID">kActor::AreaID()</a></code> and <code><a href="kActor.html#SectorIndex">kActor::SectorIndex()</a></code>, respectively, or the sector at an arbitrary point with <code><a href="kActor.html#GetSectorIndexAtLocation">kActor::GetSectorIndexAtLocation()</a></code>.</p>
+
+<p>You can enable a debug sector visualization with <a href="console.html#showcollision">showcollision</a>, and a readout containing the player's current sector with <a href="console.html#statplayloop">statplayloop</a>.</p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec"><a href="kActor.html">kActor</a>@ <strong>GetActorByTID</strong>( <!--const -->int <em>tagID</em>, <!--const -->int <em class="hasDef">[unknown]</em> = <em class="defVal">-1</em> )</h4>
+<p>get the first actor with a given <a href="kActor.html#TID">tag ID</a></p>
+
+<h4 class="funcDec"><!--const -->bool <strong>TriggerActorsByTID</strong>( <a href="kActor.html">kActor</a>@ <em>a</em>, <!--const -->int <em>tagID</em> )</h4>
+
+<h4 class="funcDec"><!--const -->uint <strong>GetAreaFlags</strong>( <!--const -->int <em>areaID</em> )</h4>
+<p><a href="scripts.html#BitFields">bit field</a> of area flags:</p>
+<ul class="enum">
+	<li id="AAF_WATER">
+		<span>AAF_WATER</span>
+		<span>&ndash;</span>
+		<span>water area</span>
+	</li>
+	<li>
+		<span>AAF_BLOCK</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>AAF_TOGGLE</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>AAF_CLIFF</span>
+		<span>&ndash;</span>
+		<span>slopes too steep to walk on?  (clearing this does nothing)</span>
+	</li>
+	<li id="AAF_CLIMB">
+		<span>AAF_CLIMB</span>
+		<span>&ndash;</span>
+		<span>climbable surfaces</span>
+	</li>
+	<li>
+		<span>AAF_ONESIDED</span>
+		<span>&ndash;</span>
+		<span>area can be walked under? (bridges and such; clearing this does nothing)</span>
+	</li>
+	<li id="AAF_CEILING">
+		<span>AAF_CEILING</span>
+		<span>&ndash;</span>
+		<span>area has a ceiling</span>
+	</li>
+	<li id="AAF_CRAWL">
+		<span>AAF_CRAWL</span>
+		<span>&ndash;</span>
+		<span>cause the player to <a href="kPuppet.html#PF_CRAWLING">crawl</a> in this area</span>
+	</li>
+	<li>
+		<span>AAF_ENTERCRAWL</span>
+		<span>&ndash;</span>
+		<span>small areas outside <code>AAF_CRAWL</code> entrances that also cause the player to <a href="kPuppet.html#PF_CRAWLING">crawl</a></span>
+	</li>
+	<li>
+		<span>AAF_HIDDEN</span>
+		<span>&ndash;</span>
+		<span>don't show on the map</span>
+	</li>
+	<li>
+		<span>AAF_ENTERED</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>AAF_RESTRICTED</span>
+		<span>&ndash;</span>
+		<span>AI will not enter the area</span>
+	</li>
+	<li>
+		<span>AAF_SLOPETEST</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>AAF_DEATHPIT</span>
+		<span>&ndash;</span>
+		<span>fallling death</span>
+	</li>
+	<li>
+		<span>AAF_MAPPED</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>AAF_EVENT</span>
+		<span>&ndash;</span>
+		<span>trigger some kind of even when entered, like enemies appearing, or a door opening</span>
+	</li>
+	<li>
+		<span>AAF_REPEATABLE</span><!-- hub key panels, button on level 2 also plays sound every time you step on it, even though it doesn't have this, buttons at beginning of catacombs can be pressed again after resetting without this -->
+		<span></span>
+		<span></span>
+	<li>
+		<span>AAF_TELEPORT</span>
+		<span>&ndash;</span>
+		<span>teleport when stepped on</span>
+	</li>
+	<li>
+		<span>AAF_DAMAGE</span>
+		<span>&ndash;</span>
+		<span>floor deals damage (lava, tar; not the lasers on level 8)</span>
+	</li>
+	<li>
+		<span>AAF_DRAWSKY</span>
+		<span>&ndash;</span>
+		<span>render cloud layers</span>
+	</li>
+	<li>
+		<span>AAF_TELEPORTAIR</span>
+		<span>&ndash;</span>
+		<span>teleport when entered at all, not just stepped on (paired with <code>AAF_TELEPORT</code>)</span>
+	</li>
+	<li>
+		<span>AAF_LAVA</span>
+		<span>&ndash;</span>
+		<span>
+			generally a floor that slows the player down (lava, tar)<br>
+			the sludge on level 8 has this, but doesn't slow the player
+		</span>
+	</li>
+	<li>
+		<span>AAF_EVENTSOUND</span><!-- buttons on level 2, but not level 1 -->
+		<span></span>
+		<span></span>
+	</li>
+	<li>
+		<span>AAF_ANTIGRAVITY</span>
+		<span>&ndash;</span>
+		<span>antigravity shafts in level 8 (paired with <code>AAF_WATER</code>)</span>
+	</li>
+	<li>
+		<span>AAF_LADDER</span>
+		<span>&ndash;</span>
+		<span>ladders, climbable trees (paired with <code>AAF_CLIMB</code>)</span>
+	</li>
+	<li>
+		<span>AAF_CHECKPOINT</span>
+		<span>&ndash;</span>
+		<span>level checkpoint</span>
+	</li>
+	<li>
+		<span>AAF_SAVEGAME</span>
+		<span>&ndash;</span>
+		<span>save totem</span>
+	</li>
+	<li>
+		<span>AAF_WARPRETURN</span>
+		<span></span>
+		<span></span>
+	</li>
+	<li id="AAF_SHALLOWWATER">
+		<span>AAF_SHALLOWWATER</span>
+		<span>&ndash;</span>
+		<span>
+			water too shallow to swim in (paired with <code>AAF_WATER</code>)<br>
+			not all shallow water uses this
+		</span>
+	</li>
+	<li>
+		<span>AAF_DRAWSUN</span>
+		<span>&ndash;</span>
+		<span>render the sun (and <a href="console.html#lightScatter">light scatter</a>, if enabled)</span>
+	</li>
+</ul>
+
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>ChangeAreaFlag</strong>( <!--const -->int <em>areaID</em>, <!--const -->uint <em>flags</em>, <!--const -->bool <em>bSet</em> )</h4>
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>FloodMatchingAreaFlags</strong>( <!--const -->int <em>sector</em>, <!--const -->uint <em>flags</em>, <!--const -->bool <em>bSet</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>FloodFillAreaFlags</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, <!--const -->uint <em>flags</em>, <!--const -->bool <em>bSet</em> )</h4>
+<p>set or clear the given flags in an area based on its ID, a sector within it, or a point inside it</p>
+
+<aside class="unimportant">
+	<code>void FloodFillAreaFlags( <!--const -->int i, <!--const -->uint flags, <!--const--> bool bSet )</code> doesn't seem to do anything
+</aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ChangeSectorHeight</strong>( <!--const -->int <em>sector</em>, <!--const -->float <em>height</em> )</h4>
+<p>change the physical floor height of the area <code>sector</code> is part of, but not the visual floor height</p>
+
+<h4 class="funcDec"><!--const --><span class="unimportant">void</span> <strong>ChangeAreaWaterHeight</strong>( <!--const -->int <em>areaID</em>, <!--const--> float <em>height</em> )</h4>
+<p>change physical water height of an area, but not visual water height</p>
+
+<h4 class="funcDec collapse"><!--const -->int16 <strong>GetAreaArg</strong>( <!--const -->int <em>areaID</em>, <!--const -->int <em>arg</em> )</h4>
+<h4 class="funcDec"><!--const --><span class="unimportant">void</span> <strong>ChangeAreaArg</strong>( <!--const -->int <em>areaID</em>, <!--const -->int <em>arg</em>, <!--const -->int16 <em>value</em> )</h4>
+<p>generic space for various area properties</p>
+<p>typical <code>arg</code> usage:</p>
+<ol class="bold">
+	<li value="0">warp ID</li>
+	<li>warp level ID or trigger sound ID</li>
+	<li>checkpoint ID</li>
+	<li>tag ID</li>
+	<li>floor damage hit points</li>
+	<li>floor damage rate</li>
+</ol>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

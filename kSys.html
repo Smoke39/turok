@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kSys - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Methods">Methods</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kSys</h2>
+
+<p>provides system functions not directly related to gameplay</p>
+<p>stored in global var <code>Sys</code></p>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>Print</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>Warning</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em> )</h4>
+<p>output to the console and stdout.txt</p>
+<p>warnings appear in yellow in the console</p>
+
+<h4 class="funcDec"><!--const -->bool <strong>GetCvarValue</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>var</em>, <a href="kStr.html">kStr</a>&amp;<!--out--> <em>val</em> )</h4>
+<p>get the <a href="console.html#Variables">console variable</a> named <code>var</code>, store the result in <code>val</code>, and return whether the variable was found</p>
+<p>e.g.,</p>
+<pre><code>kStr crosshair;
+if ( Sys.GetCvarValue("g_showcrosshair",crosshair) &amp;&amp; crosshair.Atoi() == 0 )
+	Sys.Warning( "player cannot aim" );</code></pre>
+
+<h4 class="funcDec collapse">int <strong>VideoWidth</strong>()</h4>
+<h4 class="funcDec">int <strong>VideoHeight</strong>()</h4>
+<p>display dimensions</p>
+
+<h4 class="funcDec collapse">int <strong>Mouse_X</strong>()</h4>
+<h4 class="funcDec">int <strong>Mouse_Y</strong>()</h4>
+<p>horizontal and vertical mouse coordinates, respectively</p>
+<p><code>(0,0)</code> is in the top-left corner, and the coordinates are limited to the display region</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

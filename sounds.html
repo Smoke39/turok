@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Sounds - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Types">Types</a></li>
+		<li><a href="#General">General Properties</a></li>
+		<li><a href="#Envelopes">Envelope Blocks</a>
+			<ul>
+				<li><a href="#volume">volume_envelope</a></li>
+				<li><a href="#pitch">pitch_envelope</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>
+
+
+<h2>Sounds</h2>
+
+<p>sounds/waves contains raw audio data which is referred to by ksnd files in sounds/shaders.</p>
+<p>ksnd files define the actual sound effects played in the game.  They can mix multiple sounds together, add delays, dynamically shift the volume and pitch, and control other properties.</p>
+<p>The number of sounds is specified at the beginning of the file with <code>sounds[N] =</code>, followed by a block containing <code>N</code> sub blocks, each defining a sound to play when the ksnd is invoked.</p>
+<p>The number of sound definitions <strong>must</strong> match the value of <code>N</code>, or the game will not load.</p>
+
+
+<h3 id="Types">Types</h3>
+<aside>Boolean properties are prefixed with <code>b</code>, and are enabled when <code>1</code>, disabled when <code>0</code>.</aside>
+<p></p>
+<aside>Time properties are in terms of <span class="numerator">1</span>&frasl;<span class="denominator">60</span> seconds.</aside>
+
+
+<h3 id="General">General Properties</h3>
+<table>
+	<tr>
+		<td>wavefile</td>
+		<td>
+			<p>wav file to play</p>
+			<p>e.g., <code>wavefile = "sounds/waves/explo1p.wav"</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>bOneInstancePerSource</td>
+		<td>can't be replayed until the previous instance finishes</td>
+	</tr>
+	<tr>
+		<td>bLoop</td>
+		<td>loop until the source is removed, dies, or <a href="kActor.html#stopping_sounds">stops it via script</a></td>
+	</tr>
+	<tr id="EnvelopeBooleans"></tr>
+	<tr id="bEnableVolumeEnvelope">
+		<td>bEnableVolumeEnvelope</td>
+		<td rowspan="2">enables the shifting properties in the corresponding <a href="#Envelopes">envelope block</a></td>
+	</tr>
+	<tr id="bEnablePitchEnvelope">
+		<td>bEnablePitchEnvelope</td>
+	</tr>
+	<tr>
+		<td>bFadeIfObstructed</td>
+		<td>source requires line of sight to the player for this sound to be audible</td>
+	</tr>
+	<tr class="void">
+		<td>bUpdateNoEnvelope</td>
+		<td>[unused]</td>
+	</tr>
+	<tr class="void">
+		<td>bLinkToEnvelope</td>
+		<td>[unused]</td>
+	</tr>
+	<tr>
+		<td>bFullVolume</td>
+		<td>do not reduce volume with distance from the player</td>
+	</tr>
+	<tr>
+		<td>delay</td>
+		<td>how long after the ksnd was invoked to play this sound</td>
+	</tr>
+	<tr>
+		<td>priority</td>
+		<td>There's a limit to how many sounds can be playing at once. Sounds with a higher priority are given precedence when that limit is reached.</td>
+	</tr>
+	<tr>
+		<td>random</td>
+		<td>probability that the sound will play (<code>0.0</code> to <code>1.0</code>)</td>
+	</tr>
+	<tr id="radioVolume">
+		<td>radioVolume </td>
+		<td>
+			<ol class="noIndent bold">
+				<li value="0">-20% volume</li>
+				<li>normal volume</li>
+				<li>+50% volume</li>
+			</ol>
+			<p>seems the same as modifying <code>max</code> in <code><a href="#volume">volume_envelope</a></code></p>
+		</td>
+	</tr>
+</table>
+
+
+<h3 id="Envelopes">Envelope Blocks</h3>
+<p>These blocks control volume and pitch, as well as dynamic volume and pitch shifting.</p>
+<p>All values except for <code>max</code> require the corresponding <a href="#EnvelopeBooleans">envelope boolean</a> to be set, <strong>except</strong> for <code>start = 0</code> in <code>volume_envelope</code>.</p>
+<p>These blocks work slightly different from each other, so be mindful of the details.</p>
+
+<h4 id="volume">volume_envelope</h4>
+<table>
+	<tr>
+		<td>max</td>
+		<td>base volume scalar of the sound</td>
+	</tr>
+	<tr>
+		<td>start</td>
+		<td rowspan="2">
+			<p>initial and target fraction of <code>max</code></p>
+			<p>volume will ramp from <code>start*max</code> to <code>end*max</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>end</td>
+	</tr>
+	<tr>
+		<td>duration</td>
+		<td>how long it takes to ramp from initial to target volume</td>
+	</tr>
+	<tr>
+		<td>envStartTime</td>
+		<td>
+			<p>how long to stay at initial volume, before beginning to ramp toward target volume</p>
+		</td>
+	</tr>
+</table>
+<p></p>
+<aside>the product of <code>max</code>, <code>start</code> through <code>end</code>, and <code><a href="#radioVolume">radioVolume</a></code> is capped at <code>1.0</code></aside>
+<p></p>
+<aside>if <code>start = 0</code>, the sound will not play, unless <code><a href="#bEnableVolumeEnvelope">bEnableVolumeEnvelope</a> = 1</code> and <code>envStartTime = 0</code></aside>
+
+<h4 id="pitch">pitch_envelope</h4>
+<table>
+	<tr>
+		<td>max</td>
+		<td>
+			<p>pitch scalar</p>
+			<p>this value will <strong>only</strong> be used when <code><a href="#bEnablePitchEnvelope">bEnablePitchEnvelope</a> = 0</code></p>
+		</td>
+	</tr>
+	<tr>
+		<td>start</td>
+		<td rowspan="2">
+			<p>initial and target pitch</p>
+			<p>pitch will shift from <code>start</code> to <code>end</code></p></td>
+	</tr>
+	<tr>
+		<td>end</td>
+	</tr>
+	<tr>
+		<td>duration</td>
+		<td>how long it takes to shift from <code>start</code> to <code>end</code></td>
+	</tr>
+	<tr>
+		<td>envStartTime</td>
+		<td>how long to stay at <code>start</code>, before beginning to shift toward <code>end</code></td>
+	</tr>
+</table>
+<p></p>
+<aside>Make sure <code>max</code> &gt; <code>0</code> when <code><a href="#bEnablePitchEnvelope">bEnablePitchEnvelope</a> = 0</code>, and that <code>end</code> &gt; <code>0</code> when <code><a href="#bEnablePitchEnvelope">bEnablePitchEnvelope</a> = 1</code> (or that the sound finishes playing before the pitch reaches <code>0</code>), or else the sound will stall, silently using up an audio channel.</aside>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

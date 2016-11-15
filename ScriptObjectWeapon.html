@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ScriptObjectWeapon - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Inherited">Inherited Functions</a></li>
+		<li><a href="#Weapon">Weapon Functions</a></li>
+	</ul>
+</nav>
+
+
+<h2>
+	<span class="breadcrumb"><a href="scripts.html">Scripts</a>
+	<a href="ScriptObject.html">ScriptObject</a></span>
+	ScriptObjectWeapon
+</h2>
+
+<p>Base class of all weapon scripts, associated with a <a href="kWeapon.html">kWeapon</a> actor.  Weapon classes are defined in scripts/weapons.</p>
+
+<p>Ammo is managed by <a href="kPlayer.html">kPlayer</a>, which you can get a reference to with <code><a href="kWeapon.html#Owner">kWeapon::Owner()</a></code>.</p>
+
+
+<h3 id="Inherited">Inherited Functions</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSpawn</strong>()</h4>
+<p>definitely gets called before the player can use the weapon, but I'm not sure exactly when</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnTick</strong>()</h4>
+<p>called every <a href="scripts.html#TickRate">tick</a>, if it's the current weapon</p>
+
+
+<h3 id="Weapon">Weapon Functions</h3>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnBeginFire</strong>()</h4>
+<p>called when the player presses the fire button (only if playing idle anim?)</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnFire</strong>()</h4>
+<p>called every <a href="scripts.html#TickRate">tick</a>, if an attack animation is playing</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnEndFire</strong>()</h4>
+<p>called when the player releases the fire button (only if playing attack anim?)</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnRaise</strong>()</h4>
+<p>called at the end of swap-in anim</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnLower</strong>()</h4>
+<p>called at the end of swap-out anim, when changing weapons</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnHoldster</strong>()</h4>
+<p>called at the end of swap-out anim, when climbing</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>
