@@ -37,7 +37,8 @@
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ConsumeAmmo</strong>( <!--const -->int <em>amt</em> )</h4>
 <p>draws <code>amt</code> from current weapon's alt ammo if it has any, primary otherwise</p>
-<p>negative values will add ammo to alt ammo if it has any, primary otherwise (will go over max)</p>
+<p>the weapon's primary ammo will not be deducted if its alt ammo &gt; <code>0</code>, but &lt; <code>amt</code></p>
+<p>negative values will add ammo to alt ammo if it has any, primary otherwise (will go over max; will not overflow from primary into alt)</p>
 
 <h4 class="funcDec collapse"><!--const -->int <strong>GetAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
 <h4 class="funcDec"><!--const -->int <strong>GetAltAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
