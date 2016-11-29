@@ -222,8 +222,11 @@
 
 <h3 id="Movement">Movement</h3>
 
-<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Origin</strong>()</h4>
+<h4 id="Origin" class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Origin</strong>()</h4>
 <p>current location of the actor</p>
+<aside>
+	although this is mutable, <code><a href="#MoveToPosition">MoveToPosition()</a></code> and <code><a href="#SetPosition">SetPosition()</a></code> should be used instead
+</aside>
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>PrevOrigin</strong>()</h4>
 <p>location of the actor before the last move</p>
@@ -247,15 +250,15 @@
 
 <h4 class="funcDec">float&amp; <strong>StepHeight</strong>()</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>MoveToPosition</strong>( <!--const -->float <em>newX</em>, <!--const -->float <em>newY</em> )</h4>
+<h4 id="MoveToPosition" class="funcDec"><span class="unimportant">void</span> <strong>MoveToPosition</strong>( <!--const -->float <em>newX</em>, <!--const -->float <em>newY</em> )</h4>
 <p>tries to move to the given global horizontal coordinates</p>
 <p>will move up and down slopes, but will be stopped by any obstructions along the way</p>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>newLoc</em> )</h4>
+<h4 id="SetPosition" class="funcDec"><span class="unimportant">void</span> <strong>SetPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>newLoc</em> )</h4>
 <p>set location to an arbitrary point</p>
 <p>if the actor gets stuck in a wall or actor, or outside the map, the game will try to find a reasonable place to move it back into bounds</p>
 <aside>
-	seems equivalent to <code>self.Origin() = newLoc;</code>
+	this seems to update the actor's <a href="kWorld.html#MapStructure">sector</a> more reliably than modifying <code><a href="#Origin">Origin()</a></code>
 </aside>
 
 <h4 class="funcDec collapse"><a href="kAngle.html">kAngle</a>&amp; <strong>Yaw</strong>()</h4>
