@@ -53,15 +53,15 @@ ANF_CYCLECOMPLETED</code></pre>
 <p>play an animation without tweening to it</p>
 
 
-<h4 class="funcDec"><!--const -->int <strong>CurrentFrame</strong>()</h4>
-
 <h4 class="funcDec"><!--const -->int <strong>NumFrames</strong>()</h4>
+<p>number of frames the current animation consists of</p>
 
 <h4 class="funcDec"><!--const -->float <strong>PlayTime</strong>()</h4>
 <p>time in seconds the current animation has been playing</p>
 
-<h4 class="funcDec"><!--const -->float <strong>TrackTime</strong>()</h4>
+<h4 id="TrackTime" class="funcDec"><!--const -->float <strong>TrackTime</strong>()</h4>
 <p>fraction of the current animation that's been played so far (<code>0.0</code> to <code>1.0</code>)</p>
+<p>does not reflect tweening, e.g., halfway between the first two frames of a ten-frame animation would return <code>0.1</code>, not <code>0.15</code></p>
 
 <h4 class="funcDec"><!--const -->int <strong>PlayingID</strong>()<!-- const--></h4>
 <p>ID of the actor's current animation</p>
@@ -84,6 +84,12 @@ ANF_CYCLECOMPLETED</code></pre>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ChangeSpeed</strong>( <!--const -->float <em>newSpeed</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetLastFrame</strong>( <!--const -->bool <em class="hasDef">[unknown]</em> = <em class="defVal">false</em> )</h4>
+
+
+<h4></h4><!-- spacer -->
+<aside class="unimportant">
+	<code><!--const -->int CurrentFrame()</code> sometimes works, but some animations just return <code>0</code> &ndash; use <code><a href="#TrackTime">TrackTime()</a></code> instead
+</aside>
 
 
 </div><!-- main -->
