@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Trails - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Vertices">Vertices</a></li>
+		<li><a href="#Edges">Edges</a></li>
+		<li><a href="#Trails">Trails</a></li>
+	</ul>
+</nav>
+
+
+<h2>Trails</h2>
+
+<p>Trails are procedural, polygonal effects that can can be attached to <a href="fx.html#trailDefinitions">effects</a> and <a href="kRenderModel.html#AddTrailEffect">models</a>.</p>
+
+<p>Trails are defined by a series of edges, which are in turn defined by an initial and final vertex, which the edge interpolates between over the course of its life:</p>
+
+<img src="trail.png" alt="trail diagram">
+
+
+<h3 id="Vertices">Vertices</h3>
+
+<table>
+	<tr>
+		<td>pos</td>
+		<td>
+			<p>position relative to source</p>
+			<p>for effects, +x is left, +y is backward, and +z is up, all relative to the camera</p>
+		</td>
+	</tr>
+	<tr>
+		<td>color</td>
+		<td>red, green, and blue color components, from <code>0</code> to <code>255</code></td>
+	</tr>
+	<tr>
+		<td>alpha</td>
+		<td>opacity, from <code>0</code> to <code>255</code></td>
+	</tr>
+</table>
+
+
+<h3 id="Edges">Edges</h3>
+
+<table>
+	<tr>
+		<td>vertex_start</td>
+		<td rowspan="2">initial and final vertices to interpolate between over the course of the edge's life time</td>
+	</tr>
+	<tr>
+		<td>vertex_end</td>
+	</tr>
+</table>
+
+
+<h3 id="Trails">Trails</h3>
+
+<table>
+	<tr>
+		<td>lifeTime</td>
+		<td>life time of the trail as a whole</td>
+	</tr>
+	<tr>
+		<td>fadeOutTime</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>edgeLifeTime</td>
+		<td>how long each edge takes to transition from <code>vertex_start</code> to <code>vertex_end</code></td>
+	</tr>
+	<tr>
+		<td>scale</td>
+		<td>vertex position scalar</td>
+	</tr>
+	<tr>
+		<td>bCloseEdges</td>
+		<td>
+			<p>connect the last edge to the first edge</p>
+			<p>this is equivalent to duplicating the first edge at the end of the edge list below</p>
+		</td>
+	</tr>
+	<tr>
+		<td><p style="display:inline-block;text-align:center;">edge_1<br>...<br>edge_N</p></td>
+		<td>
+			<p>list of <strong>2 or more</strong> edges</p>
+			<p>each edge is connected to the previous edge</p>
+		</td>
+	</tr>
+</table>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>
