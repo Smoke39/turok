@@ -67,7 +67,8 @@ ANF_CYCLECOMPLETED</code></pre>
 <p>ID of the actor's current animation</p>
 
 <h4 class="funcDec">bool <strong>IsPlaying</strong>( <!--const -->int <em>animID</em> )</h4>
-<p>returns whether <code>PlayingID() == animID</code></p>
+<p>returns whether the given animation is playing (<code>PlayingID() == animID &amp;&amp; !Stopped()</code>)</p>
+<p>todo: also test paused anims</p>
 
 <h4 class="funcDec">bool <strong>CheckAnimID</strong>( <!--const -->int <em>animID</em> )</h4>
 <p>returns whether this actor has an animation with the given ID</p>
