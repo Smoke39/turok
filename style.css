@@ -362,7 +362,7 @@ table
 /*	box-shadow: 0 0 5px #AAA;*/
 	box-shadow: 5px 5px 0 #DDD;
 }
-td
+td, th
 {
 	padding: 0.75em;
 	border: 1px solid grey;
