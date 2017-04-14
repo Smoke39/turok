@@ -97,7 +97,7 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>bDrawOnBottom</td>
-		<td></td>
+		<td>render in front of other effects</td>
 	</tr>
 	<tr id="bLensFlares">
 		<td>bLensFlares</td>
@@ -110,10 +110,10 @@ forwardSpeedRandom = 500</code></pre>
 	<tr id="bScaleLerp">
 		<td>bScaleLerp</td>
 		<td>
-			<p class="collapse">controls how <a href="#scaleDest"><code>scaleDest</code></a> continuously updates <code>scale</code>:</p>
+			<p class="collapse">continuously increment rather than multiply <code>scale</code> by <a href="#scaleDest"><code>scaleDest</code></a>:</p>
 			<ol class="bold">
 				<li value="0"><code>scale</code> *= <code>scaleDest</code></li>
-				<li><code>scale</code> += <code>scaleDest</code> * initial scale</li>
+				<li><code>scale</code> += <code>scaleDest</code></li>
 			</ol>
 		</td>
 	</tr>
@@ -144,8 +144,8 @@ forwardSpeedRandom = 500</code></pre>
 	<tr>
 		<td>bWeaponView</td>
 		<td>
-			<p>offset using first-person weapon modelview matrix</p>
-			<p>allows <code><a href="#offset">offset</a></code> to be consistent irrespective of FOV</p>
+			<p>render with first-person weapon modelview matrix</p>
+			<p>allows consistent alignment with first-person weapon irrespective of FOV, but causes inconsistent positioning in the world when FOV is not 47.5</p>
 		</td>
 	</tr>
 	<tr id="bMuzzleEffect">
