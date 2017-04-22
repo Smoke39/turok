@@ -44,16 +44,26 @@
 <h3 id="Weapon">Weapon Functions</h3>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnBeginFire</strong>()</h4>
-<p>called when the player presses the fire button (only if playing idle anim?)</p>
+<p>Called if the fire button is pressed, and the weapon is idle.</p>
+<p>The weapon will remain in the firing state until an animation ends (by completing or being stopped manually &ndash; interrupting with another animation does not count as "ending" the previous animation), or until <code>anim_weaponIdle</code> or <code>anim_weaponIdleUnderwater</code> is playing.</p>
+<p>Therefore, if you do not play an animation in this function:</p>
+<ul>
+	<li><strong>if an idle anim is playing:</strong>
+		<p>the weapon will not enter the firing state, and <code>OnBeginFire()</code> will be called every <a href="scripts.html#TickRate">tick</a> until the player releases the fire button</p>
+	</li>
+	<li><strong>if the run anim is playing:</strong>
+		<p>the weapon will ramain in the firing state until you change the <a href="kAnimState.html">anim state</a> (because the run anim is looping, and therefore never ends)</p>
+	</li>
+</ul>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnFire</strong>()</h4>
-<p>called every <a href="scripts.html#TickRate">tick</a>, if an attack animation is playing</p>
+<p>called every <a href="scripts.html#TickRate">tick</a>, if the weapon is firing</p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnEndFire</strong>()</h4>
-<p>called when the player releases the fire button (only if playing attack anim?)</p>
+<p>called when the player first releases the fire button while the weapon is firing</p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnRaise</strong>()</h4>
-<p>called at the end of swap-in anim</p>
+<p>called at the end of swap-in anim, when changing weapons or after climbing</p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnLower</strong>()</h4>
 <p>called at the end of swap-out anim, when changing weapons</p>
