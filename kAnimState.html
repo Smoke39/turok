@@ -44,13 +44,11 @@ ANF_CYCLECOMPLETED</code></pre>
 
 <h3 id="Methods">Methods</h3>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>Blend</strong>( <!--const -->int <em>animID</em>, float <em>animRate</em>, float <em>tweenTime</em>, int <em>flags</em> )</h4>
-<p>play an animation</p>
-<p>larger <code>animRate</code> values mean slower animation</p>
-<p>not sure if anim state's flags get set to <code>flags</code>, or bitwise or'd with <code>flags</code></p>
-
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>Blend</strong>( <!--const -->int <em>animID</em>, float <em>animRate</em>, float <em>tweenTime</em>, int <em>flags</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>Set</strong>( <!--const -->int <em>animID</em>, float <em>animRate</em>, int <em>flags</em> )</h4>
-<p>play an animation without tweening to it</p>
+<p>play an animation with or without tween time, respectively</p>
+<p><code>animRate</code> is the time per frame, in <span class="numerator">1</span>&frasl;<span class="denominator">60</span> seconds</p>
+<p><code>tweenTime</code> is the time to crossfade between the previous and new animation, in <span class="numerator">1</span>&frasl;<span class="denominator">30</span> seconds</p>
 
 
 <h4 class="funcDec"><!--const -->int <strong>NumFrames</strong>()</h4>
@@ -58,6 +56,7 @@ ANF_CYCLECOMPLETED</code></pre>
 
 <h4 class="funcDec"><!--const -->float <strong>PlayTime</strong>()</h4>
 <p>time in seconds the current animation has been playing</p>
+<p>does not increase while paused</p>
 
 <h4 id="TrackTime" class="funcDec"><!--const -->float <strong>TrackTime</strong>()</h4>
 <p>fraction of the current animation that's been played so far (<code>0.0</code> to <code>1.0</code>)</p>
@@ -65,25 +64,28 @@ ANF_CYCLECOMPLETED</code></pre>
 
 <h4 class="funcDec"><!--const -->int <strong>PlayingID</strong>()<!-- const--></h4>
 <p>ID of the actor's current animation</p>
+<p>valid even if the animation is paused or stopped</p>
 
 <h4 class="funcDec">bool <strong>IsPlaying</strong>( <!--const -->int <em>animID</em> )</h4>
-<p>returns whether the given animation is playing (<code>PlayingID() == animID &amp;&amp; !Stopped()</code>)</p>
-<p>todo: also test paused anims</p>
+<p>returns whether the given animation is playing</p>
+<p>returns true even if the animation is paused, but not if it's stopped</p>
 
 <h4 class="funcDec">bool <strong>CheckAnimID</strong>( <!--const -->int <em>animID</em> )</h4>
 <p>returns whether this actor has an animation with the given ID</p>
 
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>Stop</strong>()</h4>
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>Pause</strong>()</h4>
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>Stop</strong>()</h4>
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>Pause</strong>()</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>Resume</strong>()</h4>
 
-<h4 class="funcDec"><!--const -->bool <strong>Stopped</strong>()<!-- const--></h4>
-<h4 class="funcDec"><!--const -->bool <strong>Blending</strong>()<!-- const--></h4>
-<h4 class="funcDec"><!--const -->bool <strong>Looping</strong>()<!-- const--></h4>
+<h4 class="funcDec collapse"><!--const -->bool <strong>Stopped</strong>()<!-- const--></h4>
+<h4 class="funcDec collapse"><!--const -->bool <strong>Blending</strong>()<!-- const--></h4>
+<h4 class="funcDec collapse"><!--const -->bool <strong>Looping</strong>()<!-- const--></h4>
 <h4 class="funcDec"><!--const -->bool <strong>CycleCompleted</strong>()<!-- const--></h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>ChangeSpeed</strong>( <!--const -->float <em>newSpeed</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ChangeSpeed</strong>( <!--const -->float <em>animRate</em> )</h4>
+<p><code>animRate</code> works the same as in <code>Blend()</code>/<code>Set()</code></p>
+
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetLastFrame</strong>( <!--const -->bool <em class="hasDef">[unknown]</em> = <em class="defVal">false</em> )</h4>
 
 
