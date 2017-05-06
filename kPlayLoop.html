@@ -27,8 +27,9 @@
 
 <h3 id="Methods">Methods</h3>
 
-<h4 class="funcDec"><!--const -->int <strong>Ticks</strong>()</h4>
+<h4 id="Ticks" class="funcDec"><!--const -->int <strong>Ticks</strong>()</h4>
 <p>number of <a href="scripts.html#TickRate">ticks</a> since the current map started</p>
+<aside>unlike <a href="kActor.html#GameTicks">kActor::GameTicks()</a>, when the game's time scale is less than 100% (<a href="console.html#gamespeed">gamespeed</a> &lt; <code>1.0</code>, or spirit mode is active), this will increment in proportion to the time scale (e.g., every 5 ticks when game speed is <span class="numerator">1</span>&frasl;<span class="denominator">5</span>)</aside>
 
 <h4 class="funcDec"><!--const --><span class="unimportant">void</span> <strong>TagActorForBossBar</strong>( <a href="kActor.html">kActor</a>@ <em>boss</em> )</h4>
 <p>show boss health bar on the HUD, tracking <code>boss</code>'s <a href="kActor.html#Health">health</a></p>

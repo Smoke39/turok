@@ -85,8 +85,9 @@
 	<p>I'm not sure what the relation between <code>k</code> and <code>kex</code> classes is.  There're too many classes for each object.</p>
 </aside>
 
-<h4 class="funcDec"><!--const -->int <strong>GameTicks</strong>()</h4>
+<h4 id="GameTicks" class="funcDec"><!--const -->int <strong>GameTicks</strong>()</h4>
 <p>how many <a href="scripts.html#TickRate">ticks</a> the actor has existed for</p>
+<aside>unlike <a href="kPlayLoop.html#Ticks">kPlayLoop::Ticks()</a>, when the game's time scale is less than 100% (<a href="console.html#gamespeed">gamespeed</a> &lt; <code>1.0</code>, or spirit mode is active), this will continue to increment every tick</aside>
 
 <h4 id="Health" class="funcDec">int16&amp; <strong>Health</strong>()</h4>
 <p>actor's health</p>
