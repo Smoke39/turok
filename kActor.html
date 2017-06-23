@@ -58,7 +58,7 @@
 
 <h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kActor</h2>
 
-<p>kActors are the internal representation of objects in the game.  They're controlled by a combination of native code (in sobek.exe), and an associated <a href="ScriptObject.html">script object</a>, which gets a handle to its kActor in its constructor.</p>
+<p>kActor is an internal class that acts as an intermediary between scripts and an actor's native object.  If an actor has a <a href="ScriptObject.html">script object</a> assigned, it will receive a handle to its associated kActor in its constructor.</p>
 
 
 
@@ -79,11 +79,7 @@
 
 <h4 class="funcDec">kScriptObject@ <strong>ScriptObject</strong>()</h4>
 <h4 class="funcDec">bool <strong>InstanceOf</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>className</em> )</h4>
-<p>returns whether this actor's type is <code>className</code>, or a subclass thereof</p>
-<aside>
-	<p><code>className</code> should be a <code>kex</code>-prefixed class (as defined in defs/actors), not a <code>k</code>-prefixed class (like we use for variable types, from the <a href="scripts.html#ClassTree">class tree</a>).</p>
-	<p>I'm not sure what the relation between <code>k</code> and <code>kex</code> classes is.  There're too many classes for each object.</p>
-</aside>
+<p>returns whether this actor's associated <a href="scripts.html#NativeClasses">native object</a> is an instance of <code>className</code>, or a subclass thereof (this refers to kex-prefixed classes, not script classes)</p>
 
 <h4 id="GameTicks" class="funcDec"><!--const -->int <strong>GameTicks</strong>()</h4>
 <p>how many <a href="scripts.html#TickRate">ticks</a> the actor has existed for</p>

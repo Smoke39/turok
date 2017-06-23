@@ -65,6 +65,7 @@
 <nav>
 	<h3>Contents</h3>
 	<ul>
+		<li><a href="#ControlStructure">Control Structure</a></li>
 		<li><a href="#General">General</a>
 			<ul>
 				<li><a href="#AngelScript">AngelScript</a></li>
@@ -87,12 +88,29 @@
 
 <h2>Scripts</h2>
 
-<p>Objects in the game are represented by <a href="kActor.html">kActor</a>, which are controlled by a combination of native code (in sobek.exe), and scripts.</p>
-<p><a href="ScriptObject.html">Script objects</a> get a handle to their associated kActor in their constructor, which is typically stored in a member variable named <code>self</code>.</p>
+<p>Although some of the game's behavior can be modified by changing things like <a href="defs.html">defs</a> and <a href="fx.html">fx</a>, the scripts are the meat of more complex game logic.</p>
 
 <!--<aside>
 	This guide omits <code>const</code> declarations where they have no practical impact (e.g., data passed by value), and where testing seems to contradict them.  Check <a href="https://www.dropbox.com/s/6nvxxczvi8j9shu/ScriptAPI.txt?dl=0">BehemothProgrammer's notes</a> if you want to see the raw signatures taken from the game's exe.
 </aside>-->
+
+
+
+<h3 id="ControlStructure">Control Structure</h3>
+
+<p>Turok EX's logic is split into three different levels.  It's helpful to understand all three and how they fit together:</p>
+
+<h4 id="NativeClasses">Native Classes</h4>
+<p>These are hard-coded in the game engine itself, and cannot be modified or interracted with from user scripts.  All dynamic objects in the game (actors) are represented by one of these, which defines their baseline behavior.  Native classes are assigned to actors with the <code>classname</code> property in defs/actors/.</p>
+<p>By convention, native classes are prefixed with <strong>kex</strong>.</p>
+
+<h4>Internal Scripts</h4>
+<p>These are part of the scripting engine, but defined inside the game's executable.  They can't be modified, but unlike native classes they can be used from user scripts.  They act as liasons between user scripts and kex classes (e.g., <a href="kActor.html">kActor</a>) or the engine itself (e.g., <a href="kGame.html">kGame</a>), or provide some standard functionality (e.g., <a href="kVec3.html">kVec3</a>).</p>
+<p>Internal script classes are conventionally prefixed with <strong>k</strong>.</p>
+
+<h4>User Scripts</h4>
+<p>This is the stuff in the text files in the scripts folder.  We have free reign to modify these, or add our own variables, functions, and classes.</p>
+<p>Actors can optionally have a <a href="ScriptObject.html">user script class</a> assigned with the <code>scriptClass</code> property in defs/actors/.  These classes will be passed a handle to the <a href="kActor.html">internal script object</a> associated with their native kex object in their constructor, which is typically stored in a member variable named <code>self</code>.</p>
 
 
 
@@ -278,7 +296,7 @@ self.AnimState().flags ^= ANF_PAUSED;</code></pre>
 				</ul>
 			</li><!-- ScriptObjectWeapon -->
 			<li>TurokEnemy
-				<ul>
+				<ul class="unimportant">
 					<li>TurokCampainger</li>
 					<li>TurokHummer</li>
 					<li>TurokLongHunter</li>
