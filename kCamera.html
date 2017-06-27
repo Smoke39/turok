@@ -39,14 +39,22 @@
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>StartCinematic</strong>( <!--const -->uint <em class="hasDef">flags</em> = <em class="defVal">CMF_LOCK_PLAYER | CMF_UNLOCK_PLAYER_ON_FINISH</em> )</h4>
 <ul class="enum">
-	<li>CMF_NO_INITIAL_FADEOUT</li>
-	<li>CMF_NO_LETTERBOX</li>
-	<li>CMF_LOCK_PLAYER</li>
-	<li>CMF_UNLOCK_PLAYER_ON_FINISH</li>
-	<li>CMF_INITIAL_FADEIN</li>
-	<li>CMF_SHOW_CREDITS</li>
-	<li>CMF_CHANGE_MAP_AFTER_FADE</li>
-	<li>CMF_SHOW_HIDDEN_OBJECTS</li>
+	<li>
+		<span>CMF_NO_INITIAL_FADEOUT</span>
+		<span>&ndash;</span>
+		<span>cut rather than fade to black (start at state 2)</span>
+	</li>
+	<li><span>CMF_NO_LETTERBOX</span></li>
+	<li><span>CMF_LOCK_PLAYER</span></li>
+	<li><span>CMF_UNLOCK_PLAYER_ON_FINISH</span></li>
+	<li>
+		<span>CMF_INITIAL_FADEIN</span>
+		<span>&ndash;</span>
+		<span>fade from black and resume gameplay (start at state 5)</span>
+	</li>
+	<li><span>CMF_SHOW_CREDITS</span></li>
+	<li><span>CMF_CHANGE_MAP_AFTER_FADE</span></li>
+	<li><span>CMF_SHOW_HIDDEN_OBJECTS</span></li>
 </ul>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>StopCinematic</strong>()</h4>
