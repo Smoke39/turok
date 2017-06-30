@@ -124,8 +124,13 @@
 
 <pre><code>obj a, b;
 obj@ h;   // null handle
-@h = @a;  // h now refers to a
-h = b;    // a is now a copy of b</code></pre>
+@h = a;   // h now refers to a
+@h = @a;  // explicit version of previous line (rarely required)
+h = b;    // a is now a copy of b
+
+if ( h == b )     // "a equals b" (true)
+if ( h is b )     // "h refers to b" (false)
+if ( h !is null ) // "h refers to something" (true)</code></pre>
 
 
 <h4 id="BitFields">Bit Fields</h3>
