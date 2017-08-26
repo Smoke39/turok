@@ -54,7 +54,11 @@
 	</li>
 	<li><span>CMF_SHOW_CREDITS</span></li>
 	<li><span>CMF_CHANGE_MAP_AFTER_FADE</span></li>
-	<li><span>CMF_SHOW_HIDDEN_OBJECTS</span></li>
+	<li>
+		<span>CMF_SHOW_HIDDEN_OBJECTS</span>
+		<span>&ndash;</span>
+		<span>do not hide "non-cutscene" objects, like key pedistals</span>
+	</li>
 </ul>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>StopCinematic</strong>()</h4>
@@ -69,6 +73,10 @@
 	<li>transitioning out &ndash; fading from black</li>
 </ol>
 
+<h4 class="funcDec collapse"><!--const -->bool <strong>Active</strong>()</h4>
+<h4 class="funcDec"><!--const -->bool <strong>ViewingFromCamera</strong>()</h4>
+<p>returns <code>true</code> if <code>CinematicState()</code> is <code>2</code>, <code>3</code>, or <code>4</code></p>
+
 <h4 class="funcDec"><!--const --><span class="unimportant">void</span> <strong>SetLookAtActor</strong>( <a href="kActor.html">kActor</a>@ <em>a</em> )</h4>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ClearLookAtActor</strong>()</h4>
@@ -77,10 +85,14 @@
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetFinalView</strong>( <!--const -->int <em>i</em> )</h4>
 
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ClearFinalView</strong>()</h4>
+
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetRotationTrack</strong>( <!--const -->int <em>trackID</em>, <!--const -->float <em>angle1</em>, <!--const -->float <em>angle2</em>, <!--const -->float <em>dist1</em>, <!--const -->float <em>dist2</em>,<br>
 	</pre><!--const -->float <em class="hasDef">height1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">height2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">lookHeight1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">lookHeight2</em> = <em class="defVal">0</em> )</h4>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetPositionTrack</strong>( <!--const -->int <em>trackID</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v3</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v4</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ClearViewTracks</strong>()</h4>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>TweenPositionTrack</strong>( <!--const -->int <em>trackID</em>, <!--const -->float <em>time</em> )</h4>
 
@@ -103,25 +115,18 @@
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetEyeView</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetFocusView</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
-
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ZoomEyeViewToPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
-
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>ZoomFocusViewToPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a> <strong>GetEyeView</strong>()</h4>
 
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetFocusView</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>ZoomFocusViewToPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
+
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a> <strong>GetFocusView</strong>()</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>ClearFinalView</strong>()</h4>
-
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>ClearViewTracks</strong>()</h4>
-
 <h4 class="funcDec"><!--const -->bool <strong>UserInterrupted</strong>()</h4>
-
-<h4 class="funcDec"><!--const -->bool <strong>Active</strong>()</h4>
-
-<h4 class="funcDec"><!--const -->bool <strong>ViewingFromCamera</strong>()</h4>
+<p>returns <code>true</code> if the player has tried to cancel the cutscene (e.g., pressed fire or escape key)</p>
 
 <h4 class="funcDec"><span class="unimportant">const</span> <a href="kVec3.html">kVec3</a>&amp; <strong>Tremor</strong>()</h4>
 
