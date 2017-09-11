@@ -128,6 +128,7 @@ nav ~ h3:first-of-type
 }
 
 /******************************************************************************/
+/* GENERAL */
 
 h3
 {
@@ -202,6 +203,11 @@ img
 	display: block;
 	margin: auto;
 	box-shadow: 1px 1px 10px #666;
+}
+
+ol.alpha
+{
+	list-style-type: lower-alpha;
 }
 
 .important
@@ -346,10 +352,35 @@ aside pre code
 	box-shadow: 3px 3px 0 #D5D5D5;
 }
 
+aside table
+{
+	background: white;
+	margin: auto;
+}
+
 /* don't reduce font size for important notes */
 aside.important
 {
 	font-size: 100%;
+}
+
+/* side bar */
+aside.sideBar
+{
+	float: right;
+	margin: 0 0 1em 1em;
+	padding: 1em;
+	max-width: 30%;
+}
+aside.sideBar h4
+{
+	display: inline-block;
+	border-bottom: 1px solid grey;
+	margin-bottom: 1em;
+}
+aside.sideBar h4 + *
+{
+	margin-top: 0;
 }
 
 /******************************************************************************/

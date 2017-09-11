@@ -15,7 +15,8 @@
 <nav>
 	<h3>Contents</h3>
 	<ul>
-		<li><a href="#Methods">Methods</a></li>
+		<li><a href="#Initialization">Initialization</a></li>
+		<li><a href="#OtherEvents">Other Events</a></li>
 	</ul>
 </nav>
 
@@ -27,30 +28,78 @@
 <p>Script objects get a handle to their associated kActor in their constructor, which is typically stored in a member variable named <code>self</code>.</p>
 
 
-<h3 id="Methods">Methods</h3>
+<h3 id="Initialization">Initialization</h3>
+
+<aside class="sideBar">
+	<h4>Initialization Sequence</h4>
+	<p>When the player enters a level, every actor on the level is initialized in phases:</p>
+	<table>
+		<!-- phase 1 -->
+		<tr>
+			<td>1</td>
+			<td>
+				<ol class="noIndent alpha">
+					<li>constructor</li>
+					<li><code>OnSpawn()</code></li>
+					<li class="unimportant" style="font-style:italic">(native) initialize internal data:
+						<ul style="padding-left: 2em;">
+							<li><a href="kActor.html#PersistentBit">persistent bit</a></li>
+							<li><a href="kActor.html#Flags">flags</a> &amp; <a href="kActor.html#SpawnFlags">spawn flags</a></li>
+							<li><a href="kActor.html#TID">tag ID</a></li>
+							<li>(possibly others)</li>
+						</ul>
+					</li>
+				</ol>
+			</td>
+		</tr>
+		<!-- phase 2 -->
+		<tr>
+			<td>2</td>
+			<td>
+				<ol class="noIndent alpha">
+					<li><code>OnBeginLevel()</code></li>
+					<li><code>OnRestore()</code></li>
+				</ol>
+			</td>
+		</tr>
+		<!-- phase 3 -->
+		<tr>
+			<td>3</td>
+			<td>
+				<code>OnPostBeginLevel()</code>
+			</td>
+		</tr>
+	</table>
+	<p>Each phase is applied to all actors on the level before moving on to the next phase, and each action within a phase is applied to one actor before moving on to the next actor.</p>
+	<p>For actors spawned dynamically during gameplay, only the first phase is applied, unless they are spawned during level initialization, in which case <code>OnBeginLevel()</code> and <code>OnPostBeginLevel()</code> will be called if the actor was spawned before phase 2 and 3 began, respectively.</p>
+</aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSpawn</strong>()</h4>
+<p>gets called when the actor is spawned, immediately after the script's constructor</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnBeginLevel</strong>()</h4>
+<p>called during level initialization, after <code>OnSpawn()</code> has been called for all actors</p>
+
+<h4 id="OnRestore" class="funcDec"><span class="unimportant">void</span> <strong>OnRestore</strong>()</h4>
+<p>gets called if the <a href="kActor.html#PersistentBit">persistent bit</a> is marked, immediately after <code>OnBeginLevel()</code></p>
+<p>When the player enters a level, all actors placed in the map file will be spawned in their default state, even if they've been killed, picked up, or triggered.  An actor's persistent bit &ndash; whose value persists between saves/loads and level transitions &ndash; can be used as a rudimentary signal to restore the actor to some previous state.</p>
+<p>Some <a href="scripts.html#NativeClasses">native classes</a> use this bit internally.  For example, pickups use this bit to flag them as having been picked up, in which case they are removed before <code>OnRestore()</code> has a chance to be called.  Other classes can replicate this kind of behavior via script by marking the persistent bit and removing the actor in <code>OnRestore()</code> (e.g., <code>TurokAnimal</code>, in scripts/animal.txt).</p>
+<p>The persistent bit doesn't necessarily need to be used for removing an actor.  For example, <code>TurokTrap</code> in scripts/traps.txt uses it to track whether a trap has already been triggered.  This is how, for example, boulders appear on the ground when returning to a level after they've fallen.</p>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnPostBeginLevel</strong>()</h4>
+<p>called during level initialization, after <code>OnBeginLevel()</code> and <code>OnRestore()</code> have been called for all actors</p>
+
+
+<h3 id="OtherEvents">Other Events</h3>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnTick</strong>()</h4>
 <p>gets called every <a href="scripts.html#TickRate">tick</a></p>
-
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSpawn</strong>()</h4>
-<p>gets called when the actor is spawned</p>
-<aside>
-	<a href="kActor.html#Flags">flags</a> and <a href="kActor.html#TID">tag ID</a> aren't initialized until <code>OnBeginLevel()</code> &ndash; possibly other properties, too
-</aside>
-
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnBeginLevel</strong>()</h4>
-<p>gets called when the map starts, after <code>OnSpawn()</code></p>
-<p>only gets called for actors placed in the map file, not dynamically spawned actors</p>
-
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnPostBeginLevel</strong>()</h4>
-<p>gets called after <code>OnBeginLevel()</code></p>
-<p>this gets called for all actors &ndash; not just those placed in the map file &ndash; so you can think of it as a general "on-post-spawn"</p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnEndLevel</strong>()</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnActivate</strong>()</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnDeactivate</strong>()</h4>
 
-<h4 id="OnDamage" class="funcDec collapse"><span class="unimportant">void</span> <strong>OnDamage</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em>, <span class="unimportant">const</span> int <em>damage</em> )</h4>
+<h4 id="OnDamage" class="funcDec collapse"><span class="unimportant">void</span> <strong>OnDamage</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em>, <!--const -->int <em>damage</em> )</h4>
 <h4 id="OnDeath" class="funcDec"><span class="unimportant">void</span> <strong>OnDeath</strong>( <a href="kActor.html">kActor</a>@ <em>killer</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em> )</h4>
 <p>gets called when taking damage, before the actor's <a href="kActor.html#Health">health</a> gets decremented</p>
 <p><code>damageDef</code> stores <a href="defs.html#damageInfo">damage type</a> properties</p>
@@ -61,7 +110,6 @@
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSleep</strong>()</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnWake</strong>()</h4>
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnRestore</strong>()</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnTouch</strong>( <a href="kActor.html">kActor</a>@ <em>theActorThatTouchedMe</em> )</h4>
 <h4 id="OnCollide" class="funcDec"><span class="unimportant">void</span> <strong>OnCollide</strong>( <a href="kCModel.html">kCModel</a>@ <em>pCModel</em> )</h4>
 

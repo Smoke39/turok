@@ -66,8 +66,15 @@
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>Remove</strong>()</h4>
 <h4 class="funcDec"><!--const -->bool <strong>IsStale</strong>()</h4>
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>MarkPersistentBit</strong>( <!--const -->bool <em>b</em> )</h4>
+
+<div id="PersistentBit">
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>MarkPersistentBit</strong>( <!--const -->bool <em>bUnmark</em> )</h4>
 <h4 class="funcDec"><!--const -->bool <strong>IsPersistentMarked</strong>()</h4>
+<p>set and check the actor's persistent bit, respectively</p>
+<p>the persistent bit only applies to actors placed in the map file &ndash; for actors spawned dynamically during gameplay, <code>MarkPersistentBit()</code> does nothing, and <code>IsPersistentMarked()</code> always returns <code>false</code></p>
+<p>for more information on the persistent bit, see <code><a href="ScriptObject.html#OnRestore">ScriptObject::OnRestore()</a></code></p>
+<aside>note that, counterintuitively, <code>MarkPersistentBit()</code> is passed <code>false</code> to mark the bit, and <code>true</code> to unmark it</aside>
+</div>
 
 <h4 class="funcDec"><a href="kDictMem.html">kDictMem</a>@ <strong>Definition</strong>()</h4>
 <h4 class="funcDec">kActor@ <strong>CastToActor</strong>()</h4>
@@ -187,8 +194,9 @@
 		<span>AF_NOMOVEMENT</span>
 	</li>
 </ul>
+<aside>During the "native" step of <a href="ScriptObject.html#Initialization">initialization</a>, an actor's flags are bitwise or'd with its initial settings.  This means that, before they are initialized, flags can be set, but not cleared.</aside>
 
-<h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags1</strong>()</h4>
+<h4 id="SpawnFlags" class="funcDec collapse"><!--const -->uint <strong>SpawnFlags1</strong>()</h4>
 <h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags2</strong>()</h4>
 <h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags3</strong>()</h4>
 <h4 class="funcDec"><!--const -->int16 <strong>SpawnParams</strong>( <!--const -->int <em>param</em> )</h4>
