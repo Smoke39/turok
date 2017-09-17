@@ -169,7 +169,7 @@ self.AnimState().flags ^= ANF_PAUSED;</code></pre>
 </ol>
 <p>A single iteration of the "update" phase is called a <strong>tick</strong>.</p>
 <p>In some engines, the "update" phase occures once per frame.  If the game is designed with a fixed framerate, it will assume a specific, set amount of time has passed since the previous tick.  If the game is designed to allow a variable framerate, it will track the amount of time that's passed since the previous tick, and scale its calculations by that time.</p>
-<p>Turok EX allows a variable framerate, but its tick rate is fixed at 60hz.  If the framerate drops below 60fps, the game will run the update phase multiple times per frame to ensure the overall tick rate remains constant.</p>
+<p>Turok EX allows a variable framerate, but its tick rate is fixed at 60 Hz.  If the framerate drops below 60 fps, the game will run the update phase multiple times per frame to ensure the overall tick rate remains constant.</p>
 
 
 
@@ -211,15 +211,13 @@ self.AnimState().flags ^= ANF_PAUSED;</code></pre>
 <h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_DELTA_TIME</em> = <em class="defVal">1/60</em></h5>
 <p>length of a <a href="#TickRate">tick</a>, in seconds</p>
 
-<h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_SECONDS</em> = <em class="defVal">1/15</em></h5>
-<p>Time unit for <a href="fx.html">effects</a>.  Not sure what significance it has in scripts.</p>
-
-<h5 class="funcDec collapse"><span class="unimportant">const</span> float <em>GAME_FRAME_TIME</em> = <em class="defVal">1/4</em></h4>
+<h5 class="funcDec collapse"><span class="unimportant">const</span> float <em>GAME_SECONDS</em> = <em class="defVal">1/15</em></h5>
+<h5 class="funcDec collapse"><span class="unimportant">const</span> float <em>GAME_FRAME_TIME</em> = <em class="defVal">1/4</em></h5>
 <h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_FRAME_UNIT</em> = <em class="defVal">4</em></h5>
-<p>relations between <code>GAME_DELTA_TIME</code> and <code>GAME_SECONDS</code>?</p>
+<p>In the original game, game logic and animations ran at 15 Hz, while physics and rendering were allowed to update as fast as 60 fps when possible.  These values are mainly used for adapting the timing of the original game to the new engine.</p>
 
 <h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_SCALE</em> = <em class="defVal">10.24</em></h5>
-<p>some kind of distance scalar</p>
+<p>Universal distance scalar.  For example, the level editor's grid snapping is based on this, since most models are aligned to it.</p>
 
 
 <h4 id="Objects">Objects</h4>
