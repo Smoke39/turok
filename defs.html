@@ -16,7 +16,7 @@
 <table>
 	<tr>
 		<td>actors</td>
-		<td>defines all the things than can exist in the world (pickups, enemies, decorations...)</td>
+		<td>defines all the things that can exist in the world (pickups, enemies, decorations...)</td>
 	</tr>
 	<tr>
 		<td><a href=#ammoInfo>ammoInfo</a></td>
@@ -74,7 +74,7 @@
 		<td>
 			<p>Set to <code>1</code> to deal damage in a radius.</p>
 			<p>Causes enemies (and bodies) to fly into the air on death.</p>
-			<p>scripts/misc/destructibles (trees, rocks blocking the minigun on level 2, etc.) also looks for this flag to determine if it should be destroyed when taking damage.</p>
+			<p>Classes in scripts/misc/destructibles.txt (trees, rocks blocking the minigun on level 2, etc.) also look for this flag to determine if they should be destroyed when taking damage.</p>
 		</td>
 	</tr>
 	<tr>
@@ -134,16 +134,17 @@
 	<tr>
 		<td>bImpact</td>
 		<td rowspan=3>
-			<p>Used by arrow.kfx.</p>
-			<p>Presumably related to damage scaling based on velocity.</p>
-			<p>I haven't worked out the math behind these.</p>
+			<p>if <code>bImpact</code> is <code>1</code>, damage will be scaled by:
+			<blockquote>projectile speed / <code>impactDamp</code> / <code>impactFalloff</code></blockquote>
+			<p>(speed is in terms of distance per second)</p>
+			<p>if the scalar is &geq; <code>1.0</code>, damage will instead be <code>999999</code>, except against bosses</p>
 		</td>
 	</tr>
 	<tr>
 		<td>impactDamp</td>
 	</tr>
 	<tr>
-		<td>impactFallof</td>
+		<td>impactFalloff</td>
 	</tr>
 </table>
 
