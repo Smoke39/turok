@@ -288,7 +288,10 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>translation&nbsp;<a href="#vector">(v)</a>&nbsp;<a href="#random">*</a></td>
-		<td rowSpan="2">initial velocity = <code>forwardSpeed</code> * normal(<code>translation</code>)</td>
+		<td rowSpan="2">
+			<p>initial velocity = <code>forwardSpeed</code> * normal(<code>translation</code>)</p>
+			<p>speed is in terms of distance per second</p>
+		</td>
 	</tr>
 	<tr>
 		<td>forwardSpeed&nbsp;<a href="#random">*</a></td>
@@ -353,8 +356,8 @@ forwardSpeedRandom = 500</code></pre>
 	<tr id="lifeTime">
 		<td>lifeTime&nbsp;<a href="#random">*</a></td>
 		<td>
-			<p>how many <span class="numerator">1</span>&frasl;<span class="denominator">15</span> seconds this effect exists for</p>
-			<p><code>0</code> will last for <span class="numerator">1</span>&frasl;<span class="denominator">60</span> second</p>
+			<p>particle will exist for (1 + 4*<code>lifeTime</code>) / 60 seconds</p>
+			<p>negative values are simply treated as <code>0</code> (i.e., <code>lifeTime = -1</code> will not cause a particle to expire instantaneously)</p>
 		</td>
 	</tr>
 	<tr>
