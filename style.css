@@ -292,10 +292,17 @@ a[href^="http://"]:visited, a[href^="https://"]:visited
 	margin-top: 0;
 }
 
-ol.noIndent, ul.noIndent, .collapse + ul, .collapse + ol
+ol.noIndent, .collapse + ol
 {
 	list-style-position: inside;
 	padding-left: 0;
+}
+/* above style does not indent wrapped lines
+ * (but below style over-indents numbered lists, so we'll keep above around
+ * until I have a non-indented numbered list that wraps) */
+ul.noIndent, .collapse + ul
+{
+	padding-left: 1em;
 }
 
 /* BOLD NUMBERED LIST */

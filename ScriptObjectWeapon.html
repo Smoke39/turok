@@ -43,6 +43,16 @@
 
 <h3 id="Weapon">Weapon Functions</h3>
 
+<aside class="sideBar">
+	<h4>Weapon State &amp; Player Lock</h4>
+	<p>If the weapon is in the firing state when the player is <a href="kPlayer.html#Lock">locked</a> (namely, during a <a href="kCamera.html#StartCinematic">cutscene</a>):
+	<ul class="noIndent">
+		<li><code>OnFire()</code> is suspended</li>
+		<li><code>OnEndFire()</code> is delayed until the player is unlocked</li>
+		<li><code>OnTick()</code> continues to be called</li>
+	</ul>
+</aside>
+
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnBeginFire</strong>()</h4>
 <p>Called if the fire button is pressed, and the weapon is idle.</p>
 <p>The weapon will remain in the firing state until an animation ends (by completing or being stopped manually &ndash; interrupting with another animation does not count as "ending" the previous animation), or until <code>anim_weaponIdle</code> or <code>anim_weaponIdleUnderwater</code> is playing.</p>

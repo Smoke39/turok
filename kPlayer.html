@@ -92,11 +92,12 @@ BC_WEAPONLEFT
 BC_MAPZOOMIN
 BC_MAPZOOMOUT</code></pre>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>Lock</strong>()</h4>
+<h4 id="Lock" class="funcDec"><span class="unimportant">void</span> <strong>Lock</strong>()</h4>
 <p>completely halts all player/weapon simulation</p>
 <p>player freezes (even in mid air), camera locks in place (even bob effects), weapon freezes mid-animation, enemies behave as if you no longer exist, etc.</p>
+<p>this is the same functionality used by <a href="kCamera.html#StartCinematic">cutscenes</a></p>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>Unlock</strong>()</h4>
+<h4 id="Unlock" class="funcDec"><span class="unimportant">void</span> <strong>Unlock</strong>()</h4>
 <p>presumably undoes <code>Lock()</code></p>
 
 <h4 class="funcDec"><!--const -->bool <strong>Locked</strong>()</h4>

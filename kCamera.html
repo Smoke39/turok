@@ -37,7 +37,7 @@
 
 <h3 id="Methods">Methods</h3>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>StartCinematic</strong>( <!--const -->uint <em class="hasDef">flags</em> = <em class="defVal">CMF_LOCK_PLAYER | CMF_UNLOCK_PLAYER_ON_FINISH</em> )</h4>
+<h4 id="StartCinematic" class="funcDec"><span class="unimportant">void</span> <strong>StartCinematic</strong>( <!--const -->uint <em class="hasDef">flags</em> = <em class="defVal">CMF_LOCK_PLAYER | CMF_UNLOCK_PLAYER_ON_FINISH</em> )</h4>
 <ul class="enum">
 	<li>
 		<span>CMF_NO_INITIAL_FADEOUT</span>
@@ -45,8 +45,16 @@
 		<span>cut rather than fade to black (start at state 2)</span>
 	</li>
 	<li><span>CMF_NO_LETTERBOX</span></li>
-	<li><span>CMF_LOCK_PLAYER</span></li>
-	<li><span>CMF_UNLOCK_PLAYER_ON_FINISH</span></li>
+	<li>
+		<span>CMF_LOCK_PLAYER</span>
+		<span>&ndash;</span>
+		<span><a href="kPlayer.html#Lock">lock</a> the player as soon as the cutscene starts (state > 0)</span>
+	</li>
+	<li>
+		<span>CMF_UNLOCK_PLAYER_ON_FINISH</span>
+		<span>&ndash;</span>
+		<span><a href="kPlayer.html#Unlock">unlock</a> the player when state 5 begins</span>
+	</li>
 	<li>
 		<span>CMF_INITIAL_FADEIN</span>
 		<span>&ndash;</span>
