@@ -28,6 +28,7 @@
 <p>kDictMems are used for storing <a href="defs.html#damageInfo">damage type</a> properties.</p>
 
 <p>There is a global kDict, <code>GameVariables</code>, for storing persistent, per-save data, like collected chronosceptor pieces.</p>
+<aside class="important">Values will not be loaded from save files unless their associated key has already been added to <code>GameVariables</code> (namely, in scripts/main.txt).</aside>
 
 
 <h3 id="Methods">Methods</h3>
