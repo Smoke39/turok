@@ -29,27 +29,73 @@
 <p><a href="scripts.html#BitFields">bit field</a> of AI flags:</p>
 <ul class="enum">
 	<li>
-		<span>AIF_ATTACKING</span>
+		<span>AIF_ATTACKING</span><span>=</span><span>1 &lt;&lt; 0</span>
 	</li>
 	<li>
-		<span>AIF_WASSOLID</span>
+		<span>AIF_WASSOLID</span><span>=</span><span>1 &lt;&lt; 1</span>
 	</li>
 	<li>
-		<span>AIF_BLOWNAWAY</span>
+		<span></span><span></span><span>1 &lt;&lt; 2</span><span>&ndash;</span><span>first attack</span>
 	</li>
 	<li>
-		<span>AIF_NOCHASE</span>
+		<span></span><span></span><span>1 &lt;&lt; 3</span><span>&ndash;</span><span>heard loud noise</span>
 	</li>
 	<li>
-		<span>AIF_NOTHINK</span>
+		<span>AIF_BLOWNAWAY</span><span>=</span><span>1 &lt;&lt; 4</span>
 	</li>
 	<li>
-		<span>AIF_RUNNING</span>
+		<span></span><span></span><span>1 &lt;&lt; 5</span><span>&ndash;</span><span>go back to leash</span>
 	</li>
 	<li>
-		<span>AIF_TELEPORTING</span>
+		<span></span><span></span><span>1 &lt;&lt; 6</span><span>&ndash;</span><span>resurrect</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 8</span><span>&ndash;</span><span>regen delay</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 9</span><span>&ndash;</span><span>see target</span>
+	</li>
+	<li>
+		<span>AIF_NOCHASE</span><span>=</span><span>1 &lt;&lt; 10</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 11</span><span>&ndash;</span><span>regenerate anim</span>
+	</li>
+	<li>
+		<span>AIF_NOTHINK</span><span>=</span><span>1 &lt;&lt; 12</span>
+	</li>
+	<li>
+		<span>AIF_RUNNING</span><span>=</span><span>1 &lt;&lt; 13</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 14</span><span>&ndash;</span><span>get attention</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 15</span><span>&ndash;</span><span>regen delay 2?</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 16</span><span>&ndash;</span><span>heard quiet noise</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 17</span><span>&ndash;</span><span>away from leash</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 18</span><span>&ndash;</span><span>teleport away</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 19</span><span>&ndash;</span><span>teleport move slow</span>
+	</li>
+	<li>
+		<span>AIF_TELEPORTING</span><span>=</span><span>1 &lt;&lt; 20</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 22</span><span>&ndash;</span><span>wait for cycle</span>
+	</li>
+	<li>
+		<span></span><span></span><span>1 &lt;&lt; 23</span><span>&ndash;</span><span>damage panic</span>
 	</li>
 </ul>
+<p>These can be observed in-game with <a href="console.html#debugai">debugai</a>.
 
 
 </div><!-- main -->
