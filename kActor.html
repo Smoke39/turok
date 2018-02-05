@@ -264,7 +264,7 @@
 
 <h4 id="SetPosition" class="funcDec"><span class="unimportant">void</span> <strong>SetPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>newLoc</em> )</h4>
 <p>set location to an arbitrary point</p>
-<p>if the actor gets stuck in a wall or actor, or outside the map, the game will try to find a reasonable place to move it back into bounds</p>
+<p>if the actor gets stuck in an invalid spot (based on its <a href="#ClipFlags">clip flags</a>), the game will try to find a reasonable place to move it back into bounds</p>
 <aside>
 	this seems to update the actor's <a href="kWorld.html#MapStructure">sector</a> more reliably than modifying <code><a href="#Origin">Origin()</a></code>
 </aside>
