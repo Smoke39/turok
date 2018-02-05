@@ -22,17 +22,61 @@
 
 <h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kCModel</h2>
 
-<p>used for passing collision results to <a href="ScriptObject.html#OnCollide">ScriptObject::OnCollide()</a></p>
-<p>there's also a global kCModel, <code>CModel</code></p>
+<p>used for passing collision results to <code><a href="ScriptObject.html#OnCollide">ScriptObject::OnCollide()</a></code></p>
+<p>there's also a global kCModel, <code>CModel</code>, which stores the results of the following functions:</p>
+<ul>
+	<li><code><a href="kActor.html#CanSee">kActor::CanSee()</a></code></li>
+	<li><code><a href="kActor.html#CheckPosition">kActor::CheckPosition()</a></code></li>
+	<li><code><a href="kActor.html#GetSectorIndexAtLocation">kActor::GetSectorIndexAtLocation()</a></code></li>
+	<li><code><a href="kActor.html#MoveToPosition">kActor::MoveToPosition()</a></code></li>
+	<li><code><a href="kActor.html#SpawnProjectile">kActor::SpawnProjectile()</a></code></li>
+</ul>
 
 
 <h3 id="Methods">Methods</h3>
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>InterceptVector</strong>()</h4>
+<p>point of impact</p>
+
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>ContactNormal</strong>()</h4>
+<p>collided surface normal</p>
+
 <h4 class="funcDec"><span class="unimportant">const</span> float&amp; <strong>Fraction</strong>()</h4>
+<p>fraction from <code>0.0</code> to <code>1.0</code> between start and end points where collision occured</p>
+<p><code>1.0</code> means no collision occured</p>
+
 <h4 class="funcDec"><!--const -->uint <strong>ClipResult</strong>()</h4>
+<p><a href="scripts.html#BitFields">bit field</a> describing the collision:</p>
+<ul class="enum">
+	<li>
+		<span>CRF_NOCOLLISION</span><span>=</span><span>0</span>
+	</li>
+	<li>
+		<span>CRF_FLOOR</span><span>=</span><span>1 &lt;&lt; 0</span><span>&ndash;</span><span>made contact with a floor</span>
+	</li>
+	<li>
+		<span>CRF_CEILING</span><span>=</span><span>1 &lt;&lt; 1</span><span>&ndash;</span><span>made contact with a ceiling</span>
+	</li>
+	<li>
+		<span>CRF_WALL</span><span>=</span><span>1 &lt;&lt; 2</span><span>&ndash;</span><span>made contact with an edge (sector edge that isn't linked to another</span> sector)
+	</li>
+	<li>
+		<span>CRF_OBJECT</span><span>=</span><span>1 &lt;&lt; 3</span><span>&ndash;</span><span>made contact with an actor</span>
+	</li>
+	<li>
+		<span>CRF_MESH</span><span>=</span><span>1 &lt;&lt; 4</span><span>&ndash;</span><span>made contact with a static object</span>
+	</li>
+	<li>
+		<span>CRF_ADJUST</span><span>=</span><span>1 &lt;&lt; 5</span><span>&ndash;</span><span>z-axis was adjusted (ceiling or floor)</span>
+	</li>
+	<li>
+		<span>CRF_WALLRADIUS</span><span>=</span><span>1 &lt;&lt; 6</span><span>&ndash;</span><span>made contact with an edge during the wall radius collision test</span>
+	</li>
+</ul>
+<aside>this enum is not exposed to the script engine, so you'll have to define it yourself; e.g., in scripts/common.txt</aside>
+
 <h4 class="funcDec"><a href="kActor.html">kActor</a>@ <strong>ContactActor</strong>()</h4>
+<p>actor that was collided with, if any</p>
 
 
 </div><!-- main -->

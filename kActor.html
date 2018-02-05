@@ -260,6 +260,7 @@
 <h4 id="MoveToPosition" class="funcDec"><span class="unimportant">void</span> <strong>MoveToPosition</strong>( <!--const -->float <em>newX</em>, <!--const -->float <em>newY</em> )</h4>
 <p>tries to move to the given global horizontal coordinates</p>
 <p>will move up and down slopes, but will be stopped by any obstructions along the way</p>
+<p>stores collision info in the global <code><a href="kCModel.html">CModel</a></code> if anything was hit along the way</p>
 
 <h4 id="SetPosition" class="funcDec"><span class="unimportant">void</span> <strong>SetPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>newLoc</em> )</h4>
 <p>set location to an arbitrary point</p>
@@ -316,6 +317,7 @@
 
 <h4 id="GetSectorIndexAtLocation" class="funcDec"><!--const -->int <strong>GetSectorIndexAtLocation</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>loc</em>, uint <em class="hasDef">[unknown]</em> = <em class="defVal">0</em> )</h4>
 <p>returns the <a href="kWorld.html#MapStructure">sector</a> that contains <code>loc</code></p>
+<aside>This function updates the global <code><a href="kCModel.html">CModel</a></code>, which suggests bounds checks are performed, in which case the uint parameter may be clip flags defining which checks to perform, like <code><a href="#CanSee">CanSee()</a></code>.  Needs testing.</aside>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetSector</strong>( <!--const -->uint <em>i</em> )</h4>
 
@@ -344,7 +346,7 @@
 	areas without a <a href="kWorld.html#AAF_CEILING">ceiling</a> have a junk ceiling height value
 </aside>
 
-<h4 class="funcDec">bool <strong>CheckPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 id="CheckPosition" class="funcDec collapse">bool <strong>CheckPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
 <h4 class="funcDec">bool <strong>CheckPosition</strong>( <!--const -->float <em>f</em>, <!--const -->float <em>f</em> )</h4>
 
 <h4 class="funcDec"><!--const -->float <strong>GetWaterHeight</strong>()</h4>
@@ -369,7 +371,7 @@
 	<li><span>IT_FORCEFIELD</span></li>
 </ul>
 
-<h4 class="funcDec">uint&amp; <strong>ClipFlags</strong>()</h4>
+<h4 id="ClipFlags" class="funcDec">uint&amp; <strong>ClipFlags</strong>()</h4>
 <p><a href="scripts.html#BitFields">bit field</a> of clipping flags:</p>
 <ul class="enum">
 	<li>
@@ -475,8 +477,76 @@
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetTarget</strong>( kActor@ <em>a</em> )</h4>
 <h4 class="funcDec">kActor@ <strong>GetTarget</strong>()</h4>
 
-<h4 class="funcDec collapse"><!--const -->bool <strong>CanSee</strong>( kActor@ <em>a</em>, <!--const -->uint <em class="hasDef">i</em> = <em class="defVal">0</em> )</h4>
-<h4 class="funcDec"><!--const -->bool <strong>CanSee</strong>( <a href="kPuppet.html">kPuppet</a>@ <em>p</em>, <!--const -->uint <em class="hasDef">i</em> = <em class="defVal">0</em> )</h4>
+<h4 id="CanSee" class="funcDec collapse"><!--const -->bool <strong>CanSee</strong>( kActor@ <em>a</em>, <!--const -->uint <em class="hasDef">clipFlags</em> = <em class="defVal">0</em> )</h4>
+<h4 class="funcDec"><!--const -->bool <strong>CanSee</strong>( <a href="kPuppet.html">kPuppet</a>@ <em>a</em>, <!--const -->uint <em class="hasDef">clipFlags</em> = <em class="defVal">0</em> )</h4>
+<p>performs a raycast to <code>a</code>, and stores the result in the global <code><a href="kCModel.html">CModel</a></code></p>
+<p>returns whether anything was hit between the two actors</p>
+<p><code>clipFlags</code> is a <a href="scripts.html#BitFields">bit field</a> of <a href="#ClipFlags">clip flags</a> to <strong>disable</strong> (e.g., "collide floors" means the ray should <em>not</em> collide with floors; i.e., the actor should see through floors):</p>
+<ul class="enum">
+	<li>
+		<span>CF_CLIPEDGES</span><span>&ndash;</span><span>see through most level geometry?</span>
+	</li>
+	<li>
+		<span>CF_IGNOREBLOCKERS</span><span>&ndash;</span><span>do not see through blocking sectors (closed doors)</span>
+	</li>
+	<li>
+		<span>CF_DROPOFF</span><span>&ndash;</span><span>do not see across cliff sectors</span>
+	</li>
+	<li class="void">
+		<span>CF_NOENTERWATER</span><span>&ndash;</span><span>no effect?</span>
+	</li>
+	<li>
+		<span>CF_NOEXITWATER</span>
+	</li>
+	<li>
+		<span>CF_NOCLIPSTATICS</span><span>&ndash;</span><span>do not see through static meshes (trees, etc.)</span>
+	</li>
+	<li>
+		<span>CF_NOCLIPACTORS</span><span>&ndash;</span><span>do not see through actors</span>
+	</li>
+	<li>
+		<span>CF_WALKWALLS</span>
+	</li>
+	<li>
+		<span>CF_COLLIDEFLOORS</span><span>&ndash;</span><span>see through floors</span>
+	</li>
+	<li>
+		<span>CF_HITSCAN</span><span>&ndash;</span><span>causes <code><a href="kCModel.html#InterceptVector">kCModel::InterceptVector()</a></code> to be all over the place?</span>
+	</li>
+	<li>
+		<span>CF_ALLOWCLIMB</span>
+	</li>
+	<li class="void">
+		<span>CF_ALLOWCRAWL</span><span>&ndash;</span><span>no effect?</span>
+	</li>
+	<li>
+		<span>CF_NOSTEPDOWN</span>
+	</li>
+	<li>
+		<span>CF_NOSLOPESTEP</span>
+	</li>
+	<li>
+		<span>CF_COLLIDEHEIGHT</span>
+	</li>
+	<li class="void">
+		<span>CF_COLLIDECORPSES</span><span>&ndash;</span><span>no effect?</span>
+	</li>
+	<li>
+		<span>CF_NOEXITWALLS</span>
+	</li>
+	<li>
+		<span>CF_NOCOLLIDEFUNC</span>
+	</li>
+	<li>
+		<span>CF_NOFLOORADJUST</span>
+	</li>
+	<li>
+		<span>CF_NOCEILINGADJUST</span>
+	</li>
+	<li class="void">
+		<span>CF_COLLIDEWATER</span><span>&ndash;</span><span>no effect?</span>
+	</li>
+</ul>
 <aside>
 	the <code>kPuppet</code> version is only available in kActor, not subclasses
 </aside>
@@ -487,7 +557,7 @@
 
 <h3 id="Other">Other Methods</h3>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
+<h4 id="SpawnProjectile" class="funcDec"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>q</em> )</h4>

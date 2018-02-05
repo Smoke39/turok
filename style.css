@@ -509,6 +509,13 @@ ul.enum
 	padding: 5px;
 	margin-left: 2em;
 }
+
+/* override void background color */
+.enum .void
+{
+	background-color: #EEE;
+}
+
 .enum li
 {
 	display: table-row;
