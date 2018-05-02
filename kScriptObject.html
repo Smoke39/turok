@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>kScriptObject - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<nav>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#Variables">Variables</a></li>
+	</ul>
+</nav>
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kScriptObject</h2>
+
+<p>This is a wrapper for accessing an actor's <a href="ScriptObject.html">user script object</a> from its <a href="kActor.html">native script object</a>, via <code><a href="kActor.html#ScriptObject">kActor::ScriptObject()</a></code>.</p>
+
+
+<h3 id="Variables">Variables</h3>
+
+<h4 class="funcDec">ref&amp; <em>obj</em></h4>
+<p>a reference to the actor's <a href="ScriptObject.html">user script object</a></p>
+<p>e.g.,</p>
+<pre><code>void DoViewShake( float velocity, float angle, float duration )
+{
+	kActor@ actor = ActorFactory.Spawn( "QuakeSource", 0,0,0, 0, self.SectorIndex() );
+	if ( actor is null )
+		return;
+
+	TurokQuakeSource@ quake = cast&lt;TurokQuakeSource@&gt;( actor.ScriptObject().obj );
+	if ( quake !is null )
+		quake.SetupShake( self.Origin(), velocity, angle, duration );
+}</pre></code>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>
