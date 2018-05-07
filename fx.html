@@ -192,12 +192,19 @@ forwardSpeedRandom = 500</code></pre>
 		<td>destroy when entering/exiting water</td>
 	</tr>
 	<tr>
+		<td>bNoDirection</td>
+		<td>use global rather than local coordinates for things like <a href="#translation"><code>translation</code></a> and <a href="#offset"><code>offset</code></a></td>
+	</tr>
+	<tr>
 		<td>bNoHitSource</td>
 		<td>don't register collision with whatever spawned the effect</td>
 	</tr>
-	<tr>
+	<tr id="bPerPolyCollision">
 		<td>bPerPolyCollision</td>
-		<td></td>
+		<td>
+			<p>makes the particle qualify for <a href="console.html#g_perpolyparticlecollision">precise projectile collision</a></p>
+			<p>may not always be desirable, as it can cause the particle to collide with small details like vines</p>
+		</td>
 	</tr>
 	<tr>
 		<td>bProjectile</td>
@@ -230,10 +237,6 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>bNoGroundSpawn</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>bNoDirection</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -286,7 +289,7 @@ forwardSpeedRandom = 500</code></pre>
 		<td>translationRandomGlobal</td>
 		<td>increment <code>translation</code> by a vector with a random direction and random extent up to this amount?</td>
 	</tr>
-	<tr>
+	<tr id="translation">
 		<td>translation&nbsp;<a href="#vector">(v)</a>&nbsp;<a href="#random">*</a></td>
 		<td rowSpan="2">
 			<p>initial velocity = <code>forwardSpeed</code> * normal(<code>translation</code>)</p>
