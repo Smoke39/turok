@@ -24,6 +24,7 @@
 		<li><a href="#SectorProperties">Sector Properties</a>
 			<ul>
 				<li><a href="#Music">Music</a></li>
+				<li><a href="#Automap">Automap Properties</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -187,6 +188,11 @@ Item Drop Mask 14 - clip<br>
 <aside>
 	underwater music is handled automatically when the player dives, not by the sector's music property, contrary to what the official guide says
 </aside>
+
+<h4 id="Automap">Automap Properties</h4>
+<p>A given sector edge will be drawn on the automap if it isn't shared with another sector, or if the adjacent sectors' <strong>Draw Order</strong>s are not equal.  The color will be chosen by the sector with the lower <strong>Draw Order</strong>.</p>
+
+<p>The <strong>Hidden</strong> flag works like another color &ndash; the edge will only be hidden if the hidden sector has the lower <strong>Draw Order</strong>.</p>
 
 
 </div><!-- main -->
