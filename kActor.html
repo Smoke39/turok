@@ -560,12 +560,15 @@
 <h3 id="Other">Other Methods</h3>
 
 <h4 id="SpawnProjectile" class="funcDec"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>damageType</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>offset</em>, <!--const -->float <em>radius</em> )</h4>
+
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>q</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>InflictGenericDamage</strong>( kActor@ <em>a</em>, <!--const -->int <em>i</em> )</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>InteractActorsAtPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const -->float <em class="hasDef">f1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">f2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">f3</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">f4</em> = <em class="defVal">0</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>InteractActorsAtPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>offset</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>callbackFunc</em>,<br>
+<!--const -->float <em class="hasDef">arg1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg3</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg4</em> = <em class="defVal">0</em> )</h4>
 
 <h4 class="funcDec">bool <strong>RandomDecision</strong>( <!--const -->int <em>i</em> )</h4>
 <p>probability of returning true is 1 / 2<sup><code>i</code>-1</sup>, except when <code>i</code> is <code>0</code>, in which case the probability is nearly 0</p>
