@@ -37,7 +37,7 @@
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSpawn</strong>()</h4>
 <p>definitely gets called before the player can use the weapon, but I'm not sure exactly when</p>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnTick</strong>()</h4>
+<h4 id="OnTick" class="funcDec"><span class="unimportant">void</span> <strong>OnTick</strong>()</h4>
 <p>called <strong>twice</strong> every <a href="scripts.html#TickRate">tick</a>, if it's the current weapon</p>
 
 
@@ -62,13 +62,14 @@
 		<p>the weapon will not enter the firing state, and <code>OnBeginFire()</code> will be called every <a href="scripts.html#TickRate">tick</a> until the player releases the fire button</p>
 	</li>
 	<li><strong>if the run anim is playing:</strong>
-		<p>the weapon will ramain in the firing state until you change the <a href="kAnimState.html">anim state</a> (because the run anim is looping, and therefore never ends)</p>
+		<p>the weapon will remain in the firing state until you manually change the <a href="kAnimState.html">anim state</a> (because the run anim is looping, and therefore never ends)</p>
 	</li>
 </ul>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnFire</strong>()</h4>
 <p>called every <a href="scripts.html#TickRate">tick</a>, if the weapon is firing</p>
 <p>first called one tick after <code>OnBeginFire()</code></p>
+<aside><code>OnFire()</code> does not get called if <a href="kPlayer.html#HasAmmo">ammo is empty</a> and the <a href="kPlayer.html#Buttons">fire button</a> is held.  As a workaround, you can call the function manually from <code><a href="#OnTick">OnTick()</a></code> under such circumstances.</aside>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnEndFire</strong>()</h4>
 <p>called when the player first releases the fire button while the weapon is firing</p>
