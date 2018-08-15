@@ -76,19 +76,23 @@
 <aside>note that, counterintuitively, <code>MarkPersistentBit()</code> is passed <code>false</code> to mark the bit, and <code>true</code> to unmark it</aside>
 </div>
 
-<h4 class="funcDec"><a href="kDictMem.html">kDictMem</a>@ <strong>Definition</strong>()</h4>
-<h4 class="funcDec">kActor@ <strong>CastToActor</strong>()</h4>
-<h4 class="funcDec"><a href="kAI.html">kAI</a>@ <strong>CastToAI</strong>()</h4>
-<h4 class="funcDec">int&amp; <strong>Type</strong>()</h4>
-
 <h4 id="TID" class="funcDec"><!--const -->int <strong>TID</strong>()</h4>
 <p>actor tag ID</p>
 
 <h4 id="ScriptObject" class="funcDec"><a href="kScriptObject.html">kScriptObject</a>@ <strong>ScriptObject</strong>()</h4>
 <p>returns a wrapper for the <a href="ScriptObject.html">user script object</a> this actor is associated with</p>
 
+<h4 class="funcDec"><a href="kDictMem.html">kDictMem</a>@ <strong>Definition</strong>()</h4>
+
+<h4 id="Type" class="funcDec">int&amp; <strong>Type</strong>()</h4>
+<p>actor type ID</p>
+<p>this is the number after the actor's type name in defs/actors/, and enumerated in <code>turokActorTypes</code> in scripts/common.txt</p>
+
 <h4 class="funcDec">bool <strong>InstanceOf</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>className</em> )</h4>
 <p>returns whether this actor's associated <a href="scripts.html#NativeClasses">native object</a> is an instance of <code>className</code>, or a subclass thereof (this refers to kex-prefixed classes, not script classes)</p>
+
+<h4 class="funcDec">kActor@ <strong>CastToActor</strong>()</h4>
+<h4 class="funcDec"><a href="kAI.html">kAI</a>@ <strong>CastToAI</strong>()</h4>
 
 <h4 id="GameTicks" class="funcDec"><!--const -->int <strong>GameTicks</strong>()</h4>
 <p>how many <a href="scripts.html#TickRate">ticks</a> the actor has existed for</p>
