@@ -572,6 +572,18 @@
 <h4 id="SpawnProjectile" class="funcDec"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>damageType</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>offset</em>, <!--const -->float <em>radius</em> )</h4>
+deal <code>damageType</code> to all actors within range of the given offset, according to the following math:
+<pre><code>float range = (radius + 1) * 2 * GAME_SCALE;
+kVec3 origin = self.GetTransformedVector( offset );
+for every actor A in the general vicinity
+{
+	kVec3 v = A.Origin();     // actor's base
+	v.z += A.Height() * 0.5f; // center of mass
+	float dist = (v - origin).Unit() - A.Radius();
+	if ( dist &lt;= range )
+		deal damageType to A
+}</code></pre>
+damage types are defined in <a href="defs.html#damageInfo">defs/damageInfo.txt</a>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>q</em> )</h4>
