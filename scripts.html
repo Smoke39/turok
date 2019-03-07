@@ -108,7 +108,7 @@
 <p>These are part of the scripting engine, but defined inside the game's executable.  They can't be modified, but unlike native classes they can be used from user scripts.  They act as liasons between user scripts and kex classes (e.g., <a href="kActor.html">kActor</a>) or the engine itself (e.g., <a href="kGame.html">kGame</a>), or provide some standard functionality (e.g., <a href="kVec3.html">kVec3</a>).</p>
 <p>Internal script classes are conventionally prefixed with <strong>k</strong>.</p>
 
-<h4>User Scripts</h4>
+<h4 id="UserScripts">User Scripts</h4>
 <p>This is the stuff in the text files in the scripts folder.  We have free reign to modify these, or add our own variables, functions, and classes.</p>
 <p>Actors can optionally have a <a href="ScriptObject.html">user script class</a> assigned with the <code>scriptClass</code> property in defs/actors/.  These classes will be passed a handle to the <a href="kActor.html">internal script object</a> associated with their native kex object in their constructor, which is typically stored in a member variable named <code>self</code>.</p>
 
