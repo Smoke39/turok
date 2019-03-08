@@ -5,6 +5,73 @@
 	<title>Levels - Turok EX Modding Guide</title>
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="stylesheet" href="style.css">
+	<!-- this shit's a mess; I'm sorry -->
+	<style>
+		#Human.EnemyProperties td:first-child/*, #Human.EnemyProperties .rowHeader, #Human.EnemyProperties td:nth-child(3)*/
+		{
+			text-align: right;
+		}
+		th, .rowHeader, td:first-child, .EnemyProperties td:nth-child(3), th.void
+		{
+			font-weight: bold;
+			background-color: #EEE;
+		}
+		.EnemyProperties td.normal
+		{
+			font-weight: inherit;
+			text-align: inherit;
+			background-color: inherit;
+		}
+		.EnemyProperties td.normal.void
+		{
+			background-color: #F8F8F8; /* copied from .void in style.css*/
+		}
+
+		.ammo {
+			background-color: #FFC;
+		}
+		.health {
+			background-color: #CEF;
+		}
+		.special {
+			background-color: #FDF;
+		}
+
+		.EnemyProperties .barb {
+			background-color: #F8F8F8;
+			/*background-color: #FFF8E8;*/
+		}
+		.EnemyProperties .poacher {
+			background-color: #E8FFC8;
+		}
+		.EnemyProperties .tribal {
+			background-color: #DDD;
+		}
+		.EnemyProperties .cyborg {
+			background-color: #DFF;
+		}
+		.EnemyProperties .demon {
+			background-color: #EED;
+		}
+
+		#Leaper td:first-child {
+			text-align: center;
+		}
+
+		.Ambience td:first-child, .Ambience th:first-child {
+			text-align: right;
+		}
+		.Ambience pre {
+			margin: 0;
+		}
+		.Ambience [colspan] {
+			text-align: center;
+		}
+		.Ambience td:empty { /* same as .void */
+			background-color: #F8F8F8;
+			color: grey;
+		}
+	</style>
 </head>
 <body>
 <div id="container">
@@ -15,16 +82,29 @@
 <nav>
 	<h3>Contents</h3>
 	<ul>
-		<li><a href="#ActorProperties">Actor Properties</a>
+		<li><a href="#GeneralActorProperties">General Actor Properties</a>
 			<ul>
+				<li><a href="#SpawnFlags1">Spawn Flags 1</a></li>
 				<li><a href="#SpawnFlags2">Spawn Flags 2</a></li>
-				<li><a href="#Misc">Misc</a></li>
+				<li><a href="#SpawnFlags3">Spawn Flags 3</a></li>
+				<li><a href="#General">General</a></li>
+			</ul>
+		</li>
+		<li><a href="#ActorSpecificProperties">Actor-Specific Properties</a>
+			<ul>
+				<li><a href="#Enemies">Enemies</a></li>
+				<li><a href="#Movers">Movers</a></li>
+				<li><a href="#Doors">Doors</a></li>
 			</ul>
 		</li>
 		<li><a href="#SectorProperties">Sector Properties</a>
 			<ul>
 				<li><a href="#Music">Music</a></li>
-				<li><a href="#Automap">Automap Properties</a></li>
+				<li><a href="#Automap">Automap</a></li>
+				<li><a href="#Event">Event</a></li>
+				<li><a href="#Teleport">Teleport</a></li>
+				<li><a href="#Damage">Damage</a></li>
+				<li><a href="#SaveGame">Save Game</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -34,165 +114,455 @@
 <h2>Levels</h2>
 
 
-<h3 id="ActorProperties">Actor Properties</h3>
+<h3 id="GeneralActorProperties">General Actor Properties</h3>
 
-<h4 id="SpawnFlags2">Spawn Flags 2</h4>
-Item Drop Mask 1&#8199; - explosive shells<br>
-Item Drop Mask 2&#8199; - grenade<br>
-Item Drop Mask 3&#8199; - 10 health<br>
-Item Drop Mask 4&#8199; - full health<br>
-Item Drop Mask 5&#8199; - ultra health<br>
-Item Drop Mask 6&#8199; - 2 health<br>
-Item Drop Mask 7&#8199; - 25 health<br>
-Item Drop Mask 8&#8199; - minigun ammo<br>
-Item Drop Mask 9&#8199; - mortal wound<br>
-Item Drop Mask 10 - rockets<br>
-Item Drop Mask 11 - shells<br>
-Item Drop Mask 12 - energy cell<br>
-Item Drop Mask 13 - large energy cell<br>
-Item Drop Mask 14 - clip<br>
-
-<h4 id="Misc">Misc</h4>
+<h4 id="SpawnFlags1">Spawn Flags 1</h4>
 <table>
 	<tr>
-		<th>Variant</th>
-		<th>Human_Grunt_Soldier</th>
+		<td>Sniper</td>
+		<td>
+			<p>stand in place</p>
+			<p>can only use ranged attacks, even up close</p>
+		</td>
+	</tr>
+</table>
+
+<h4 id="SpawnFlags2">Spawn Flags 2</h4>
+<table>
+	<tr>
+		<td rowspan="7">Item Drop Mask</td> <td class="rowHeader">1</td> <td class="ammo">explosive shells</td>
+		<td class="rowHeader">8</td> <td class="ammo">minigun ammo</td>
 	</tr>
 	<tr>
-		<td>&#8199;0</td>
-		<td>unarmed</td>
+		<!--Item Drop Mask--> <td>2</td> <td class="ammo">grenade</td>
+		<td class="rowHeader">9</td> <td class="special">mortal wound</td>
 	</tr>
 	<tr>
-		<td>&#8199;1</td>
-		<td>axe + shield</td>
+		<!--Item Drop Mask--> <td>3</td> <td class="health">10 health</td>
+		<td class="rowHeader">10</td> <td class="ammo">rockets</td>
 	</tr>
 	<tr>
-		<td>&#8199;2</td>
-		<td>morning star</td>
+		<!--Item Drop Mask--> <td>4</td> <td class="health">full health</td>
+		<td class="rowHeader">11</td> <td class="ammo">shells</td>
 	</tr>
 	<tr>
-		<td>&#8199;3</td>
-		<td>polearm</td>
+		<!--Item Drop Mask--> <td>5</td> <td class="health">ultra health</td>
+		<td class="rowHeader">12</td> <td class="ammo">energy cell</td>
 	</tr>
 	<tr>
-		<td>&#8199;4</td>
-		<td>shotgun</td>
+		<!--Item Drop Mask--> <td>6</td> <td class="health">2 health</td>
+		<td class="rowHeader">13</td> <td class="ammo">large energy cell</td>
 	</tr>
 	<tr>
-		<td>&#8199;5</td>
-		<td>shotgun (spiked shin guards)</td>
+		<!--Item Drop Mask--> <td>7</td> <td class="health">25 health</td>
+		<td class="rowHeader">14</td> <td class="ammo">clip</td>
 	</tr>
 	<tr>
-		<td>&#8199;6</td>
-		<td>rifle</td>
+		<td colspan="2">Hold Trigger Animation</td>
+		<td colspan="3">
+			<p>invisible and non-solid until activated, which plays Trigger Anim (this flag has no effect without a valid Trigger Anim)</p>
+			<p>can still take knife and explosion damage</p>
+		</td>
+	</tr>
+</table>
+
+<h4 id="SpawnFlags3">Spawn Flags 3</h4>
+<table>
+	<tr>
+		<td>Make Spawn Anim Visible</td>
+		<td>when used with Hold Trigger Animation, before being triggered the actor will be solid, visible (with first frame of Trigger Anim), and immune to all damage (even knife and explosion damage)</td>
+	</tr>
+</table>
+
+<h4 id="General">General</h4>
+<table>
+	<tr>
+		<td>Target TID</td><td><p>triggered by enemies when killed<br>can only trigger actors, not level scripts</p><p>other actor types may use this for other purposes</p></td>
+	</tr>
+</table>
+
+
+
+<h3 id="ActorSpecificProperties">Actor-Specific Properties</h3>
+
+<h4 id="Enemies">Enemies</h4>
+
+<!-- Human -->
+
+<table id="Human" class="EnemyProperties">
+	<tr>
+		<th colspan="7">Human_Grunt_Soldier</th>
 	</tr>
 	<tr>
-		<td>&#8199;7</td>
-		<td class="void">rifle (spiked shin guards)</td>
+		<th colspan="4">Variant</th>
+		<th colspan="3">Attacks</th>
 	</tr>
 	<tr>
-		<td>&#8199;8</td>
-		<td>rifle (plasma)</td>
+		<td>0</td><td rowspan="9" class="barb">barbarian</td><td colspan="2" class="normal">unarmed</td>
+		<td rowspan="10" class="rowHeader">proj</td><td class="rowHeader" style="text-align:right;">1</td><td>wand spell</td>
 	</tr>
 	<tr>
-		<td>&#8199;9</td>
-		<td>poacher - machette</td>
+		<td>1</td><td colspan="2">axe + shield</td>
+		<td style="text-align:right;">2</td><td>pistol</td>
 	</tr>
 	<tr>
-		<td>10</td>
-		<td rowspan="2">poacher - pistol</td>
+		<td>2</td><td colspan="2">morning star</td>
+		<td style="text-align:right;">3</td><td>rifle (crouched)</td>
 	</tr>
 	<tr>
-		<td>11</td>
-		<!-- covered by rowspan -->
+		<td>3</td><td colspan="2">polearm</td>
+		<td class="void" style="text-align:right;">4</td><td class="void">[nothing]</td>
 	</tr>
 	<tr>
-		<td>12</td>
-		<td>poacher - shotgun</td>
+		<td>4</td><td rowspan="2">shotgun</td><td class="normal">standard</td>
+		<td class="rowHeader" style="text-align:right;">5</td><td>rifle (standing)</td>
 	</tr>
 	<tr>
-		<td>13</td>
-		<td>poacher - rifle</td>
+		<td>5</td><!--shotgun--><td>spiked shin guards</td>
+		<td style="text-align:right;">6</td><td>blow gun</td>
 	</tr>
 	<tr>
-		<td>14</td>
-		<td>tribal - bone club</td>
+		<td>6</td><td rowspan="3">rifle</td><td class="normal">standard</td>
+		<td class="rowHeader" style="text-align:right;">7</td><td>grenade</td>
 	</tr>
 	<tr>
-		<td>15</td>
-		<td>tribal - blow gun</td>
+		<td>7</td><!--rifle--><td>topless</td>
+		<td class="void" style="text-align:right;">8</td><td class="void">[nothing]</td>
 	</tr>
 	<tr>
-		<td>16</td>
-		<td>tribal - polearm</td>
+		<td>8</td><!--rifle--><td>plasma</td>
+		<td style="text-align:right;">9</td><td>demon fireball</td>
 	</tr>
 	<tr>
-		<td>17</td>
-		<td>tribal - shaman</td>
+		<td>9</td><td rowspan="5" class="poacher">poacher</td><td colspan="2" class="normal">machette</td>
+		<td class="rowHeader" style="text-align:right;">10</td><td>demon shaman spell</td>
 	</tr>
 	<tr>
-		<td>18</td>
-		<td>cyborg - pulse rifle</td>
+		<td>10</td><td colspan="2" rowspan="2">pistol</td><!--normal-->
+		<td colspan="2" style="text-align:center;">strong</td><td>2-handed melee</td>
 	</tr>
 	<tr>
-		<td>19</td>
-		<td>cyborg - blade</td>
+		<td>11</td><!--pistol--><!--normal-->
+		<td colspan="2" class="rowHeader" style="text-align:center;">weak</td><td class="normal">1-handed melee</td>
 	</tr>
 	<tr>
-		<td>20</td>
-		<td>cyborg - polearm</td>
+		<td>12</td><td colspan="2">shotgun</td>
+		<th colspan="3">Trigger Anim</th>
 	</tr>
 	<tr>
-		<td>21</td>
-		<td>demon - axe</td>
+		<td>13</td><td colspan="2">rifle</td>
+		<td colspan="2" style="text-align:center;">3</td><td>aerial ambush</td>
 	</tr>
 	<tr>
-		<td>22</td>
-		<td>demon - polearm</td>
+		<td>14</td><td rowspan="4" class="tribal">tribal</td><td colspan="2" class="normal">bone club</td>
+		<td colspan="2" class="rowHeader" style="text-align:center;">4</td><td>standing</td>
 	</tr>
 	<tr>
-		<td>23</td>
-		<td>demon - unarmed</td>
+		<td>15</td><td colspan="2">blow gun</td>
+		<td colspan="2" style="text-align:center;">5</td><td>demon shaman spell</td>
 	</tr>
 	<tr>
-		<td>24</td>
-		<td>demon - shaman</td>
+		<td>16</td><td colspan="2">polearm</td>
+<!--		<td rowspan="10" colspan="3" class="normal"></td>-->
+		<th colspan="3">Alternate Moves</th>
 	</tr>
 	<tr>
-		<td>25</td>
-		<td>hanging body</td>
+		<td>17</td><td colspan="2">shaman</td>
+		<td colspan="3" class="normal" style="text-align:center;">2-handed stance</td>
+	</tr>
+	<tr>
+		<td>18</td><td rowspan="3" class="cyborg">cyborg</td><td colspan="2" class="normal">pulse rifle</td>
+		<td rowspan="8" colspan="3" class="normal"></td>
+	</tr>
+	<tr>
+		<td>19</td><td colspan="2">blade</td>
+	</tr>
+	<tr>
+		<td>20</td><td colspan="2">polearm</td>
+	</tr>
+	<tr>
+		<td>21</td><td rowspan="4" class="demon">demon</td><td colspan="2" class="normal">axe</td>
+	</tr>
+	<tr>
+		<td>22</td><td colspan="2">polearm</td>
+	</tr>
+	<tr>
+		<td>23</td><td colspan="2">unarmed</td>
+	</tr>
+	<tr>
+		<td>24</td><td colspan="2">shaman</td>
+	</tr>
+	<tr>
+		<td>25</td><td style="border-right:none;"></td><td colspan="2" class="normal" style="border-left:none;">hanging body</td>
+	</tr>
+</table>
+
+<p></p><!-- spacer -->
+
+<!-- Pur-Lin -->
+
+<table class="EnemyProperties">
+	<tr>
+		<th colspan="6">Monster_Purlin</th>
+	</tr>
+	<tr>
+		<th colspan="2">Variant</th>
+		<th colspan="3">Attacks</th>
+	</tr>
+	<tr>
+		<td>0</td><td>unarmed</td>
+		<td rowspan="3" class="rowHeader">proj</td><td class="rowHeader">1</td><td class="normal">blaster</td>
+	</tr>
+	<tr>
+		<td>1</td><td>blaster</td>
+		<td class="void">2</td><td class="void">leap smash (ineffective)</td>
+	</tr>
+	<tr>
+		<th colspan="2">Texture</th>
+		<td class="rowHeader">7</td><td class="normal">ground pound</td>
+	</tr>
+	<tr>
+		<td>0</td><td style="background-color:#F6FFDD;">yellowish green</td>
+		<td colspan="2" style="text-align:center;">strong</td><td>backhand (both types)</td>
+	</tr>
+	<tr>
+		<td>1</td><td style="background-color:#CEC;">forest green</td>
+		<th colspan="3">Trigger Anim</th>
+	</tr>
+	<tr>
+		<td colspan="2" class="normal"></td>
+		<td colspan="2" class="rowHeader" style="text-align:center;">6</td><td class="normal">aerial ambush</td>
+	</tr>
+	<!-- no other ranged attacks, no weak attack, no alt moves -->
+</table>
+
+<p></p><!-- spacer -->
+
+<!-- Leaper -->
+
+<table id="Leaper" class="EnemyProperties">
+	<tr>
+		<th colspan="4">Monster_Stalker</th>
+	</tr>
+	<tr>
+		<th colspan="2">Texture</th>
+		<th colspan="2">Trigger Anim</th>
+
+	</tr>
+	<tr>
+		<td>0</td><td style="background-color:#FEC;">adult</td>
+		<td>2</td><td>hind legs, right hand swipe</td>
+	</tr>
+	<tr>
+		<td>1</td><td style="background-color:#FDE;">elder</td>
+		<td>3</td><td>face and left hand up</td>
+	</tr>
+	<tr>
+		<td>2</td><td style="background-color:#EDC;">young</td>
+		<td>4</td><td>all fours, face up (1-second delay)</td>
+	</tr>
+	<tr>
+		<td>3</td><td style="background-color:#DDE;">elite</td>
+		<td>5</td><td>all fours, low and poised</td>
+	</tr>
+	<tr>
+		<th colspan="2">Attacks</th>
+		<td class="rowHeader void">6</td><td class="normal void">aerial ambush (jolts into the air at the end)</td>
+	</tr>
+	<tr>
+		<td>proj 1</td><td>leap</td>
+		<td>7</td><td>same as 2, very slightly shorter delay</td>
+	</tr>
+	<tr>
+		<td>strong</td><td>swipe</td>
+		<td colspan="2" class="normal"></td>
+	</tr>
+	<!-- no other attacks, no variants, no alt moves -->
+</table>
+
+<p></p><!-- spacer -->
+
+<!-- Beetle -->
+
+<table class="EnemyProperties">
+	<tr>
+		<th colspan="2">Monster_Insect_Beetle</th>
+	</tr>
+	<tr>
+		<th colspan="2">Attacks</th>
+	</tr>
+	<tr>
+		<td>proj 1</td><td class="normal">lunge (only when far)</td>
+	</tr>
+	<tr>
+		<td>strong</td><td>lunge (only when close)</td>
+	</tr>
+<!--<tr>
+		<th colspan="2">Notes</th>
+	</tr>
+	<tr class="unimportant">
+		<td colspan="2" class="normal">
+			<ul class="noIndent" style="text-align:inherit;">
+				<li>proj attacks 2-7,9,10 very briefly pause to stand very slightly taller</li>
+				<li>no weak attack, alt moves, or trigger anims</li>
+			</ul>
+		</td>
+	</tr>-->
+</table>
+
+<h4 id="Movers">Movers</h4>
+<table>
+	<tr>
+		<td>Attack Chance</td> <td>time in seconds to reach new height</td>
+	</tr>
+	<tr>
+		<td>Health</td>
+		<td>
+			<p>time in seconds before returning to original height</p>
+			<p><code>0</code> will prevent the mover from returning</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Target TID</td>
+		<td>
+			<p>sound ID, as defined in defs/fileLookup.txt</p>
+			<p class="collapse">some common ones include:</p>
+			<ul class="no-indent">
+				<li><code>523</code> deep rumble</li>
+				<li><code>526</code> common rumble</li>
+				<li><code>561</code> level 8 elevator whir</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>Param 1</td>
+		<td>
+			<p>change in height &ndash; positive is up, negative is down</p>
+			<p><code>10.24 * 5 * Param1</code> for most movers</p>
+			<p><code>10.24 * Param1</code> for Mover_FloorLowerOnceSlow and Mover_FloorPerpetual</p>
+		</td>
+	</tr>
+</table>
+
+<h4 id="Doors">Doors</h4>
+<table>
+	<tr>
+		<td>Attack Chance</td>
+		<td>
+			<p>door will stay open for <code>Attack Chance * 4</code> seconds</p>
+			<p><code>0</code> will prevent the door from closing</p>
+		</td>
 	</tr>
 </table>
 
 
 <h3 id="SectorProperties">Sector Properties</h3>
 
+<h4 id="Ambience">Ambience</h4>
+
+<p>These are defined in defs/environmentInfo.txt</p>
+
+<table class="Ambience">
+	<tr>
+		<th>#</th> <th>Definition</th> <th>Sounds</th> <th>Reverb</th>
+	</tr>
+	<tr>
+		<td>0</td> <td colspan="3">[None]</td>
+	</tr>
+	<tr>
+		<td>1</td> <td><pre>Environment_Jungle     0</pre></td> <td>apes, birds, wildcats</td> <td></td>
+	</tr>
+	<tr>
+		<td>2</td> <td><pre>Environment_Swamp      1</pre></td> <td>birds, insects, occasional ape</td> <td></td>
+	</tr>
+	<tr>
+		<td>3</td> <td><pre>Environment_Cave       2</pre></td> <td>bats, cave growls</td> <td>cavernous</td>
+	</tr>
+	<tr>
+		<td>4</td> <td><pre>Environment_Catcomb01  3</pre></td> <td>wind, occasional cave growls, screams</td> <td>enclosed</td>
+	</tr>
+	<tr>
+		<td>5</td> <td><pre>Environment_LostLand   4</pre></td> <td>wind, rumble, wildcats, t-rex</td> <td></td>
+	</tr>
+	<tr>
+		<td>6</td> <td><pre>Environment_Catcomb02  5</pre></td> <td>metal moan (level 8)</td> <td>spacious</td>
+	</tr>
+	<tr class="void">
+		<td>7</td> <td><pre>Environment_Catcomb03  6</pre></td> <td colspan="2">[same as 4]</td>
+	</tr>
+	<tr>
+		<td>8</td> <td><pre>Environment_Ruins      7</pre></td> <td>wind, occasional wildcat, cave growls</td> <td></td>
+	</tr>
+	<tr>
+		<td>9</td> <td><pre>Environment_Valley     8</pre></td> <td>wind, occasional wildcat, t-rex</td> <td></td>
+	</tr>
+	<tr>
+		<td>10</td> <td><pre>Environment_Village    9</pre></td> <td>apes, birds, rumble</td> <td></td>
+	</tr>
+</table>
+
 <h4 id="Music">Music</h4>
-&#8199;0 - level 1 + 2<br>
-&#8199;1 - level 5 - catacombs<br>
-&#8199;2 - cave ambience<br>
-&#8199;3 - boss - longhunter + mantis<br>
-&#8199;4 - level 8 interior<br>
-&#8199;5 - boss - campaigner<br>
-&#8199;6 - hub ambience<br>
-&#8199;7 - level 6 - treetop village<br>
-&#8199;8 - level 7 - lost land, level 8 exterior<br>
-&#8199;9 - boss - t-rex<br>
+
+<p>These are defined in defs/fileLookup.txt</p>
+
+&#8199;0 - Level 1 + 2<br>
+&#8199;1 - Level 5 - Catacombs<br>
+&#8199;2 - Cave Ambience<br>
+&#8199;3 - Boss - Longhunter + Mantis<br>
+&#8199;4 - Level 8 - Final Confrontation<br>
+&#8199;5 - Boss - Campaigner<br>
+&#8199;6 - Hub Ambience<br>
+&#8199;7 - Level 6 - Treetop Village<br>
+&#8199;8 - Level 7 - Lost Land<br>
+&#8199;9 - Boss - T-Rex<br>
 <span class="void">10 - silence</span><br>
-11 - level 7 intro cave<br>
+11 - Mysterious Ambience (level 7 intro cave)<br>
 <span class="void">12 - silence</span><br>
-13 - level 3 - ancient city<br>
-14 - level 4 - ruins<br>
+13 - Level 3 - Ancient City<br>
+14 - Level 4 - Ruins<br>
+100 - Underwater Ambience<br>
 
 <p></p><!-- spacer -->
 <aside>
-	underwater music is handled automatically when the player dives, not by the sector's music property, contrary to what the official guide says
+	underwater music plays automatically when the player dives; setting a sector's music property to <code>100</code> will cause it to also play above the surface or on dry land
 </aside>
 
-<h4 id="Automap">Automap Properties</h4>
-<p>A given sector edge will be drawn on the automap if it isn't shared with another sector, or if the adjacent sectors' <strong>Draw Order</strong>s are not equal.  The color will be chosen by the sector with the lower <strong>Draw Order</strong>.</p>
+<h4 id="Automap">Automap</h4>
+<p>A given sector edge will be drawn on the automap if it isn't shared with another sector, or if the adjacent sectors' <em>Draw Order</em>s are not equal.  The color will be chosen by the sector with the lower <em>Draw Order</em>.</p>
 
-<p>The <strong>Hidden</strong> flag works like another color &ndash; the edge will only be hidden if the hidden sector has the lower <strong>Draw Order</strong>.</p>
+<p>The <em>Hidden</em> flag works like another color &ndash; the edge will only be hidden if the hidden sector has the lower <em>Draw Order</em>.</p>
+
+<h4 id="Event">Event</h4>
+<ul>
+	<li><em>Arg 4</em>: target </em>TID</em></li>
+</ul>
+<p>Triggers all actors with the matching TID when the player enters the sector.  If there are none, the corresponding level script will be called instead, if there is one.</p>
+<p>The event is triggered once every tick for as long as the player is within the sector.</p>
+
+<h4 id="Teleport">Teleport</h4>
+<ul>
+	<li><em>Arg 1</em>: WarpPoint <em>TID</em></li>
+	<li><em>Arg 2</em>: destination <a href="defs.html#mapid">map ID</a></li>
+</ul>
+<p>WarpPoint <em>Target TID</em> does not matter</li>
+
+<h4 id="Damage">Damage</h4>
+<ul>
+	<li><em>Arg 5</em>: damage amount</li>
+	<li>
+		<em>Arg 6</em>: time between instances of damage
+		<ul>
+			<li><code>1024</code> is 1 second</li>
+		</ul>
+	</li>
+</ul>
+<p>The <em>Lava</em> flag reduces the player's speed (only works in conjunction with <em>Damage</em> flag).</p>
+
+<h4 id="SaveGame">Save Game</h4>
+<ul>
+	<li><em>Arg 3</em>: TID of WarpPoint player spawns at when save is loaded</li>
+</ul>
+<p>WarpPoint <em>Target TID</em> must match the level's <a href="defs.html#mapid">mapid</a></li>
 
 
 </div><!-- main -->

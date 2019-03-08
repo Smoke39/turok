@@ -410,7 +410,7 @@ td:first-child
 	font-weight: bold;
 }
 /* EXPERIMENTAL */
-td:first-child *
+td:first-child > *
 {
 	display:inline-block;
 	text-align:center;
