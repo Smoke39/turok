@@ -157,6 +157,11 @@
 	</li>
 	<li>
 		<span>AF_STATIONARY</span>
+		<span>&ndash;</span>
+		<span>
+			AI stands in place<br>
+			corresponds to "Sniper" editor property in "Spawn Flags 1"
+		</span>
 	</li>
 	<li>
 		<span>AF_ALIGNTOFLOOR</span>
@@ -210,11 +215,23 @@
 
 <h4 id="SpawnFlags" class="funcDec collapse"><!--const -->uint <strong>SpawnFlags1</strong>()</h4>
 <h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags2</strong>()</h4>
-<h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags3</strong>()</h4>
-<h4 class="funcDec"><!--const -->int16 <strong>SpawnParams</strong>( <!--const -->int <em>param</em> )</h4>
-<p>generic space for various actor properties</p>
-<p>different classes seem to use these for different things</p>
+<h4 class="funcDec"><!--const -->uint <strong>SpawnFlags3</strong>()</h4>
+<p>static <a href="scripts.html#BitFields">bit fields</a> corresponding to the tabs of the same names in the editor</p>
+<p>some of these are used to initialize other properties when the actor is (re)spawned (e.g., the Sniper flag sets <a href="#Flags"><code>AF_STATIONARY</code></a>), while other are referenced directly (e.g., the item drop flags in <code>TurokEnemy::DropItem()</code>)</p>
 
+<h4 class="funcDec"><!--const -->int16 <strong>SpawnParams</strong>( <!--const -->int <em>param</em> )</h4>
+<p>static properties corresponding to the following editor fields:</p>
+<ol class="bold">
+	<li value="0">Target TID</li>
+	<li>Trigger Anim</li>
+	<li>Health (initial)</li>
+	<li>Max Regenerations</li>
+	<li>Attack Chance (uint8)</li>
+	<li>Texture (initial)</li>
+	<li>Params 2 (int8)</li>
+	<li>Params 1 (int8)</li>
+</ol>
+<p>some classes use these in novel ways (e.g., movers use health and attack chance to control timing)</p>
 
 
 
