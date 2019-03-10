@@ -103,10 +103,13 @@
 		<span>&ndash;</span>
 		<span>in a <a href="kWorld.html#AAF_CRAWL">crawl</a> space, like the small passages in the catacombs</span>
 	</li>
-	<li>
+	<li id="PF_PREVENTDEATHCAM">
 		<span>PF_PREVENTDEATHCAM</span>
-		<span></span>
-		<span></span>
+		<span>&ndash;</span>
+		<span>
+			<p class="collapse">when the player dies, do not fall to ground, lose life, or respawn/end game</p>
+			<p class="collapse">normal death procedure can be resumed with <a href="kPlayLoop.html#HandlePlayerDeath"><code>kPlayLoop::HandlePlayerDeath()</code></a></p>
+		</span>
 	</li>
 	<li>
 		<span>PF_FIREDPROJECTILE</span>
