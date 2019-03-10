@@ -47,8 +47,9 @@
 <p>teleport the player to an arbitrary point in the given <a href="kWorld.html#MapStructure">sector</a>, on the map with the given <a href="defs.html#mapid">map ID</a>, and facing the given direction</p>
 <p><code>a</code> must be non-null, but otherwise doesn't seem to matter</p>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>HandlePlayerDeath</strong>( <!--const -->bool <em class="hasDef">[unknown]</em> = <em class="defVal">true</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>HandlePlayerDeath</strong>( <!--const -->bool <em class="hasDef">bLoseLife</em> = <em class="defVal">true</em> )</h4>
 <p>called by map scripts at the end of custom player death cutscenes to trigger respawn or game over</p>
+<p>if <code>bLoseLife</code> is false, the player won't lose any lives</p>
 
 
 </div><!-- main -->
