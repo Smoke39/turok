@@ -240,12 +240,12 @@ aside.unimportant
 	text-align: center;
 }*/
 
-.v2
+.v1, .v2
 {
 	/* undo aside styling */
 	display: inline;
 	padding: 0;
-	border: inherit;
+	border: none;
 	background-color: inherit;
 	/* pseudo-superscript */
 	font-size: 75%;
@@ -254,8 +254,15 @@ aside.unimportant
 
 	left: 0.5em;
 	font-weight: normal;
-	color: #2A0;
 	cursor: help;
+}
+.v1
+{
+	color: red;
+}
+.v2
+{
+	color: #2A0;
 }
 
 /******************************************************************************/
