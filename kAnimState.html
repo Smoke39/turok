@@ -44,8 +44,8 @@ ANF_CYCLECOMPLETED</code></pre>
 
 <h3 id="Methods">Methods</h3>
 
-<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>Blend</strong>( <!--const -->int <em>animID</em>, float <em>animRate</em>, float <em>tweenTime</em>, int <em>flags</em> )</h4>
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>Set</strong>( <!--const -->int <em>animID</em>, float <em>animRate</em>, int <em>flags</em> )</h4>
+<h4 id="Blend" class="funcDec collapse"><span class="unimportant">void</span> <strong>Blend</strong>( <!--const -->int <em>animID</em>, float <em>animRate</em>, float <em>tweenTime</em>, int <em>flags</em> )</h4>
+<h4 id="Set" class="funcDec"><span class="unimportant">void</span> <strong>Set</strong>( <!--const -->int <em>animID</em>, float <em>animRate</em>, int <em>flags</em> )</h4>
 <p>play an animation with or without tween time, respectively</p>
 <p><code>animRate</code> is the time per frame, in <span class="numerator">1</span>&frasl;<span class="denominator">60</span> seconds</p>
 <p><code>tweenTime</code> is the time to crossfade between the previous and new animation, in <span class="numerator">1</span>&frasl;<span class="denominator">30</span> seconds</p>
@@ -84,9 +84,11 @@ ANF_CYCLECOMPLETED</code></pre>
 <h4 class="funcDec"><!--const -->bool <strong>CycleCompleted</strong>()<!-- const--></h4>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ChangeSpeed</strong>( <!--const -->float <em>animRate</em> )</h4>
-<p><code>animRate</code> works the same as in <code>Blend()</code>/<code>Set()</code></p>
+<p><code>animRate</code> works the same as in <code><a href="#Blend">Blend()</a></code> and <code><a href="#Set">Set()</a></code></p>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetLastFrame</strong>( <!--const -->bool <em class="hasDef">[unknown]</em> = <em class="defVal">false</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetLastFrame</strong>( <!--const -->bool <em class="hasDef">bPerformActions</em> = <em class="defVal">false</em> )</h4>
+<p>cut to the last frame of the current animation</p>
+<p>if <code>bPerformActions</code> is true, <strong>all</strong> keyframe actions (sounds, particles, melee damage, etc.) will be performed (not just the ones for the skipped frames), otherwise <strong>none</strong> of them will be performed</p>
 
 
 <h4></h4><!-- spacer -->
