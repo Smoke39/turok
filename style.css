@@ -521,6 +521,32 @@ h5.funcDec strong, h5.funcDec em
 	font-size: 106%;
 }
 
+/* void (function removed in an update) */
+.funcDec.void
+{
+	background-color: inherit;
+}
+.funcDec.void strong, .funcDec.void em
+{
+	font-size: inherit;
+}
+.funcDec.void strong
+{
+	color: #80aaff; /*#05F;*/
+}
+.funcDec.void em
+{
+	color: #ffc380; /*#F80;*/
+}
+.funcDec.void em.hasDef
+{
+	color: #ff80d5; /*#F0A;*/
+}
+.funcDec.void em.defVal
+{
+	color: #66aa55; /*#2A0;*/
+}
+
 /******************************************************************************/
 /* ENUM */
 
