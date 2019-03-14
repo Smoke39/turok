@@ -609,7 +609,7 @@ for every actor A in the general vicinity of origin
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>InteractActorsAtPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>position</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>callbackFunc</em>,<br>
 <!--const -->float <em class="hasDef">arg1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg3</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg4</em> = <em class="defVal">0</em> )</h4>
 <p>for every actor <code>A</code> in the general vicinity of <code>position</code>, call:
-<pre><code>self.callbackFunc( A, arg1, arg2, arg3, arg4 );</code></pre></p>
+<pre><code>this.callbackFunc( A, arg1, arg2, arg3, arg4 );</code></pre></p>
 the callback function should be defined in the <a href="scripts.html#UserScripts">user script</a> (or a parent class) for the actor that called <code>InteractActorsAtPosition()</code>, with the following type signature:
 <pre><code>void( kActor@, const float, const float, const float, const float )</code></pre></p>
 
