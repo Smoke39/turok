@@ -27,9 +27,16 @@
 
 <h3 id="Methods">Methods</h3>
 
+<h4 id="CallDelayedMapScript" class="funcDec collapse"><span class="unimportant">void</span> <strong>CallDelayedMapScript</strong>( <!--const -->int <em>scriptID</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const -->float <em>delay</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>CallDelayedMapScript</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const -->float <em>delay</em> )</h4>
-
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>CallDelayedMapScript</strong>( <!--const -->int <em>scriptID</em>, <a href="kActor.html">kActor</a>@ <em>instigator</em>, <!--const -->float <em>delay</em> )</h4>
+<p>invoke a <a href="level_scripts.html">level script</a> after <code>delay</code> seconds, or 1 <a href="scripts.html#TickRate">tick</a>, whichever is longer</p>
+<p>the int version can invoke <code><a href="level_scripts.html#$script">$script</a></code>s by their ID</p>
+<p>the string version can invoke by name any level script function with the following type signature:</p>
+<pre><code>void( kActor@ )</code></pre>
+<p>both versions will simply do nothing if the specified script does not exist</p>
+<aside>when called from <code>$script 0</code> during level startup, <code>delay</code> will be increased by 5 <a href="scripts.html#TickRate">ticks</a></aside>
+<p></p><!-- spacer -->
+<aside><code>$script 0</code> will always be invoked immediately, on the current tick, irrespective of <code>delay</code>, even during level startup, unless invoked with the string version</aside>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>HaltMapScript</strong>( <!--const -->int <em>scriptID</em> )</h4>
 <p>terminates a map script in a <code>$restart</code> loop or waiting to begin/continue</p>

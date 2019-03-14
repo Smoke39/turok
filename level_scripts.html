@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Level Scripts - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> Level Scripts</h2>
+
+<p>level scripts are associated with maps in <a href="defs.html#mapInfo">defs/mapInfo.txt</a></p>
+
+<p>todo: discuss game/level <a href="https://www.angelcode.com/angelscript/sdk/docs/manual/doc_module.html">modules</a> and <a href="https://www.angelcode.com/angelscript/sdk/docs/manual/doc_script_shared.html">shared</a> entities</p>
+
+
+<h3 id=""></h3>
+
+<h4 id="$script" class="funcDec"><strong>$script</strong> <em>&lt;ID&gt;</em></h4>
+<p>declares a function that can be invoked via its ID by an <a href="levels.html#Event">event sector</a> or <code><a href="kGame.html#CallDelayedMapScript">kGame::CallDelayedMapScript()</a></code></p>
+<p><code>$script 0</code> gets invoked once automatically during level startup</p>
+<aside class="unimportant"><p>this is actually a preprocessor directive that gets replaced with:</p>
+<pre><code>void mapscript_&lt;ID&gt;_root( kActor@ instigator )</code></pre></aside>
+
+<h4 class="funcDec"><strong>$restart</strong></h4>
+<p>when called from inside a $script, restarts that $script on the next <a href="scripts.html#TickRate">tick</a></p>
+<aside class="unimportant"><p>this is actually a preprocessor directive that gets replaced with:</p>
+<pre><code>Game.CallDelayedMapScript( "mapscript_&lt;ID&gt;_root", instigator, 0 )</code></pre>
+<p>where &lt;ID&gt; is that of the last $script that physically appears before the $restart in the file itself</p></aside>
+
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>delay</strong>( <!--const -->float <em>t</em> )</h4>
+<p>pause execution for <code>t</code> seconds, or 1 <a href="scripts.html#TickRate">tick</a>, whichever is longer</p>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>

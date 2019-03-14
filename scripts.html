@@ -81,6 +81,7 @@
 				<li><a href="#Objects">Objects</a></li>
 			</ul>
 		</li>
+		<li><a href="#LevelScripts">Level Scripts</a></li>
 		<li><a href="#ClassTree">Class Tree</a></li>
 	</ul>
 </nav>
@@ -170,6 +171,7 @@ self.AnimState().flags ^= ANF_PAUSED;</code></pre>
 <p>A single iteration of the "update" phase is called a <strong>tick</strong>.</p>
 <p>In some engines, the "update" phase occures once per frame.  If the game is designed with a fixed framerate, it will assume a specific, set amount of time has passed since the previous tick.  If the game is designed to allow a variable framerate, it will track the amount of time that's passed since the previous tick, and scale its calculations by that time.</p>
 <p>Turok EX allows a variable framerate, but its tick rate is fixed at 60 Hz.  If the framerate drops below 60 fps, the game will run the update phase multiple times per frame to ensure the overall tick rate remains constant.</p>
+<p>The length of a tick is stored in the global constant <code><a href="#GAME_DELTA_TIME">GAME_DELTA_TIME</a></code>.</p>
 
 
 
@@ -208,7 +210,7 @@ self.AnimState().flags ^= ANF_PAUSED;</code></pre>
 
 <h4 id="Constants">Constants</h4>
 
-<h5 class="funcDec"><span class="unimportant">const</span> float <em>GAME_DELTA_TIME</em> = <em class="defVal">1/60</em></h5>
+<h5 id="GAME_DELTA_TIME" class="funcDec"><span class="unimportant">const</span> float <em>GAME_DELTA_TIME</em> = <em class="defVal">1/60</em></h5>
 <p>length of a <a href="#TickRate">tick</a>, in seconds</p>
 
 <h5 class="funcDec collapse"><span class="unimportant">const</span> float <em>GAME_SECONDS</em> = <em class="defVal">1/15</em></h5>
@@ -231,6 +233,12 @@ self.AnimState().flags ^= ANF_PAUSED;</code></pre>
 <h5 class="funcDec collapse"><a href="kPlayLoop.html">kPlayLoop</a> <em>PlayLoop</em></h5>
 <h5 class="funcDec collapse"><a href="kSys.html">kSys</a> <em>Sys</em></h5>
 <h5 class="funcDec"><a href="kWorld.html">kWorld</a> <em>World</em></h5>
+
+
+
+<h3 id="LevelScripts">Level Scripts</h3>
+
+<p><a href="level_scripts.html">Level scripts</a> can be used to attach logic to levels themselves.</p>
 
 
 
