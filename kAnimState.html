@@ -62,6 +62,10 @@ ANF_CYCLECOMPLETED</code></pre>
 <p>fraction of the current animation that's been played so far (<code>0.0</code> to <code>1.0</code>)</p>
 <p>does not reflect tweening, e.g., halfway between the first two frames of a ten-frame animation would return <code>0.1</code>, not <code>0.15</code></p>
 
+<aside class="unimportant">
+	<code><!--const -->int CurrentFrame()</code> sometimes works, but some animations just return <code>0</code> &ndash; use <code>TrackTime()</code> instead
+</aside>
+
 <h4 class="funcDec"><!--const -->int <strong>PlayingID</strong>()<!-- const--></h4>
 <p>ID of the actor's current animation</p>
 <p>valid even if the animation is paused or stopped</p>
@@ -89,12 +93,6 @@ ANF_CYCLECOMPLETED</code></pre>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetLastFrame</strong>( <!--const -->bool <em class="hasDef">bPerformActions</em> = <em class="defVal">false</em> )</h4>
 <p>cut to the last frame of the current animation</p>
 <p>if <code>bPerformActions</code> is true, <strong>all</strong> keyframe actions (sounds, particles, melee damage, etc.) will be performed (not just the ones for the skipped frames), otherwise <strong>none</strong> of them will be performed</p>
-
-
-<h4></h4><!-- spacer -->
-<aside class="unimportant">
-	<code><!--const -->int CurrentFrame()</code> sometimes works, but some animations just return <code>0</code> &ndash; use <code><a href="#TrackTime">TrackTime()</a></code> instead
-</aside>
 
 
 </div><!-- main -->
