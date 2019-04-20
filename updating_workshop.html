@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Updating a Steam Workshop Item - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<h2>Updating a Steam Workshop Item</h2>
+
+<p>Theoretically, to update an existing Steam Workshop item, all you need to do is load its kprj and click "Upload to Steam."  However, the editor is notoriously finicky about managing kprj files, and will often create a new Workshop item instead of updating the existing one.</p>
+
+<h3>Repairing a Broken kprj</h3>
+
+<p>Luckily, kprj files are simple text files which we can repair by hand:</p>
+
+<ol>
+	<li>
+		<p>Open the broken kprj file, and look for the <code>publishedfileid</code> line.</p>
+	</li>
+	<li>
+		<p>Go to the workshop page for the item you want to update.</p>
+	</li>
+	<li>
+		<p>Copy the <code>id</code> number from the page's url, and paste it into the <code>publishedfileid</code> line in the kprj.</p>
+			<p>For example, if the URL is:</p>
+		<pre><code>https://steamcommunity.com/sharedfiles/filedetails/?id=12345</code></pre>
+		<p>your kprj should contain:</p>
+			<pre><code>publishedfileid "12345"</code></pre>
+	</li>
+	<li>
+		<p>Save the kprj, and load it in the editor.  When you click "Upload to Steam," it should now update your existing workshop item.</p>
+	</li>
+</ol>
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>
