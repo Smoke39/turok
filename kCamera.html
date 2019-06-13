@@ -102,7 +102,8 @@
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>SetRotationTrack</strong>( <!--const -->int <em>trackID</em>, <!--const -->float <em>angle1</em>, <!--const -->float <em>angle2</em>, <!--const -->float <em>dist1</em>, <!--const -->float <em>dist2</em>,<br>
 	</pre><!--const -->float <em class="hasDef">height1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">height2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">lookHeight1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">lookHeight2</em> = <em class="defVal">0</em> )</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetPositionTrack</strong>( <!--const -->int <em>trackID</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v3</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v4</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetPositionTrack</strong>( <!--const -->int <em>trackID</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>startPos</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>endPos</em>,<br>
+	<!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>startLookAt</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>endLookAt</em> )</h4>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ClearViewTracks</strong>()</h4>
 
@@ -125,13 +126,15 @@
 	<li>CMLT_COSINE_POW</li>
 </ul>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetEyeView</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetEyeView</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>pos</em> )</h4>
+<p>set camera position<p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ZoomEyeViewToPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a> <strong>GetEyeView</strong>()</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetFocusView</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetFocusView</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>lookAt</em> )</h4>
+<p>set location camera should point at</p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>ZoomFocusViewToPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
 
