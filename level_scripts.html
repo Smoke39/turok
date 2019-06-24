@@ -22,7 +22,7 @@
 <h3 id=""></h3>
 
 <h4 id="$script" class="funcDec"><strong>$script</strong> <em>&lt;ID&gt;</em></h4>
-<p>declares a function that can be invoked via its ID by an <a href="levels.html#Event">event sector</a> or <code><a href="kGame.html#CallDelayedMapScript">kGame::CallDelayedMapScript()</a></code></p>
+<p>declares a function that can be invoked via its ID by an <a href="levels.html#Event">event sector</a>, <code><a href="kGame.html#CallDelayedMapScript">kGame::CallDelayedMapScript()</a></code>, or the <code><a href="console.html#puke">puke</a></code> console command</p>
 <p><code>$script 0</code> gets invoked once automatically during level startup</p>
 <aside class="unimportant"><p>this is actually a preprocessor directive that gets replaced with:</p>
 <pre><code>void mapscript_&lt;ID&gt;_root( kActor@ instigator )</code></pre></aside>

@@ -230,6 +230,27 @@
 <p>manually invoke various aspects of the game</p>
 <table>
 	<tr>
+		<td>call &lt;function name&gt;</td>
+		<td>invoke the specified global function</td>
+	</tr>
+	<tr>
+		<td>callfile &lt;file name&gt; &lt;function name&gt;</td>
+		<td>compile the specified file on the fly, and invoke the specified function within it</td>
+	</tr>
+	<tr id="puke">
+		<td>puke &lt;script number&gt;</td>
+		<td>invoke the specified <a href="level_scripts.html#$script">level script</a></td>
+	</tr>
+
+	<tr>
+		<td>spawnfx &lt;file&gt;</td>
+		<td>
+			<p>spawn a kfx at the player's location</p>
+			<p>e.g., <code>spawnfx fx/bullet.kfx</code></p>
+		</td>
+	</tr>
+
+	<tr>
 		<td>testcinematic &lt;mode&gt;</td>
 		<td>
 			<p>play a cinematic:</p>
@@ -244,10 +265,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td>spawnfx &lt;file&gt;</td>
+		<td>testmusic &lt;file&gt;</td>
 		<td>
-			<p>spawn a kfx at the player's location</p>
-			<p>e.g., <code>spawnfx fx/bullet.kfx</code></p>
+			<p>play a music track</p>
+			<p>e.g., <code>testmusic music/track01.ogg</code></p>
 		</td>
 	</tr>
 	<tr>
@@ -255,13 +276,6 @@
 		<td>
 			<p>play a ksnd</p>
 			<p>e.g., <code>testsoundshader sounds/shaders/explosion_1.ksnd</code></p>
-		</td>
-	</tr>
-	<tr>
-		<td>testmusic &lt;file&gt;</td>
-		<td>
-			<p>play a music track</p>
-			<p>e.g., <code>testmusic music/track01.ogg</code></p>
 		</td>
 	</tr>
 </table>
@@ -510,14 +524,6 @@
 		<td>showmenu &lt;type&gt;</td>
 		<td></td>
 	</tr>
-	<tr>
-		<td>call &lt;function name&gt;</td>
-		<td>invoke the specified global function</td>
-	</tr>
-	<tr>
-		<td>callfile &lt;file name&gt; &lt;function name&gt;</td>
-		<td>compile the specified file on the fly, and invoke the specified function within it</td>
-	</tr>
 
 	<tr>
 		<td>dumplocalizedtext</td>
@@ -525,10 +531,6 @@
 	</tr>
 	<tr>
 		<td>purgemodels</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>puke &lt;script number&gt;</td>
 		<td></td>
 	</tr>
 </table>
