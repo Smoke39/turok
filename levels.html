@@ -98,11 +98,16 @@
 				<li><a href="#Doors">Doors</a></li>
 			</ul>
 		</li>
-		<li><a href="#SectorProperties">Sector Properties</a>
+		<li><a href="#SectorSettings">Sector Settings</a>
 			<ul>
+				<li><a href="#BlendLength">Blend Length</a></li>
 				<li><a href="#Ambience">Ambience</a></li>
 				<li><a href="#Music">Music</a></li>
 				<li><a href="#Automap">Automap</a></li>
+			</ul>
+		</li>
+		<li><a href="#SectorFlags">Sector Flags</a>
+			<ul>
 				<li><a href="#Event">Event</a></li>
 				<li><a href="#Teleport">Teleport</a></li>
 				<li><a href="#Damage">Damage</a></li>
@@ -471,7 +476,13 @@
 </table>
 
 
-<h3 id="SectorProperties">Sector Properties</h3>
+<h3 id="SectorSettings">Sector Settings</h3>
+
+<h4 id="BlendLength">Blend Length</h4>
+
+<p>time taken to transition to this sector's fog properties when entered</p>
+
+<p><code>1.0</code> is the usual value</p>
 
 <h4 id="Ambience">Ambience</h4>
 
@@ -548,6 +559,9 @@
 <p>A given sector edge will be drawn on the automap if it isn't shared with another sector, or if the adjacent sectors' <em>Draw Order</em>s are not equal.  The color will be chosen by the sector with the lower <em>Draw Order</em>.</p>
 
 <p>The <em>Hidden</em> flag works like another color &ndash; the edge will only be hidden if the hidden sector has the lower <em>Draw Order</em>.</p>
+
+
+<h3 id="SectorFlags">Sector Flags</h3>
 
 <h4 id="Event">Event</h4>
 <ul>
