@@ -39,13 +39,11 @@
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>CheckKeys</strong>()</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>StartWarp</strong>( <a href="kActor.html">kActor</a>@ <em>a</em>, <!--const -->int <em>warpTID</em>, <!--const -->int <em>mapID</em> )</h4>
-<p>teleport the player to the warp exit point with the given <a href="kActor.html#TID">tag ID</a>, on the map with the given <a href="defs.html#mapid">map ID</a></p>
-<p><code>a</code> must be non-null, but otherwise doesn't seem to matter</p>
-
+<h4 id="StartWarp" class="funcDec collapse"><span class="unimportant">void</span> <strong>StartWarp</strong>( <a href="kActor.html">kActor</a>@ <em>a</em>, <!--const -->int <em>warpTID</em>, <!--const -->int <em>mapID</em> )</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>StartFreeWarp</strong>( <a href="kActor.html">kActor</a>@ <em>a</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>dest</em>, <!--const -->float <em>yaw</em>, <!--const -->int <em>sector</em>, <!--const -->int <em>mapID</em> )</h4>
-<p>teleport the player to an arbitrary point in the given <a href="kWorld.html#MapStructure">sector</a>, on the map with the given <a href="defs.html#mapid">map ID</a>, and facing the given direction</p>
+<p>teleport the player to a map by its <a href="defs.html#mapid">map ID</a>, at a given warp point or an arbitrary point on the map, respectively</p>
 <p><code>a</code> must be non-null, but otherwise doesn't seem to matter</p>
+<p>see also <code><a href="kGame.html#ChangeMap">kGame::ChangeMap()</a></code></p>
 
 <h4 id="HandlePlayerDeath" class="funcDec"><span class="unimportant">void</span> <strong>HandlePlayerDeath</strong>( <!--const -->bool <em class="hasDef">bLoseLife</em> = <em class="defVal">true</em> )</h4>
 <p>resume normal respawn/game over procedure after being blocked with <code><a href="kPuppet.html#PF_PREVENTDEATHCAM">PF_PREVENTDEATHCAM</a></code></p>

@@ -41,7 +41,10 @@
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>HaltMapScript</strong>( <!--const -->int <em>scriptID</em> )</h4>
 <p>terminates a map script in a <code>$restart</code> loop or waiting to begin/continue</p>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>ChangeMap</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
+<h4 id="ChangeMap" class="funcDec"><span class="unimportant">void</span> <strong>ChangeMap</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
+<p>change to an arbitrary map by file path (does not need to be defined in defs/mapInfo.txt)</p>
+<p>screen cuts to black (sets <a href="kCamera.html#CinematicState">cinematic state</a> to <code>5</code>), as opposed to teleportation screen effects</p>
+<p>see also <code><a href="kPlayLoop.html#StartWarp">kPlayLoop::StartWarp()/StartFreeWarp()</code></p>
 
 <h4 class="funcDec"><!--const -->int <strong>GetMapNumberFromName</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
 
