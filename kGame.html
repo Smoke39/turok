@@ -44,7 +44,7 @@
 <h4 id="ChangeMap" class="funcDec"><span class="unimportant">void</span> <strong>ChangeMap</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
 <p>change to an arbitrary map by file path (does not need to be defined in defs/mapInfo.txt)</p>
 <p>screen cuts to black (sets <a href="kCamera.html#CinematicState">cinematic state</a> to <code>5</code>), as opposed to teleportation screen effects</p>
-<p>see also <code><a href="kPlayLoop.html#StartWarp">kPlayLoop::StartWarp()/StartFreeWarp()</code></p>
+<aside class="seeAlso">see also <code><a href="kPlayLoop.html#StartWarp">kPlayLoop::StartWarp()/StartFreeWarp()</code></aside>
 
 <h4 class="funcDec"><!--const -->int <strong>GetMapNumberFromName</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>path</em> )</h4>
 
@@ -80,7 +80,7 @@
 	<li>DIFFICULTY_HARDCORE</li>
 </ul>
 
-<h4 class="funcDec">bool <strong>GetHubKeyInfo</strong>( <!--const -->uint <em>levelNum</em>, int&amp;<!--out--> <em>keys</em>, int&amp;<!--out--> <em>remaining</em>, int&amp;<!--out--> <em>lockBits</em> )</h4>
+<h4 id="GetHubKeyInfo" class="funcDec">bool <strong>GetHubKeyInfo</strong>( <!--const -->uint <em>levelNum</em>, int&amp;<!--out--> <em>keys</em>, int&amp;<!--out--> <em>remaining</em>, int&amp;<!--out--> <em>lockBits</em> )</h4>
 <p>gets info on level keys:</p>
 <ul>
 	<li><code>levelNum</code> is the number of the level to check, as defined in <a href="defs.html#mapInfo">defs/mapInfo.txt</a></li>
@@ -89,6 +89,7 @@
 	<li><code>lockBits</code> will be a <a href="scripts.html#BitFields">bit field</a> of which keys required to enter the level have been found</li>
 </ul>
 <p>returns whether <code>levelNum</code> is defined</p>
+<aside class="seeAlso">see also <code><a href="kPlayLoop.html#CheckKeys">kPlayLoop::CheckKeys()</a></code></aside>
 
 
 <h4 class="funcDec">

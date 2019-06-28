@@ -415,6 +415,14 @@ aside.sideBar h4 + *
 	margin-top: 0;
 }
 
+aside.seeAlso
+{
+	font-style: italic;
+	padding: 0;
+	border: inherit;
+	background-color: inherit;
+}
+
 /******************************************************************************/
 /* TABLES */
 
