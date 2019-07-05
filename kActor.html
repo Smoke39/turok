@@ -588,7 +588,7 @@
 
 <h4 id="SpawnProjectile" class="funcDec"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>damageType</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>offset</em>, <!--const -->float <em>radius</em> )</h4>
+<h4 id="MeleeObject" class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>damageType</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>offset</em>, <!--const -->float <em>radius</em> )</h4>
 <p>inflict <code>damageType</code> on all actors within range of the given offset, according to the following math:
 <pre><code>float range = (radius + 1) * 2 * GAME_SCALE;
 kVec3 origin = self.GetTransformedVector( offset );

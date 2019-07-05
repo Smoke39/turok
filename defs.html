@@ -52,10 +52,11 @@
 <h3 id=damageInfo>damageInfo</h3>
 
 <p>Defines damage type properties.</p>
-<p>Referred to by <a href=fx.html#Events>fx events</a> (and probably elsewhere, e.g., for melee).</p>
-<p>Most damage types are fairly generic, and may be referenced by several projectile types, so be careful when changing values here.  It's often preferable to change which damage type a projectile refers to, rather than changing the properties of the damage type here.</p>
+<p>Referred to by <a href=fx.html#Events>particle events</a> and <code><a href="kActor.html#MeleeObject">kActor::MeleeObject()</a></code>.</p>
+<p>Most damage types are fairly generic, and may be referenced by several different attacks, so be careful when changing values here.  It's often preferable to change which damage type an attack refers to, rather than changing the properties of the damage type here.</p>
 <p>New damage types can be defined by simply adding its name to this file, and listing its properties within its block.</p>
-<p>New damage properties can also be created by simply adding them to a damage type's definition.  They won't do anything by default, but you'll be able to test for them in an actor's script to program new reactions.</p>
+<p>New damage properties can also be created by simply adding them to a damage type's definition.  They won't do anything by default, but you'll be able to test for them in an actor's <a href="ScriptObject.html#OnDamage">script</a> to program new reactions.</p>
+<p>Properties that begin with a lower-case <strong>b</strong> are flags.  They are enabled if set to <code>1</code>, and disabled if set to <code>0</code> or unspecified.</p>
 <table>
 	<tr>
 		<td>damage</td>
@@ -72,29 +73,32 @@
 	<tr>
 		<td>bExplode</td>
 		<td>
-			<p>Set to <code>1</code> to deal damage in a radius.</p>
-			<p>Causes enemies (and bodies) to fly into the air on death.</p>
-			<p>Classes in scripts/misc/destructibles.txt (trees, rocks blocking the minigun on level 2, etc.) also look for this flag to determine if they should be destroyed when taking damage.</p>
+			<p>deal damage in a radius</p>
+			<p>causes enemies (and bodies) to fly into the air on death</p>
+			<p>classes in scripts/misc/destructibles.txt (trees, rocks blocking the minigun on level 2, etc.) also look for this flag to determine if they should be destroyed when taking damage</p>
 		</td>
 	</tr>
 	<tr>
 		<td>radius</td>
-		<td>how wide of an area to deal damage in if <code>bExplode</code> is <code>1</code></td>
-	</tr>
-	<tr>
-		<td>bNoDamageSource</td>
-		<td>set to <code>1</code> to not damage whoever caused this damage (e.g., shockwave weapon splash damage does not affect the player because of this)</td>
+		<td>blast radius for <code>bExplode</code> damage</td>
 	</tr>
 	<tr>
 		<td>bNoAIBlast</td>
 		<td>
-			<p>If <code>bExplode</code> is <code>1</code>, do not cause enemies to fly into the air on death.</p>
-			<p>Only affects kill shots &ndash; carcasses will still fly into the air if damaged.</p>
+			<p>prevent <code>bExplode</code> damage from causing enemies to fly into the air on death</p>
+			<p>only affects kill shots &ndash; corpses will still fly into the air if damaged</p>
 		</td>
 	</tr>
 	<tr>
+		<td>bNoDamageSource</td>
+		<td>do not damage whoever caused this damage (e.g., shockwave weapon splash damage does not affect the player because of this)</td>
+	</tr>
+	<tr>
 		<td>bAccelerator</td>
-		<td>Causes shockwave weapon death effects.  Reacted to in <code><a href="ScriptObject.html#OnDeath">OnDeath()</a></code> in a few actor scripts.</td>
+		<td>
+			<p>causes shockwave weapon death effects</p>
+			<p>reacted to in <code><a href="ScriptObject.html#OnDeath">OnDeath()</a></code> in a few actor scripts</p>
+		</td>
 	</tr>
 	<tr>
 		<td>bCauseSpecialAnimation</td>
@@ -103,13 +107,13 @@
 	<tr>
 		<td>bKnockback</td>
 		<td>
-			<p>Set to <code>1</code> to push enemies back on impact.</p>
-			<p>Does not affect velocity &ndash; it immediately sets the enemy to a new location a fixed distance away.</p>
+			<p>push enemies back on impact</p>
+			<p>does not affect velocity &ndash; it immediately sets the enemy to a new location a fixed distance away</p>
 		</td>
 	</tr>
 	<tr>
 		<td>knockBackForce</td>
-		<td>how far to move enemies back if <code>bKnockback</code> is <code>1</code></td>
+		<td>how far <code>bKnockback</code> damage moves enemies back</td>
 	</tr>
 	<tr>
 		<td>bShove</td>
@@ -117,11 +121,37 @@
 	</tr>
 	<tr>
 		<td>bQuake</td>
-		<td></td>
+		<td>shake the camera when the player is dealt this damage type</td>
+	</tr>
+	<tr>
+		<td>quakeAngle</td>
+		<td>
+			<p>shake the camera by <code>&plusmn;quakeAngle*38.2&deg;</code> for <code>bQuake</code> damage</p>
+			<p><code>-0.03</code> if unspecified (a little over 1&deg;)</p>
+		</td>
+	</tr>
+	<tr>
+		<td>quakeDuration</td>
+		<td>
+			<p>time in <code>0.8<span style="text-decoration:overline;">3</span></code> seconds to shake the camera for <code>bQuake</code> damage</p>
+			<p><code>2.75</code> if unspecified (~2.3 seconds)</p>
+		</td>
+	</tr>
+	<tr class="void">
+		<td>quakeVelocity</td>
+		<td>
+			<p>[unused] (used to jostle the player upward for <code>bQuake</code> damage</p>
+			<p><code>5.76</code> if unspecified</p>
+		</td>
 	</tr>
 	<tr>
 		<td>bTargetPlayer</td>
-		<td></td>
+		<td>
+			<p>damage the player, irrespective of their location</p>
+			<p>only works in <code><a href="fx.html#onImpact">onImpact</a></code> particle events</p>
+			<p>will not damage the player if they are invincible (and thus will not, e.g., trigger <code>bQuake</code> effects), unless <code>damage</code> is <code>0</code></p>
+			<p>will not damage the player if <code>bExplode</code> is <code>1</code> (whether the player is within range or not)</p>
+		</td>
 	</tr>
 	<tr>
 		<td>sound</td>
@@ -134,7 +164,7 @@
 	<tr>
 		<td>bImpact</td>
 		<td rowspan=3>
-			<p>if <code>bImpact</code> is <code>1</code>, damage will be scaled by:
+			<p>scale damage by:
 			<blockquote>projectile speed / <code>impactDamp</code> / <code>impactFalloff</code></blockquote>
 			<p>(speed is in terms of distance per second)</p>
 			<p>if the scalar is &geq; <code>1.0</code>, damage will instead be <code>999999</code>, except against bosses</p>
