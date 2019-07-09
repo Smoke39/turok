@@ -96,6 +96,9 @@
 <p>gets called every <a href="scripts.html#TickRate">tick</a></p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnEndLevel</strong>()</h4>
+<p>called when changing levels, before the current level is unloaded</p>
+<p>no script destructors are called until after all <code>OnEndLevel()</code> events have completed</p>
+
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnActivate</strong>()</h4>
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnDeactivate</strong>()</h4>
 
