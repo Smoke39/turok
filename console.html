@@ -621,7 +621,10 @@
 	</tr>
 	<tr id="g_extendeddrawdistance">
 		<td>g_extendeddrawdistance</td>
-		<td>pushes back the fog wall (applies values defined in <a href="defs.html#maxDistance">defs/mapInfo.txt</a>)</td>
+		<td>
+			<p>pushes out the fog wall (applies values defined in <a href="defs.html#maxDistance">defs/mapInfo.txt</a>)</p>
+			<p>see also <code><a href="#r_zfarextent">r_zfarextent</a></code></p>
+		</td>
 	</tr>
 	<tr>
 		<td>g_showintromovie</td>
@@ -898,9 +901,13 @@
 		<td>cl_maxlatetics</td>
 		<td></td>
 	</tr>
-	<tr>
+	<tr id="r_zfarextent">
 		<td>r_zfarextent</td>
-		<td></td>
+		<td>
+			<p>fog distance adjustment</p>
+			<p>positive values push it out, negative values pull it in (default <code>0.0</code>)</p>
+			<p>this can be used to extend the fog beyond <code><a href="#g_extendeddrawdistance">g_extendeddrawdistance</a></code>, but enemy AI will not be affected (they will be oblivious beyond normal fog distance)</p>
+		</td>
 	</tr>
 	<tr>
 		<td>r_gridboundocclusionmultiplier</td>
