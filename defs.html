@@ -140,7 +140,7 @@
 	<tr class="void">
 		<td>quakeVelocity</td>
 		<td>
-			<p>[unused] (used to jostle the player upward for <code>bQuake</code> damage</p>
+			<p>[unused] (used to jostle the player upward for <code>bQuake</code> damage)</p>
 			<p><code>5.76</code> if unspecified</p>
 		</td>
 	</tr>
@@ -161,13 +161,13 @@
 		<td>soundInterval</td>
 		<td></td>
 	</tr>
-	<tr>
+	<tr id="bImpact">
 		<td>bImpact</td>
 		<td rowspan=3>
 			<p>scale damage by:
 			<blockquote>projectile speed / <code>impactDamp</code> / <code>impactFalloff</code></blockquote>
 			<p>(speed is in terms of distance per second)</p>
-			<p>if the scalar is &geq; <code>1.0</code>, damage will instead be <code>999999</code>, except against bosses</p>
+			<p>if the scalar is &geq; <code>1.0</code>, damage will instead be <code>999999</code>, unless the victim's <em><a href="levels.html#TeleportAvoidCliffs">Teleport Avoid Cliffs</a></em> flag is not set (namely bosses)</p>
 		</td>
 	</tr>
 	<tr>
