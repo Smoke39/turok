@@ -48,9 +48,9 @@
 
 <h2>FX</h2>
 
-<p>Each kfx file can define multiple effects to spawn when the kfx is invoked.</p>
-<p>The number of effects is specified at the beginning of the file with <code>fx[N] =</code>, followed by a block containing <code>N</code> sub blocks, each defining an effect to spawn when the kfx is invoked.</p>
-<p>The number of effect definitions <strong>must</strong> match the value of <code>N</code>, or the game will crash when the kfx is invoked.</p>
+<p>Each kfx file can define multiple particles to spawn when the kfx is spawned.</p>
+<p>The number of particle types is specified at the beginning of the file with <code>fx[N] =</code>, followed by a block containing <code>N</code> sub blocks, each defining a particle type to spawn when the kfx is spawned.</p>
+<p>The number of particle type definitions <strong>must</strong> match the value of <code>N</code>, or the game will crash when the kfx is spawned.</p>
 
 
 <h3 id="Key">Key</h3>
@@ -58,7 +58,7 @@
 <aside id="vector">
 	<h4 class="collapse">(v)</h4>
 	vector &ndash; defined as a block of 3 floating points: <code>{ x y z }</code><br>
-	+x is right, +y is forward, +z is up (relative to effect orientation)
+	+x is right, +y is forward, +z is up (relative to particle orientation)
 </aside>
 
 <p></p>
@@ -97,7 +97,7 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>bDrawOnBottom</td>
-		<td>render in front of other effects</td>
+		<td>render in front of other particles</td>
 	</tr>
 	<tr id="bLensFlares">
 		<td>bLensFlares</td>
@@ -197,7 +197,7 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>bNoHitSource</td>
-		<td>don't register collision with whatever spawned the effect</td>
+		<td>don't register collision with whatever spawned the particle</td>
 	</tr>
 	<tr id="bPerPolyCollision">
 		<td>bPerPolyCollision</td>
@@ -221,7 +221,12 @@ forwardSpeedRandom = 500</code></pre>
 <table>
 	<tr>
 		<td>bBlood</td>
-		<td>not sure yet, but some green blood effects lack this</td>
+<!--		<td>not sure yet, but some green blood effects lack this</td>-->
+		<td>
+			<p>do not spawn when blood is disabled, or against actors with "no blood" flag (namely animals)</p>
+			<p>a <code>bBlood</code> particle also indicates that all particles that come after it in the file should only be spawned when blood is disabled (or against "no blood" actors), unless they also have <code>bBlood</code> set</p>
+			<p>details of the green blood violence setting are untested</p>
+		</td>
 	</tr>
 	<tr>
 		<td>bNoSpawnNear</td>
@@ -276,7 +281,7 @@ forwardSpeedRandom = 500</code></pre>
 <table>
 	<tr id="offset">
 		<td>offset&nbsp;<a href="#vector">(v)</a>&nbsp;<a href="#random">*</a></td>
-		<td>where to spawn this effect, relative to where the kfx itself was spawned</td>
+		<td>where to spawn this particle, relative to where the kfx itself was spawned</td>
 	</tr>
 	<tr id="muzzleOffset">
 		<td>muzzleOffset&nbsp;<a href="#vector">(v)</a></td>
@@ -310,12 +315,18 @@ forwardSpeedRandom = 500</code></pre>
 		<td>gravityRandomScale</td>
 		<td>works like other <a href="#random">randomization properties</a>, just with a different naming convention</td>
 	</tr>
-	<tr>
+	<tr id="mass">
 		<td>mass</td>
 		<td>
 			<p>fraction of velocity along hit surface normal to retain when bouncing (after velocity is mirrored):</p>
 			<blockquote>velocity += (1 + <code>mass</code>) * (velocity &bull; normal) * normal</blockquote>
-			<aside>testing seems to indicate this gets <code>0.05</code> added to it, perhaps to prevent rounding errors from causing the effect to stick to surfaces when <code>mass</code> is <code>0</code></aside>
+			<p>If <a href="#bBullet"><code>bBullet</code></a> is set, this instead controls max deflection angle.  The two extremes are:
+			</p>
+			<ul>
+				<li><code>0.0</code> - bounce only when hitting completely parallel to surface</li>
+				<li><code>1.0</code> - always bounce, even if hitting head-on</li>
+			</ul>
+			<aside>testing seems to indicate this gets <code>0.05</code> added to it, perhaps to prevent rounding errors from causing the particle to stick to surfaces when <code>mass</code> is <code>0</code></aside>
 		</td>
 	</tr>
 	<tr>
@@ -328,14 +339,14 @@ forwardSpeedRandom = 500</code></pre>
 			<p>acceleration opposing velocity</p>
 			<p class="collapse">seems to be constant based on <em>initial</em> velocity:</p>
 			<ul>
-				<li>will cause the effect to move backward if set too high</li>
+				<li>will cause the particle to move backward if set too high</li>
 				<li>causes path to curve after bouncing (instead of opposing new velocity)</li>
 			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>waterFriction</td>
-		<td>unlike <code>airFriction</code>, this isn't a constant force &ndash; the effect will actually come to a stop if <code>waterFriction</code> is high enough, and bouncing won't mess things up</td>
+		<td>unlike <code>airFriction</code>, this isn't a constant force &ndash; the particle will actually come to a stop if <code>waterFriction</code> is high enough, and bouncing won't mess things up</td>
 	</tr>
 </table>
 
@@ -347,9 +358,9 @@ forwardSpeedRandom = 500</code></pre>
 	<tr>
 		<td>instances&nbsp;<a href="#random">*</a></td>
 		<td>
-			<p>how many copies of this effect to spawn</p>
+			<p>how many copies of this particle to spawn</p>
 			<p>any randomized properties get randomized independently for each instance (e.g., shotgun pellets don't all get the same randomized trajectory)</p>
-			<p>a negative <code>instancesRandom</code> can be used to make the effect spawn &lt; 100% of the time</p>
+			<p>a negative <code>instancesRandom</code> can be used to make the particle spawn &lt; 100% of the time</p>
 		</td>
 	</tr>
 	<tr>
@@ -366,7 +377,7 @@ forwardSpeedRandom = 500</code></pre>
 	<tr>
 		<td>priority</td>
 		<td>
-			<p>There's a limit to how many effects can exist at once.  Effects with a higher <code>priority</code> are given precedence when that limit is reached.</p>
+			<p>There's a limit to how many particles can exist at once.  Particles with a higher <code>priority</code> are given precedence when that limit is reached.</p>
 			<p>Things that affect gameplay (like projectiles) should be set to <code>100</code>.</p>
 		</td>
 	</tr>
@@ -390,14 +401,14 @@ forwardSpeedRandom = 500</code></pre>
 		<td>shader</td>
 		<td>
 			<p>shader to render the sprite with</p>
-			<p>typically <code>worldfx</code> or <code>worldcolorfx</code> (the latter tends to be more colorful for translucent effects)</p>
+			<p>typically <code>worldfx</code> or <code>worldcolorfx</code> (the latter tends to be more colorful for translucent particless)</p>
 			<p>e.g., <code>shader = "progs/worldcolorfx"</code></p>
 		</td>
 	</tr>
 	<tr>
 		<td>sprite</td>
 		<td>
-			<p>sprite to represent the effect with</p>
+			<p>sprite to represent the particle with</p>
 			<p>e.g., <code>sprite = "sprites/fx064"</code></p>
 		</td>
 	</tr>
@@ -488,10 +499,10 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 	<tr>
 		<td>rotationPivotX</td>
 		<td rowSpan="2">
-			<p>offset from the effect's physical location to render the sprite</p>
-			<p>uses the same coordinate system as other <a href="#vector">vectors</a>, except relative to the camera's orientation, rather than the effect's orientation</p>
-			<p>sprite rotation orbits the effect's physical location (this is how rockets and shockwave weapon projectiles spiral)</p>
-			<p>spawned effects will center on the sprite, but hit detection, splash damage, and sounds will still be based on the effect's physical location</p>
+			<p>offset from the particles's physical location to render the sprite</p>
+			<p>uses the same coordinate system as other <a href="#vector">vectors</a>, except relative to the camera's orientation, rather than the particles's orientation</p>
+			<p>sprite rotation orbits the particles's physical location (this is how rockets and shockwave weapon projectiles spiral)</p>
+			<p>spawned particless will center on the sprite, but hit detection, splash damage, and sounds will still be based on the particles's physical location</p>
 		</td>
 	</tr>
 	<tr>
@@ -542,16 +553,18 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 			<ol class="noIndent bold">
 				<li value="0">ignore; pass right through</li>
 				<li>hit and disappear</li>
-				<li>same as 3?</li>
+				<li>hit and reflect
+					<ul>
+						<li><code>onImpact</code> event is ignored (unless <a href="#bBullet"><code>bBullet</code></a> is set)</li>
+						<li>if <a href="#bBullet"><code>bBullet</code></a> is set, bounce only up to twice, and only if angle is wide, based on <a href="#mass"><code>mass</code></a></li>
+					</ul>
+				</li>
 				<li>hit and bounce
 					<ul>
-						<li><code>onImpact</code> event is ignored (unless <a href="#bBullet"><code>bBullet</code></a>, presumably)</li>
-						<li>if <a href="#bBullet"><code>bBullet</code></a>, only bounce if angle is wide</li>
+						<li>this is supposed to be reflection with speed reduction, but seems identical to reflect?</li>
 					</ul>
 				</li>
 				<li>hit and push against, dealing continuous damage</li>
-				<li>same as 4</li>
-				<li>same as 4</li>
 			</ol>
 		</td>
 	</tr>
