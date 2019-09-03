@@ -182,7 +182,7 @@ forwardSpeedRandom = 500</code></pre>
 		<td>
 			<p class="collapse">affects various behavior properties, including:</p>
 			<ul>
-				<li><a href="#airFriction"><code>airFriction</code></a> cuts <a href="#lifeTime"><code>lifeTime</code></a> short instead of affecting velocity</li>
+				<li><a href="#airFriction"><code>airFriction</code></a> cuts <a href="#lifeTime"><code>lifeTime</code></a> short instead of affecting velocity, and also blocks <a href="#onExpire"><code>onExpire</code></a></li>
 				<li>see notes in <a href="#Collision">Collision</a></li>
 			</ul>
 		</td>
@@ -616,7 +616,7 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 		<td>onTick</td>
 		<td>happens continuously (unless underwater?)</td>
 	</tr>
-	<tr>
+	<tr id="onExpire">
 		<td>onExpire</td>
 		<td>happens when <code>lifeTime</code> runs out (unless underwater?)</td>
 	</tr>
