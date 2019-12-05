@@ -97,12 +97,13 @@
 	<tr id="radioVolume">
 		<td>radioVolume </td>
 		<td>
-			<ol class="noIndent bold">
+			<p>reportedly alters volume, but has no effect with <a href="console.html#testsoundshader">testsoundshader</a></p>
+			<p>todo: test if maybe this alters dropoff distance</p>
+			<ol class="noIndent bold void" style="display:inline-block; margin-top:0;">
 				<li value="0">-20% volume</li>
 				<li>normal volume</li>
 				<li>+50% volume</li>
 			</ol>
-			<p>seems the same as modifying <code>max</code> in <code><a href="#volume">volume_envelope</a></code></p>
 		</td>
 	</tr>
 </table>
@@ -110,8 +111,8 @@
 
 <h3 id="Envelopes">Envelope Blocks</h3>
 <p>These blocks control volume and pitch, as well as dynamic volume and pitch shifting.</p>
-<p>All values except for <code>max</code> require the corresponding <a href="#EnvelopeBooleans">envelope boolean</a> to be set, <strong>except</strong> for <code>start = 0</code> in <code>volume_envelope</code>.</p>
-<p>These blocks work slightly different from each other, so be mindful of the details.</p>
+<p>All values except for <code>max</code> require the corresponding <a href="#EnvelopeBooleans">envelope boolean</a> to be set, <strong>except</strong> for <code>start &leq; 0.002</code> in <code>volume_envelope</code>.</p>
+<p>These blocks work slightly differently from each other, so be mindful of the details.</p>
 
 <h4 id="volume">volume_envelope</h4>
 <table>
@@ -123,7 +124,7 @@
 		<td>start</td>
 		<td rowspan="2">
 			<p>initial and target fraction of <code>max</code></p>
-			<p>volume will ramp from <code>start*max</code> to <code>end*max</code></p>
+			<p>volume will ramp from <code>start*max</code> to <code>end*max</code> (capped at <code>1.0</code>)</p>
 		</td>
 	</tr>
 	<tr>
@@ -141,9 +142,7 @@
 	</tr>
 </table>
 <p></p>
-<aside>the product of <code>max</code>, <code>start</code> through <code>end</code>, and <code><a href="#radioVolume">radioVolume</a></code> is capped at <code>1.0</code></aside>
-<p></p>
-<aside>if <code>start = 0</code>, the sound will not play, unless <code><a href="#bEnableVolumeEnvelope">bEnableVolumeEnvelope</a> = 1</code> and <code>envStartTime = 0</code></aside>
+<aside>if <code>start &leq; 0.002</code>, the sound will not play, unless <code><a href="#bEnableVolumeEnvelope">bEnableVolumeEnvelope</a> = 1</code> and <code>envStartTime = 0</code></aside>
 
 <h4 id="pitch">pitch_envelope</h4>
 <table>
