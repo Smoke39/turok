@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Sprites - Turok EX Modding Guide</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.texture {
+			background: url('alpha back.png') repeat;
+			border: 1px dashed black;
+			image-rendering: crisp-edges; /* pixelated */
+		}
+	</style>
+</head>
+<body>
+<div id="container">
+<h1><a href="index.html"><img src="logo.png"><span class="TX">Turok EX</span> <span class="MG">Modding Guide</span></a></h1>
+<div id="main">
+
+
+<h2>Sprites</h2>
+
+<p>Sprites are flat images capable of animation used by <a href="fx.html#sprite">particle effects</a>.  They are defined by a texture and mappings for one or more frames within that texture.</p>
+
+<pre><code>texture "&lt;file path&gt;"
+sprite 0 &lt;x&gt; &lt;y&gt; &lt;width&gt; &lt;height&gt;
+...
+sprite &lt;N&gt; &lt;x&gt; &lt;y&gt; &lt;width&gt; &lt;height&gt;</code></pre>
+
+<p>The top-left of the texture is at <code>0 0</code>, and width and height extend right and down.</p>
+
+<h3></h3>
+<img style="float:right; margin:0 0 1em 1em;" src="sprite1 in-game.png">
+<p>Coordinates refer to the top-left corner of texels, rather than their center.  For example, this texture and definition should result in a white square that fades to transparent at its edges, but instead it appears in-game as the screenshot on the right:</p>
+<p><img class="texture" style="width:72px; height:72px;" src="sprite1.png"></p>
+<pre style="margin:auto; text-align:center;"><code>sprite 0 2 2 3 3</code></pre>
+<p>You can't correct for this because coordinates and dimensions are truncated to integers (e.g., 2.5 becomes 2), but you can mitigate it by adding extra transparent space around frames in the texture.</p>
+
+<h3 style="clear:both;"></h3>
+<img style="float:right; margin-left:1em;" src="sprite2 in-game.png">
+<p>Texture mapping is clamped to the edges.  Mapping outside the texture will repeat the outer texels:</p>
+<p><img class="texture" style="width:72px; height:72px;" src="sprite2.png"></p>
+<pre style="margin:auto; text-align:center;"><code>sprite 0 -8 -8 24 24</code></pre>
+
+<p style="clear:both;"></p><!-- prevent floated image from extending out the bottom of the container -->
+
+
+</div><!-- main -->
+</div><!-- container -->
+</body>
+</html>
