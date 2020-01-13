@@ -180,10 +180,10 @@ forwardSpeedRandom = 500</code></pre>
 	<tr id="bBullet">
 		<td>bBullet</td>
 		<td>
-			<p class="collapse">affects various behavior properties, including:</p>
+			<p class="collapse">affects various behavioral properties:</p>
 			<ul>
-				<li><a href="#airFriction"><code>airFriction</code></a> cuts <a href="#lifeTime"><code>lifeTime</code></a> short instead of affecting velocity, and also blocks <a href="#onExpire"><code>onExpire</code></a></li>
-				<li>see notes in <a href="#Collision">Collision</a></li>
+				<li>Particle is destroyed when speed drops below a certain threshold.  Does not call <a href="#onExpire"><code>onExpire</code></a> or <a href="#onWaterExpire"><code>onWaterExpire</code></a> in this case (they will still happen when <code>lifeTime</code> runs out).</li>
+				<li>See notes in <a href="#Collision">Collision</a>.</li>
 			</ul>
 		</td>
 	</tr>
@@ -631,7 +631,7 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 		<td>onWaterTick</td>
 		<td>happens continuously instead of <code>onTick</code> while underwater</td>
 	</tr>
-	<tr>
+	<tr id="onWaterExpire">
 		<td>onWaterExpire</td>
 		<td>happens when <code>lifeTime</code> runs out, if underwater</td>
 	</tr>
