@@ -88,10 +88,10 @@
 <p><code>f = 0.5</code> seems to jump around a length somewhere around <code>0.3</code> to <code>0.8</code></p>
 <p><code>f = 2.0</code> seems to jump around, but overall increase over time</p>
 
-<h4 class="funcDec">kVec3 <strong>Lerp</strong>( <!--const -->kVec3&amp;<!--in--> <em>v</em>, <!--const -->float <em>pct</em> )<br>
-<!--const kVec3& Lerp( const kVec3&in, const float )--></h4>
+<h4 class="funcDec collapse">kVec3 <strong>Lerp</strong>( <!--const -->kVec3&amp;<!--in--> <em>v</em>, <!--const -->float <em>pct</em> ) <span class="unimportant">const</span></h4>
+<h4 class="funcDec">kVec3&amp; <strong>Lerp</strong>( <!--const -->kVec3&amp;<!--in--> <em>v</em>, <!--const -->float <em>pct</em> )</h4>
 <p>linear interpolation, <code>this + (v-this)*pct</code></p>
-<p>applies result to self, and returns it</p>
+<p>non-const version applies result to self, and returns reference to self</p>
 
 <h4 class="funcDec collapse">kVec3&amp; <strong>CubicCurve</strong>( <!--const -->kVec3&amp;<!--in--> <em>v1</em>, <!--const -->float <em>f</em>, <!--const -->kVec3&amp;<!--in--> <em>v2</em> )</h4>
 <h4 class="funcDec">kVec3&amp; <strong>QuadraticCurve</strong>( <!--const -->kVec3&amp;<!--in--> <em>v1</em>, <!--const -->float <em>f</em>, <!--const -->kVec3&amp;<!--in--> <em>v2</em>, <!--const -->kVec3&amp;<!--in--> <em>v3</em> )</h4>
