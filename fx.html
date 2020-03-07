@@ -588,10 +588,12 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 		<td id="onImpact">onImpact</td>
 		<td>
 			<p>happens when hitting an <a href="kActor.html#ImpactType">actor</a>, wall, or floor (based on the <code>onCollide</code> properties above)</p>
+			<aside class="unimportant" style="float:right; max-width:35%;"><p>* The water impact type is typically used as a floor impact type instead of the water sector flag, in very shallow water where the engine would tend to register an impact with the floor before the actual water surface (e.g., level38.map).</p>
+			<p>However, it's also occasionally used <em>in addition</em> to the water sector flag, which can result in two redundant "water" impacts (<code>onWaterImpact</code> + <code>onImpact[1]</code>; e.g., the end of level07.map).</p></aside>
 			<p>contains a sub-block for each surface type it can hit:</p>
 			<ol class="bold">
 				<li value="0">grass/wood surfaces</li>
-				<li class="void" style="display:inline;">water (unused?)</li>
+				<li class="void" style="display:inline;">water (rarely used<span class="numerator">*</span>)</li>
 				<li>metallic enemies</li>
 				<li>hard surfaces</li>
 				<li>red-blooded enemies</li>
@@ -612,8 +614,8 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 				<li><code>IT_LAVA</code></li>
 				<li>tar (<code>IT_SLIME</code>)</li>
 				<li><code>IT_FORCEFIELD</code></li>
-			</ol>
--->		</td>
+			</ol> -->
+		</td>
 	</tr>
 	<tr>
 		<td>onTick</td>
