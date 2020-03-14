@@ -29,13 +29,15 @@
 
 <p>Base class of all weapon scripts, associated with a <a href="kWeapon.html">kWeapon</a> actor.  Weapon classes are defined in scripts/weapons.txt.</p>
 
+<p>Every weapon is intialized at level start, not just those the player owns.<p>
+
 <p>Ammo is managed by <a href="kPlayer.html">kPlayer</a>, which you can get a reference to with <code><a href="kWeapon.html#Owner">kWeapon::Owner()</a></code>.</p>
 
 
 <h3 id="Inherited">Inherited Functions</h3>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnSpawn</strong>()</h4>
-<p>definitely gets called before the player can use the weapon, but I'm not sure exactly when</p>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>OnBeginLevel</strong>()</h4>
+<p>seems to be skipped during <a href="ScriptObject.html#Initialization">initialization</a> (other events are called as usual)</p>
 
 <h4 id="OnTick" class="funcDec"><span class="unimportant">void</span> <strong>OnTick</strong>()</h4>
 <p>called <strong>twice</strong> every <a href="scripts.html#TickRate">tick</a>, if it's the current weapon</p>
