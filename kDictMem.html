@@ -28,7 +28,11 @@
 <p>kDictMems are used for storing <a href="defs.html#damageInfo">damage type</a> properties.</p>
 
 <p id="GameVariables">There is a global kDict, <code>GameVariables</code>, for storing persistent, per-save data, like collected chronosceptor pieces.</p>
-<aside class="important">Values will not be loaded from save files unless their associated key has already been added to <code>GameVariables</code> (namely, in scripts/main.txt).</aside>
+
+<aside class="unimportant">
+	<p><span class="v1">1.x</span> Before the 2.0 update, loading a save would iterate through all keys in the <code>GameVariables</code>, and set their values to those in the save's version.  If a key did not exist in the save file, its current value would not be removed from <code>GameVariables</code>.  If a key existed in the save file, but not in the current <code>GameVariables</code>, it would not be added.</p>
+	<p><span class="v2">2.0</span> After the 2.0 update, it seems that the entire kDict is simply replaced with the save's version.</p>
+</aside>
 
 
 <h3 id="Methods">Methods</h3>
