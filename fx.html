@@ -373,8 +373,8 @@ forwardSpeedRandom = 500</code></pre>
 	<tr id="lifeTime">
 		<td>lifeTime&nbsp;<a href="#random">*</a></td>
 		<td>
-			<p>particle will exist for (1 + 4*<code>lifeTime</code>) / 60 seconds</p>
-			<p>negative values are simply treated as <code>0</code> (i.e., <code>lifeTime = -1</code> will not cause a particle to expire instantaneously)</p>
+			<p>how long the particle will exist, in <span class="numerator">1</span>&frasl;<span class="denominator">15</span> seconds</p>
+			<aside>values &leq; <code>0</code> will cause the particle to exist for <span class="numerator">1</span>&frasl;<span class="denominator">60</span> second, even in spirit mode</aside>
 		</td>
 	</tr>
 	<tr>
