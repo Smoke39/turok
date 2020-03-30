@@ -623,7 +623,10 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 	</tr>
 	<tr id="onExpire">
 		<td>onExpire</td>
-		<td>happens when <code>lifeTime</code> runs out, unless underwater</td>
+		<td>
+			<p>happens when <code>lifeTime</code> runs out, unless underwater</p>
+			<aside>if a particle hits something at the same time that it expires, both <code>onImpact</code> and <code>onExpire</code> events will occur simultaneously</aside>
+		</td>
 	</tr>
 	<tr>
 		<td>onWaterImpact</td>
@@ -635,7 +638,7 @@ trailDefinition_2 = "Trail_TekBow_Crossline_2"</code></pre>
 	</tr>
 	<tr id="onWaterExpire">
 		<td>onWaterExpire</td>
-		<td>happens when <code>lifeTime</code> runs out, if underwater</td>
+		<td>happens instead of <code>onExpire</code> when <code>lifeTime</code> runs out, if underwater</td>
 	</tr>
 </table>
 <p>Each of these blocks can contain any combination of the following:</p>
