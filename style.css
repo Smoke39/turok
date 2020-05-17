@@ -568,6 +568,10 @@ ul.enum
 	padding: 5px;
 	margin-left: 2em;
 }
+ul.enum.noIndent
+{
+	margin-left: 0;
+}
 
 /* override void background color */
 .enum .void

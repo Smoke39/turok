@@ -33,6 +33,20 @@
 		{
 			content: ":";
 		}
+		/* SpawnFlags lists */
+		.SpawnFlags
+		{
+			display: inline-block;
+		}
+		.SpawnFlags h4
+		{
+			margin-bottom: -0.25em;
+		}
+		.SpawnFlags ul
+		{
+			font-size: 80%; /* make sure all 3 fit side-by-side */
+			margin-right: 1em;
+		}
 	</style>
 </head>
 <body>
@@ -213,24 +227,106 @@
 </ul>
 <aside>During the "native" step of <a href="ScriptObject.html#Initialization">initialization</a>, an actor's flags are bitwise or'd with its initial settings.  This means that, before they are initialized, flags can be set, but not cleared.</aside>
 
-<h4 id="SpawnFlags" class="funcDec collapse"><!--const -->uint <strong>SpawnFlags1</strong>()</h4>
-<h4 class="funcDec collapse"><!--const -->uint <strong>SpawnFlags2</strong>()</h4>
+<span class="SpawnFlags">
+<h4 id="SpawnFlags" class="funcDec"><!--const -->uint <strong>SpawnFlags1</strong>()</h4>
+<ul class="enum noIndent">
+	<li><span>1 &lt;&lt; &nbsp;0</span><span>&ndash;</span><span>Solid</span></li>
+	<li><span>1 &lt;&lt; &nbsp;1</span><span>&ndash;</span><span>Projectile Attack 1</span></li>
+	<li><span>1 &lt;&lt; &nbsp;2</span><span>&ndash;</span><span>Leader</span></li>
+	<li><span>1 &lt;&lt; &nbsp;3</span><span>&ndash;</span><span>Snap To Floor</span></li>
+	<li><span>1 &lt;&lt; &nbsp;4</span><span>&ndash;</span><span>Explosion Death</span></li>
+	<li><span>1 &lt;&lt; &nbsp;5</span><span>&ndash;</span><span>Climb Walls</span></li>
+	<li><span>1 &lt;&lt; &nbsp;6</span><span>&ndash;</span><span>Projectile Attack 2</span></li>
+	<li><span>1 &lt;&lt; &nbsp;7</span><span>&ndash;</span><span>No Repeat Explosion</span></li>
+	<li><span>1 &lt;&lt; &nbsp;8</span><span>&ndash;</span><span>Die On Explosion</span></li>
+	<li><span>1 &lt;&lt; &nbsp;9</span><span>&ndash;</span><span>Flocker</span></li>
+	<li><span>1 &lt;&lt; 13</span><span>&ndash;</span><span>Kamikaze</span></li>
+	<li><span>1 &lt;&lt; 14</span><span>&ndash;</span><span>Avoid Players</span></li>
+	<li><span>1 &lt;&lt; 15</span><span>&ndash;</span><span>Float In Water On Death</span></li>
+	<li><span>1 &lt;&lt; 16</span><span>&ndash;</span><span>Teleport</span></li>
+	<li><span>1 &lt;&lt; 17</span><span>&ndash;</span><span>Cast Shadow</span></li>
+	<li><span>1 &lt;&lt; 18</span><span>&ndash;</span><span>Teleport Wait</span></li>
+	<li><span>1 &lt;&lt; 19</span><span>&ndash;</span><span>Use Strong Attacks</span></li>
+	<li><span>1 &lt;&lt; 20</span><span>&ndash;</span><span>Use Weak Attacks</span></li>
+	<li><span>1 &lt;&lt; 21</span><span>&ndash;</span><span>Sniper</span></li>
+	<li><span>1 &lt;&lt; 22</span><span>&ndash;</span><span>Melt On Death</span></li>
+	<li><span>1 &lt;&lt; 23</span><span>&ndash;</span><span>Avoid Water</span></li>
+	<li><span>1 &lt;&lt; 24</span><span>&ndash;</span><span>Flying</span></li>
+	<li><span>1 &lt;&lt; 25</span><span>&ndash;</span><span>Teleport Avoid Water</span></li>
+	<li><span>1 &lt;&lt; 26</span><span>&ndash;</span><span>Teleport Avoid Cliffs</span></li>
+	<li><span>1 &lt;&lt; 27</span><span>&ndash;</span><span>Trigger Stuff</span></li>
+	<li><span>1 &lt;&lt; 28</span><span>&ndash;</span><span>Cannot Cause A Fight</span></li>
+	<li><span>1 &lt;&lt; 29</span><span>&ndash;</span><span>No Wall Collision</span></li>
+	<li><span>1 &lt;&lt; 30</span><span>&ndash;</span><span>Screen Shake</span></li>
+	<li><span>1 &lt;&lt; 31</span><span>&ndash;</span><span>Respawn Animation</span></li>
+</ul>
+</span>
+
+<span class="SpawnFlags">
+<h4 class="funcDec"><!--const -->uint <strong>SpawnFlags2</strong>()</h4>
+<ul class="enum noIndent">
+	<li><span>1 &lt;&lt; &nbsp;0</span><span>&ndash;</span><span>Drop Item Mask 1</span></li>
+	<li><span>1 &lt;&lt; &nbsp;1</span><span>&ndash;</span><span>Drop Item Mask 2</span></li>
+	<li><span>1 &lt;&lt; &nbsp;2</span><span>&ndash;</span><span>Drop Item Mask 3</span></li>
+	<li><span>1 &lt;&lt; &nbsp;3</span><span>&ndash;</span><span>Drop Item Mask 4</span></li>
+	<li><span>1 &lt;&lt; &nbsp;4</span><span>&ndash;</span><span>Drop Item Mask 5</span></li>
+	<li><span>1 &lt;&lt; &nbsp;5</span><span>&ndash;</span><span>Drop Item Mask 6</span></li>
+	<li><span>1 &lt;&lt; &nbsp;6</span><span>&ndash;</span><span>Drop Item Mask 7</span></li>
+	<li><span>1 &lt;&lt; &nbsp;7</span><span>&ndash;</span><span>Drop Item Mask 8</span></li>
+	<li><span>1 &lt;&lt; &nbsp;8</span><span>&ndash;</span><span>Drop Item Mask 9</span></li>
+	<li><span>1 &lt;&lt; &nbsp;9</span><span>&ndash;</span><span>Drop Item Mask 10</span></li>
+	<li><span>1 &lt;&lt; 10</span><span>&ndash;</span><span>Drop Item Mask 11</span></li>
+	<li><span>1 &lt;&lt; 11</span><span>&ndash;</span><span>Drop Item Mask 12</span></li>
+	<li><span>1 &lt;&lt; 12</span><span>&ndash;</span><span>Drop Item Mask 13</span></li>
+	<li><span>1 &lt;&lt; 13</span><span>&ndash;</span><span>Drop Item Mask 14</span></li>
+	<li><span>1 &lt;&lt; 14</span><span>&ndash;</span><span>Remove on Completion</span></li>
+	<li><span>1 &lt;&lt; 15</span><span>&ndash;</span><span>No Blood</span></li>
+	<li><span>1 &lt;&lt; 16</span><span>&ndash;</span><span>Hold Trigger Animation</span></li>
+	<li><span>1 &lt;&lt; 17</span><span>&ndash;</span><span>Projectile Attack 3</span></li>
+	<li><span>1 &lt;&lt; 18</span><span>&ndash;</span><span>Projectile Attack 4</span></li>
+	<li><span>1 &lt;&lt; 19</span><span>&ndash;</span><span>Drop Item On Damage</span></li>
+	<li><span>1 &lt;&lt; 20</span><span>&ndash;</span><span>No Automap Draw</span></li>
+	<li><span>1 &lt;&lt; 21</span><span>&ndash;</span><span>Alternate Moves</span></li>
+	<li><span>1 &lt;&lt; 24</span><span>&ndash;</span><span>Projectile Attack 5</span></li>
+	<li><span>1 &lt;&lt; 25</span><span>&ndash;</span><span>Projectile Attack 6</span></li>
+	<li><span>1 &lt;&lt; 26</span><span>&ndash;</span><span>Mortal Wound Impact</span></li>
+	<li><span>1 &lt;&lt; 27</span><span>&ndash;</span><span>Stay In Water</span></li>
+	<li><span>1 &lt;&lt; 30</span><span>&ndash;</span><span>Projectile Attack 7</span></li>
+	<li><span>1 &lt;&lt; 31</span><span>&ndash;</span><span>Projectile Attack 8</span></li>
+</ul>
+</span>
+
+<span class="SpawnFlags">
 <h4 class="funcDec"><!--const -->uint <strong>SpawnFlags3</strong>()</h4>
+<ul class="enum noIndent">
+	<li><span>1 &lt;&lt; &nbsp;1</span><span>&ndash;</span><span>Play Trigger Anim Once</span></li>
+	<li><span>1 &lt;&lt; &nbsp;2</span><span>&ndash;</span><span>Regenerate From Start</span></li>
+	<li><span>1 &lt;&lt; &nbsp;3</span><span>&ndash;</span><span>Walk In Straight Line</span></li>
+	<li><span>1 &lt;&lt; &nbsp;5</span><span>&ndash;</span><span>No Thinker</span></li>
+	<li><span>1 &lt;&lt; &nbsp;6</span><span>&ndash;</span><span>Avoid Players 2</span></li>
+	<li><span>1 &lt;&lt; &nbsp;7</span><span>&ndash;</span><span>No Violent Death</span></li>
+	<li><span>1 &lt;&lt; &nbsp;8</span><span>&ndash;</span><span>Projectile Attack 9</span></li>
+	<li><span>1 &lt;&lt; &nbsp;9</span><span>&ndash;</span><span>Projectile Attack 10</span></li>
+	<li><span>1 &lt;&lt; 10</span><span>&ndash;</span><span>Make Spawn Anim Visible</span></li>
+	<li><span>1 &lt;&lt; 11</span><span>&ndash;</span><span>No Draw On Camera</span></li>
+</ul>
+</span>
+
 <p>static <a href="scripts.html#BitFields">bit fields</a> corresponding to the tabs of the same names in the editor</p>
-<p>some of these are used to initialize other properties when the actor is (re)spawned (e.g., the Sniper flag sets <a href="#Flags"><code>AF_STATIONARY</code></a>), while other are referenced directly (e.g., the item drop flags in <code>TurokEnemy::DropItem()</code>)</p>
+<p>some of these are used to initialize other properties when the actor is (re)spawned (e.g., the "Sniper" flag sets <a href="#Flags"><code>AF_STATIONARY</code></a>), while other are referenced directly (e.g., the item drop flags in <code>TurokEnemy::DropItem()</code>)</p>
 
 <h4 class="funcDec"><!--const -->int16 <strong>SpawnParams</strong>( <!--const -->int <em>param</em> )</h4>
 <p>static properties corresponding to the following editor fields:</p>
-<ol class="bold">
-	<li value="0">Target TID</li>
-	<li>Trigger Anim (uint8)</li>
-	<li>Health (initial)</li>
-	<li>Max Regenerations</li>
-	<li>Attack Chance (uint8)</li>
-	<li>Texture (initial) (int8)</li>
-	<li>Params 2 (int8)</li>
-	<li>Params 1 (int8)</li>
-</ol>
+<ul class="enum">
+	<li><span>0</span><span>&ndash;</span><span>Target TID</span></li>
+	<li><span>1</span><span>&ndash;</span><span>Trigger Anim (uint8)</span></li>
+	<li><span>2</span><span>&ndash;</span><span>Health (initial)</span></li>
+	<li><span>3</span><span>&ndash;</span><span>Max Regenerations</span></li>
+	<li><span>4</span><span>&ndash;</span><span>Attack Chance (uint8)</span></li>
+	<li><span>5</span><span>&ndash;</span><span>Texture (initial) (int8)</span></li>
+	<li><span>6</span><span>&ndash;</span><span>Params 2 (int8)</span></li>
+	<li><span>7</span><span>&ndash;</span><span>Params 1 (int8)</span></li>
+</ul>
 <p>some classes use these in novel ways (e.g., movers use health and attack chance to control timing)</p>
 
 
