@@ -161,6 +161,11 @@
 	</li>
 	<li>
 		<span>AF_AVOIDWATER</span>
+		<span>&ndash;</span>
+		<span>
+			deletes the actor if it enters a water sector<br>
+			initialized by "Avoid Water" in Spawn Flags 1
+		</span>
 	</li>
 	<li>
 		<span>AF_FLOATINWATERONDEATH</span>
@@ -173,7 +178,7 @@
 		<span>&ndash;</span>
 		<span>
 			AI stands in place<br>
-			corresponds to "Sniper" editor property in "Spawn Flags 1"
+			initialized by "Sniper" in Spawn Flags 1
 		</span>
 	</li>
 	<li>
@@ -509,6 +514,8 @@
 	</li>
 	<li>
 		<span>CF_NOENTERWATER</span>
+		<span>&ndash;</span>
+		<span>actor cannot enter <code><a href="kWorld.html#AAF_WATER">AAF_WATER</a></code> sectors, unless they also have <code><a href="kWorld.html#AAF_SHALLOWWATER">AAF_SHALLOWWATER</a></code></span>
 	</li>
 	<li>
 		<span>CF_NOEXITWATER</span>
