@@ -611,7 +611,7 @@
 <h4 id="CanSee" class="funcDec collapse"><!--const -->bool <strong>CanSee</strong>( kActor@ <em>a</em>, <!--const -->uint <em class="hasDef">clipFlags</em> = <em class="defVal">0</em> )</h4>
 <h4 class="funcDec"><!--const -->bool <strong>CanSee</strong>( <a href="kPuppet.html">kPuppet</a>@ <em>a</em>, <!--const -->uint <em class="hasDef">clipFlags</em> = <em class="defVal">0</em> )</h4>
 <p>performs a raycast to <code>a</code>, and stores the result in the global <code><a href="kCModel.html">CModel</a></code></p>
-<p>returns whether anything was hit between the two actors</p>
+<p>returns true if anything was hit between the two actors</p>
 <p><code>clipFlags</code> is a <a href="scripts.html#BitFields">bit field</a> of <a href="#ClipFlags">clip flags</a> to <strong>disable</strong> (e.g., "collide floors" means the ray should <em>not</em> collide with floors; i.e., the actor should see through floors):</p>
 <ul class="enum">
 	<li>
