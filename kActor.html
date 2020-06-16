@@ -360,8 +360,9 @@
 
 <h4 id="Origin" class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Origin</strong>()</h4>
 <p>current location of the actor</p>
+<p>actors are removed at a distance around <code>1996.9 * GAME_SCALE</code> from global origin</p>
 <aside>
-	although this is mutable, <code><a href="#MoveToPosition">MoveToPosition()</a></code> and <code><a href="#SetPosition">SetPosition()</a></code> should be used instead
+	although this is mutable, <code><a href="#MoveToPosition">MoveToPosition()</a></code> and <code><a href="#SetPosition">SetPosition()</a></code> should generally be used instead
 </aside>
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>PrevOrigin</strong>()</h4>
@@ -378,7 +379,7 @@
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Velocity</strong>()</h4>
 <p>attempted delta per <a href="scripts.html#TickRate">tick</a></p>
-<p>For the <a href="kPuppet.html">player</a>, this will always be <code>(0,0,0)</code>, except for the z component when in the air.  When knocked back by a purlin, it'll also show the entire velocity imparted by the attack.</p>
+<p>For the <a href="kPuppet.html">player</a>, this will always be <code>(0,0,0)</code>, except for the z component when in the air.  When knocked back by a purlin, it'll also reflect the entire velocity imparted by the attack.</p>
 
 <h4 class="funcDec">float&amp; <strong>Gravity</strong>()</h4>
 <p>positive is down</p>
