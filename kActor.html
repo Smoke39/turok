@@ -459,7 +459,7 @@
 <h3 id="Collision">Collision</h3>
 
 <h4 class="funcDec">float&amp; <strong>Radius</strong>()</h4>
-<h4 class="funcDec">float&amp; <strong>Height</strong>()</h4>
+<h4 id="Height" class="funcDec">float&amp; <strong>Height</strong>()</h4>
 <h4 class="funcDec">float&amp; <strong>WallRadius</strong>()</h4>
 
 <h4 class="funcDec collapse">float&amp; <strong>FloorHeight</strong>()</h4>
@@ -599,8 +599,10 @@
 
 <h4 class="funcDec">float <strong>GetTurnYaw</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
 <h4 class="funcDec">float <strong>GetAvoidanceAngle</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
-<h4 class="funcDec">float <strong>DistanceToPoint</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
-<h4 class="funcDec">float <strong>DistanceToPoint</strong>( <!--const -->float <em>f1</em>, <!--const -->float <em>f2</em>, <!--const -->float <em>f3</em> )</h4>
+
+<h4 class="funcDec collapse">float <strong>DistanceToPoint</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec">float <strong>DistanceToPoint</strong>( <!--const -->float <em>x</em>, <!--const -->float <em>y</em>, <!--const -->float <em>z</em> )</h4>
+<p>square of the distance from center of mass (<a href="#Origin">origin</a> + half <a href="#Height">height</a>) to a global point</p>
 
 
 
