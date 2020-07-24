@@ -23,7 +23,11 @@
 <nav>
 	<h3>Contents</h3>
 	<ul>
-		<li><a href="#Key">Key</a></li>
+		<li><a href="#General">General</a>
+			<ul>
+				<li><a href="#Key">Key</a></li>
+				<li><a href="#WallsFloors">Walls &amp; Floors</a></li>
+			</ul>
 		<li><a href="#Flags">Flags</a>
 			<ul>
 				<li><a href="#DisplayFlags">Display</a>
@@ -53,7 +57,9 @@
 <p>The number of particle type definitions <strong>must</strong> match the value of <code>N</code>, or the game will crash when the kfx is spawned.</p>
 
 
-<h3 id="Key">Key</h3>
+<h3 id="General">General</h3>
+
+<h4 id="Key">Key</h4>
 
 <aside id="vector">
 	<h4 class="collapse">(v)</h4>
@@ -83,6 +89,11 @@ forwardSpeedRandom = 500</code></pre>
 	<p>Vectors follow the same pattern independently for each coordinate.</p>
 </aside>
 
+<h4 id="WallsFloors">Walls &amp; Floors</h4>
+<p>What constitutes a "wall" or a "floor" for the purposes of various collision behaviors isn't entirely intuitive:</p>
+<p>A <strong>floor</strong> is any sector surface, <em>even</em> cliff sectors.</p>
+<p>A <strong>wall</strong> is <em>specifically</em> an unconnected sector edge.</p>
+
 
 <!-- FLAGS -------------------------------------------------------------------->
 
@@ -105,7 +116,7 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>bOffsetFromFloor</td>
-		<td>center on the bottom of the sprite, so it doesn't clip into the ground</td>
+		<td>sprite is elevated by half its height to avoid clipping into the ground</td>
 	</tr>
 	<tr id="bScaleLerp">
 		<td>bScaleLerp</td>
@@ -119,7 +130,7 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>bStopAnimOnImpact</td>
-		<td>freeze sprite animation after hitting <em>specifically</em> the <em>ground</em></td>
+		<td>freeze sprite animation after hitting <em>specifically</em> the <a href="#WallsFloors"><em>ground</em></a></td>
 	</tr>
 	<tr>
 		<td>bTextureWrapMirrorWidth</td>
@@ -238,11 +249,10 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>bNoWallSpawn</td>
-		<td></td>
+		<td rowSpan="2">ignore <code><a href="#onImpact">onImpact</a></code> contents when hitting <a href="#WallsFloors">wall or floor</a>, respectively</td>
 	</tr>
 	<tr>
 		<td>bNoGroundSpawn</td>
-		<td></td>
 	</tr>
 	<tr>
 		<td>bAttachSource</td>
@@ -331,7 +341,7 @@ forwardSpeedRandom = 500</code></pre>
 	</tr>
 	<tr>
 		<td>friction</td>
-		<td>fraction of horizontal velocity lost when bouncing <em>specifically</em> off the <em>ground</em></td>
+		<td>fraction of horizontal velocity lost when bouncing <em>specifically</em> off the <a href="#WallsFloors"><em>ground</em></a></td>
 	</tr>
 	<tr id="airFriction">
 		<td>airFriction</td>
