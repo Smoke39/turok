@@ -462,14 +462,17 @@
 <h4 id="Height" class="funcDec">float&amp; <strong>Height</strong>()</h4>
 <h4 class="funcDec">float&amp; <strong>WallRadius</strong>()</h4>
 
-<h4 class="funcDec collapse">float&amp; <strong>FloorHeight</strong>()</h4>
-<h4 class="funcDec collapse"><!--const -->float <strong>GetFloorHeight</strong>()</h4>
+<h4 class="funcDec">float&amp; <strong>FloorHeight</strong>()</h4>
+<p>initial global z-coordinate of the floor at the current location, as defined in the map file</p>
+<p>modifying the reference value will not change the sector's height (see <code><a href="kWorld.html#ChangeSectorHeight">kWorld::ChangeSectorHeight()</a></code>), but will persist to subsequent calls to the function, allowing you to change what's considered the "initial" height</p>
+<h4 class="funcDec"><!--const -->float <strong>GetFloorHeight</strong>()</h4>
+<p>current global z-coordinate of the floor at the current location</p>
 <h4 class="funcDec collapse">float&amp; <strong>CeilingHeight</strong>()</h4>
 <h4 class="funcDec"><!--const -->float <strong>GetCeilingHeight</strong>()</h4>
-<p>global z-coordinate of the floor or ceiling at the current location</p>
+<p>global z-coordinate of the ceiling at the current location</p>
 <p><code>CeilingHeight()</code>'s value is only updated when the actor enters a new <a href="kWorld.html#MapStructure">sector</a>, making it coarse and imprecise</p>
 <aside>
-	modifying the refence values does nothing
+	modifying the refence value does nothing (but may persist like <code>FloorHeight()</code>; needs testing)
 </aside>
 <p></p>
 <aside>
