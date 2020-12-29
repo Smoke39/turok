@@ -35,6 +35,7 @@
 <p><code><a href="kWorld.html#MapStructure">sector</a></code> will be determined automatically if left at <code>-1</code>, although this seems to be unreliable compared to <code><a href="kActor.html#GetSectorIndexAtLocation">kActor::GetSectorIndexAtLocation()</a></code></p>
 <p>actor names and IDs are defined in defs/actors/, and IDs are enumerated in <code>turokActorTypes</code> in <a href="scripts.html#common">scripts/common.txt</a></p>
 <p>returns a handle to the actor that was spawned</p>
+<aside>if the actor requested is undefined, the string version will spawn a dummy with <code>-1</code> <a href="kActor.html#Type">type</a>, and the int version will spawn a dummy with the requested ID as its type</aside>
 
 
 </div><!-- main -->
