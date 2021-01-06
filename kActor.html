@@ -718,8 +718,12 @@ for every actor A in the general vicinity of origin
 <!--const -->float <em class="hasDef">arg1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg3</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg4</em> = <em class="defVal">0</em> )</h4>
 <p>for every actor <code>A</code> in the general vicinity of <code>position</code>, call:
 <pre><code>this.callbackFunc( A, arg1, arg2, arg3, arg4 );</code></pre></p>
-the callback function should be defined in the <a href="scripts.html#UserScripts">user script</a> (or a parent class) for the actor that called <code>InteractActorsAtPosition()</code>, with the following type signature:
+<p>the callback function should be defined in the <a href="scripts.html#UserScripts">user script</a> (or a parent class) for the actor that called <code>InteractActorsAtPosition()</code>, with the following type signature:
 <pre><code>void( kActor@, const float, const float, const float, const float )</code></pre></p>
+<aside>
+	<p>This will often apply to actors a long distance from <code>position</code>, so you may want to do a distance check in your callback function (e.g., for melee weapons).</p>
+	<p>On the other hand, this will often miss actors further than a few meters from <code>position</code>.  If you want to reliably operate on actors within a larger radius, you'll need to call this function multiple times with different <code>position</code> values.</p>
+</aside>
 
 <h4 class="funcDec">bool <strong>RandomDecision</strong>( <!--const -->int <em>i</em> )</h4>
 <p>probability of returning true is 1 / 2<sup><code>i</code>-1</sup>, except when <code>i</code> is <code>0</code>, in which case the probability is nearly 0</p>
