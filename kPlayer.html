@@ -43,9 +43,11 @@
 <h4 class="funcDec collapse"><!--const -->int <strong>GetAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
 <h4 class="funcDec"><!--const -->int <strong>GetAltAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
 <p>returns how much primary or alt ammo the player has for the specified weapon<a href="#weaponSlots">*</a>, respectively</p>
+<p>returns <code>0</code> for weapons with no ammo type defined</p>
 
 <h4 id="HasAmmo" class="funcDec"><!--const -->bool <strong>HasAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
 <p>returns whether the specified weapon<a href="#weaponSlots">*</a> has any ammo of <em>either</em> type</p>
+<p>always returns true for weapons with no ammo type defined</p>
 
 <h4 class="funcDec collapse"><!--const -->bool <strong>HasAltAmmo</strong>()</h4>
 <h4 class="funcDec"><!--const -->bool <strong>HasAltAmmo</strong>( <!--const -->int <em>weaponSlot</em> )</h4>
