@@ -41,7 +41,7 @@
 <p>called when the player collects <code>pickup</code></p>
 
 <h4 id="OnArmorDamage" class="funcDec"><span class="unimportant">void</span> <strong>OnArmorDamage</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em>, <span class="unimportant">const</span> int <em>damage</em> )</h4>
-<p>gets called instead of <code><a href="ScriptObject.html#OnDamage">OnDamage()</a></code>, if the player has any armor</p>
+<p>gets called instead of <code><a href="ScriptObject.html#OnDamage">OnDamage()</a></code>, if the player has any armor and <code>damage</code> > 0</p>
 <p>gets called before <a href="kPlayer.html#Armor">armor</a> value gets decremented</p>
 <p><code>damageDef</code> stores <a href="defs.html#damageInfo">damage type</a> properties</p>
 <p>all damage is absorbed, even if it's greater than the player's armor (armor will go negative)</p>
