@@ -695,7 +695,14 @@
 
 <h3 id="Other">Other Methods</h3>
 
-<h4 id="SpawnProjectile" class="funcDec"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
+<h4 id="SpawnProjectile" class="funcDec collapse"><span class="unimportant">void</span> <strong>SpawnProjectile</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v1</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v2</em>, <!--const -->float <em>f</em> )</h4>
+
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>q</em> )</h4>
+
+<h4 id="InflictGenericDamage" class="funcDec"><span class="unimportant">void</span> <strong>InflictGenericDamage</strong>( kActor@ <em>instigator</em>, <!--const -->int <em>amount</em> )</h4>
+<p>deal <code>amount</code> of damage to this actor</p>
+<p><code>instigator</code> will be passed on to <code><a href="ScriptObject.html#OnDamage">ScriptObject::OnDamage()</a></code>/<code><a href="ScriptObject.html#OnDeath">OnDeath()</a></code></p>
 
 <h4 id="MeleeObject" class="funcDec"><span class="unimportant">void</span> <strong>MeleeObject</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>damageType</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>offset</em>, <!--const -->float <em>radius</em> )</h4>
 <p>inflict <code>damageType</code> on all actors within range of the given offset, according to the following math:
@@ -710,10 +717,6 @@ for every actor A in the general vicinity of origin
 		inflict damageType on A
 }</code></pre></p>
 <p>damage types are defined in <a href="defs.html#damageInfo">defs/damageInfo.txt</a></p>
-
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SpawnFx</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>s</em>, <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const --><a href="kQuat.html">kQuat</a>&amp;<!--in--> <em>q</em> )</h4>
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>InflictGenericDamage</strong>( kActor@ <em>a</em>, <!--const -->int <em>i</em> )</h4>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>InteractActorsAtPosition</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>position</em>, <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>callbackFunc</em>,<br>
 <!--const -->float <em class="hasDef">arg1</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg2</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg3</em> = <em class="defVal">0</em>, <!--const -->float <em class="hasDef">arg4</em> = <em class="defVal">0</em> )</h4>

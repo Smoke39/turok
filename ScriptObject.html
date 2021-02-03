@@ -103,9 +103,17 @@
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnDeactivate</strong>()</h4>
 
 <h4 id="OnDamage" class="funcDec collapse"><span class="unimportant">void</span> <strong>OnDamage</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em>, <span class="unimportant">const</span> int <em>damage</em> )</h4>
-<h4 id="OnDeath" class="funcDec"><span class="unimportant">void</span> <strong>OnDeath</strong>( <a href="kActor.html">kActor</a>@ <em>killer</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em> )</h4>
+<h4 id="OnDeath" class="funcDec"><span class="unimportant">void</span> <strong>OnDeath</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em> )</h4>
 <p>gets called when taking damage, before the actor's <a href="kActor.html#Health">health</a> gets decremented</p>
-<p><code>damageDef</code> stores <a href="defs.html#damageInfo">damage type</a> properties</p>
+<p>
+	<code>instigator</code> will be:
+	<ul>
+		<li>the actor passed by <code><a href="kActor.html#InflictGenericDamage">kActor::InflictGenericDamage()</a></code></li>
+		<li>the source actor for <code><a href="kActor.html#MeleeObject">kActor::MeleeObject()</a></code></li>
+		<li>self (damage) or some non-null value (death; neither self nor player) for particles</li>
+	</ul>
+</p>
+<p><code>damageDef</code> stores <a href="defs.html#damageInfo">damage type</a> properties (<code>null</code> if sourced from <code><a href="kActor.html#InflictGenericDamage">kActor::InflictGenericDamage()</a></code>)</p>
 <p>if the actor dies, <code>OnDeath()</code> is called before <code>OnDamage()</code></p>
 <aside>
 	<code>OnDamage()</code> doesn't get called for the <a href="ScriptObjectPlayer.html">player</a> if he's invincible
