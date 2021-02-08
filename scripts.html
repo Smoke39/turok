@@ -141,7 +141,7 @@ if ( h !is null ) // "h refers to something" (true)</code></pre>
 <p>Bit fields essentially treat each bit in an integer as a boolean value, rather than interpreting all the bits together as a single number.  Individual bits can be managed using "bitwise" arithmetic.</p>
 
 <p>Bits can be tested using the "bitwise and" operator, <code>&amp;</code>:</p>
-<pre><code>if ( Player.Buttons() &amp; BC_FORWARD )
+<pre><code>if ( Player.Buttons() &amp; BC_FORWARD != 0 )
 	// player is holding "forward"</code></pre>
 
 <p>Bits can be combined or set using the "bitwise or" operator, <code>|</code>:</p>
