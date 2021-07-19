@@ -111,7 +111,7 @@
 				<li><a href="#Event">Event</a></li>
 				<li><a href="#Teleport">Teleport</a></li>
 				<li><a href="#Damage">Damage</a></li>
-				<li><a href="#SaveGame">Save Game</a></li>
+				<li><a href="#CheckpointSaveGame">Checkpoint &amp; Save Game</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -643,9 +643,9 @@
 
 <h4 id="Event">Event</h4>
 <ul>
-	<li><em>Arg 4</em>: target </em>TID</em></li>
+	<li><em>Arg 4</em>: target <em>TID</em></li>
 </ul>
-<p>Triggers all actors with the matching TID when the player enters the sector.  If there are no matching actors, the corresponding <a href="level_scripts.html#$script">$script</a> will be called instead, if there is one.</p>
+<p>Triggers all actors with the matching <em>TID</em> when the player enters the sector.  If there are no matching actors, the corresponding <a href="level_scripts.html#$script">$script</a> will be called instead, if there is one.</p>
 <p>The event is triggered once every tick for as long as the player is within the sector.</p>
 
 <h4 id="Teleport">Teleport</h4>
@@ -653,7 +653,7 @@
 	<li><em>Arg 1</em>: WarpPoint <em>TID</em></li>
 	<li><em>Arg 2</em>: destination <a href="defs.html#mapid">map ID</a></li>
 </ul>
-<p>WarpPoint <em>Target TID</em> does not matter</li>
+<aside class="unimportant">WarpPoint <em>Target TID</em> is supposed to match the level's <a href="defs.html#mapid">mapid</a>, but in practice doesn't seem to matter?</aside>
 
 <h4 id="Damage">Damage</h4>
 <ul>
@@ -667,11 +667,11 @@
 </ul>
 <p>The <em>Lava</em> flag reduces the player's speed (only works in conjunction with <em>Damage</em> flag).</p>
 
-<h4 id="SaveGame">Save Game</h4>
+<h4 id="CheckpointSaveGame">Checkpoint &amp; Save Game</h4>
 <ul>
-	<li><em>Arg 3</em>: TID of WarpPoint player spawns at when save is loaded</li>
+	<li><em>Arg 3</em>: <em>TID</em> of WarpPoint player spawns at</li>
 </ul>
-<p>WarpPoint <em>Target TID</em> must match the level's <a href="defs.html#mapid">mapid</a></li>
+<aside class="unimportant">WarpPoint <em>Target TID</em> is supposed to match the level's <a href="defs.html#mapid">mapid</a>, but in practice doesn't seem to matter?</aside>
 
 <h4 id="ShallowWater">Shallow Water</h4>
 <p>when paired with the <em>Water</em> flag, prevents the player from entering the swimming state, and allows enemies that can't swim to enter the sector</p>
