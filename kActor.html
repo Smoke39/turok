@@ -78,7 +78,10 @@
 <h3 id="Core">Core</h3>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>Remove</strong>()</h4>
+<p>remove the actor from the game</p>
+
 <h4 class="funcDec"><!--const -->bool <strong>IsStale</strong>()</h4>
+<p>returns true if the actor has been flagged for removal, and is no longer valid</p>
 
 <div id="PersistentBit">
 <h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>MarkPersistentBit</strong>( <!--const -->bool <em>bUnmark</em> )</h4>
@@ -105,7 +108,7 @@
 <h4 class="funcDec">bool <strong>InstanceOf</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>className</em> )</h4>
 <p>returns whether this actor's associated <a href="scripts.html#NativeClasses">native object</a> is an instance of <code>className</code>, or a subclass thereof (this refers to kex-prefixed classes, not script classes)</p>
 
-<h4 class="funcDec">kActor@ <strong>CastToActor</strong>()</h4>
+<h4 class="funcDec collapse">kActor@ <strong>CastToActor</strong>()</h4>
 <h4 class="funcDec"><a href="kAI.html">kAI</a>@ <strong>CastToAI</strong>()</h4>
 
 <h4 id="GameTicks" class="funcDec"><!--const -->int <strong>GameTicks</strong>()</h4>
@@ -345,6 +348,7 @@
 <p>which model variant to use (e.g., regular or cyborg variant of raptor)</p>
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Scale</strong>()</h4>
+<p>model scale</p>
 
 <h4 id="AnimState" class="funcDec"><a href="kAnimState.html">kAnimState</a>&amp; <strong>AnimState</strong>()</h4>
 <p>returns a reference to the actor's <a href="kAnimState.html">anim state</a></p>
@@ -459,8 +463,10 @@
 
 <h3 id="Collision">Collision</h3>
 
-<h4 class="funcDec">float&amp; <strong>Radius</strong>()</h4>
+<h4 class="funcDec collapse">float&amp; <strong>Radius</strong>()</h4>
 <h4 id="Height" class="funcDec">float&amp; <strong>Height</strong>()</h4>
+<p>collision volume dimensions</p>
+
 <h4 class="funcDec">float&amp; <strong>WallRadius</strong>()</h4>
 
 <h4 class="funcDec">float&amp; <strong>FloorHeight</strong>()</h4>
@@ -612,7 +618,7 @@
 
 <h3 id="Targeting">Targeting</h3>
 
-<h4 class="funcDec"><span class="unimportant">void</span> <strong>SetTarget</strong>( kActor@ <em>a</em> )</h4>
+<h4 class="funcDec collapse"><span class="unimportant">void</span> <strong>SetTarget</strong>( kActor@ <em>a</em> )</h4>
 <h4 class="funcDec">kActor@ <strong>GetTarget</strong>()</h4>
 
 <h4 id="CanSee" class="funcDec collapse"><!--const -->bool <strong>CanSee</strong>( kActor@ <em>a</em>, <!--const -->uint <em class="hasDef">clipFlags</em> = <em class="defVal">0</em> )</h4>
