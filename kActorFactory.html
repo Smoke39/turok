@@ -29,12 +29,19 @@
 
 <h3 id="Methods">Methods</h3>
 
+
 <h4 class="funcDec collapse"><a href="kActor.html">kActor</a>@ <strong>Spawn</strong>( <!--const -->int <em>actorID</em>, <!--const -->float <em>x</em>, <!--const -->float <em>y</em>, <!--const -->float <em>z</em>, <!--const -->float <em>yaw</em>, <!--const -->int <em class="hasDef">sector</em> = <em class="defVal">-1</em> )</h4>
+
 <h4 class="funcDec"><a href="kActor.html">kActor</a>@ <strong>Spawn</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>actorName</em>, <!--const -->float <em>x</em>, <!--const -->float <em>y</em>, <!--const -->float <em>z</em>, <!--const -->float <em>yaw</em>, <!--const -->int <em class="hasDef">sector</em> = <em class="defVal">-1</em> )</h4>
+
 <p>spawn an actor at the given global coordinates, with the given rotation (in radians)</p>
-<p><code><a href="kWorld.html#MapStructure">sector</a></code> will be determined automatically if left at <code>-1</code>, although this seems to be unreliable compared to <code><a href="kActor.html#GetSectorIndexAtLocation">kActor::GetSectorIndexAtLocation()</a></code></p>
+
+<p>The default <code><a href="kWorld.html#MapStructure">sector</a></code> will leave the actor "outside" the level's nav mesh.  If you need the actor to interact with the level or other actors, it'll likely be necessary to provide a proper sector, either by using <code><a href="kActor.html#SectorIndex">kActor::SectorIndex()</a></code> of another actor in the same sector, or more generally with <code><a href="kActor.html#GetSectorIndexAtLocation">kActor::GetSectorIndexAtLocation()</a></code>.</p>
+
 <p>actor names and IDs are defined in defs/actors/, and IDs are enumerated in <code>turokActorTypes</code> in <a href="scripts.html#common">scripts/common.txt</a></p>
+
 <p>returns a handle to the actor that was spawned</p>
+
 <aside>if the actor requested is undefined, the string version will spawn a dummy with <code>-1</code> <a href="kActor.html#Type">type</a>, and the int version will spawn a dummy with the requested ID as its type</aside>
 
 
