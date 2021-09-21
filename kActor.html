@@ -347,7 +347,7 @@
 <h4 class="funcDec">int&amp; <strong>ModelVariation</strong>()</h4>
 <p>which model variant to use (e.g., regular or cyborg variant of raptor)</p>
 
-<h4 class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Scale</strong>()</h4>
+<h4 id="Scale" class="funcDec"><a href="kVec3.html">kVec3</a>&amp; <strong>Scale</strong>()</h4>
 <p>model scale</p>
 
 <h4 id="AnimState" class="funcDec"><a href="kAnimState.html">kAnimState</a>&amp; <strong>AnimState</strong>()</h4>
@@ -671,7 +671,8 @@
 <h3 id="Spatial">Spatial</h3>
 
 <h4 class="funcDec"><a href="kVec3.html">kVec3</a> <strong>GetTransformedVector</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>localOffset</em> )</h4>
-<p>multiplies <code>localOffset</code> by <code>Scale()</code>, converts to global coordinates based on orientation (<code>Yaw()</code>?  not <code>Rotation()</code>, since it doesn't take player view pitch into account), and returns the result added to <code>Origin()</code></p>
+<p>returns <code>localOffset</code> converted to global coordinates based on actor's <code><a href="#Scale">Scale()</a></code>, <code><a href="#Origin">Origin()</a></code>, and orientation</p>
+<p>for the player, this doesn't take view pitch into account; for other actors, it does take slope tilt into account</p>
 
 <h4 class="funcDec">float <strong>GetTurnYaw</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
 <h4 class="funcDec">float <strong>GetAvoidanceAngle</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
