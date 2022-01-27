@@ -142,11 +142,18 @@
 	<li>
 		<span>AF_HIDDEN</span>
 	</li>
-	<li>
+	<li id="AF_ACTIVATED">
 		<span>AF_ACTIVATED</span>
+		<span>&ndash;</span>
+		<span>
+			prevents actor from being triggered (by <a href="kWorld.html#TriggerActorsByTID">script</a>, <a href="levels.html#TargetTID">actor</a>, or <a href="levels.html#Event">sector</a>)<br>
+			gets set automatically when the actor is triggered
+		</span>
 	</li>
 	<li>
 		<span>AF_DISABLED</span>
+		<span>&ndash;</span>
+		<span>cleared when the actor is triggered</span>
 	</li>
 	<li>
 		<span>AF_ENTEREDAREAEVENT</span>

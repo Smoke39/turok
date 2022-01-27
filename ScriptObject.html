@@ -100,6 +100,9 @@
 <p>no script destructors are called until after all <code>OnEndLevel()</code> events have completed</p>
 
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnActivate</strong>()</h4>
+<p>called when the actor is triggered (by <a href="kWorld.html#TriggerActorsByTID">script</a>, <a href="levels.html#TargetTID">actor</a>, or <a href="levels.html#Event">sector</a>)</p>
+<p><code><a href="kActor.html#AF_ACTIVATED">AF_ACTIVATED</a></code> gets set before this gets called</p>
+
 <h4 class="funcDec"><span class="unimportant">void</span> <strong>OnDeactivate</strong>()</h4>
 
 <h4 id="OnDamage" class="funcDec collapse"><span class="unimportant">void</span> <strong>OnDamage</strong>( <a href="kActor.html">kActor</a>@ <em>instigator</em>, <a href="kDictMem.html">kDictMem</a>@ <em>damageDef</em>, <span class="unimportant">const</span> int <em>damage</em> )</h4>
