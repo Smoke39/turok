@@ -52,18 +52,18 @@
 	</li>
 	<li>
 		<span>AAF_BLOCK</span>
-		<span></span>
-		<span></span>
+		<span>&ndash;</span>
+		<span>block entry</span>
 	</li>
 	<li>
 		<span>AAF_TOGGLE</span>
-		<span></span>
-		<span></span>
+		<span>&ndash;</span>
+		<span>allows <code>AAF_BLOCK</code> sectors to be mapped normally</span>
 	</li>
 	<li>
 		<span>AAF_CLIFF</span>
 		<span>&ndash;</span>
-		<span>slopes too steep to walk on  (clearing via script does nothing)</span>
+		<span>slopes too steep to walk on (clearing via script does nothing)</span>
 	</li>
 	<li id="AAF_CLIMB">
 		<span>AAF_CLIMB</span>
@@ -95,13 +95,13 @@
 		<span>&ndash;</span>
 		<span>don't show on the map</span>
 	</li>
-	<li>
+	<li class="void">
 		<span>AAF_ENTERED</span>
-		<span></span>
-		<span></span>
+		<span>&ndash;</span>
+		<span>[no effect] (used internally by editor for flood fill operations; cleared on save)</span>
 	</li>
 	<li>
-		<span>2048</span>
+		<span>1 &lt;&lt; 11</span>
 		<span>&ndash;</span>
 		<span>secret area</span>
 	</li>
@@ -112,8 +112,8 @@
 	</li>
 	<li>
 		<span>AAF_SLOPETEST</span>
-		<span></span>
-		<span></span>
+		<span>&ndash;</span>
+		<span>set/clear AAF_CLIFF dynamically based on how steep the sector is</span>
 	</li>
 	<li id="AAF_DEATHPIT">
 		<span>AAF_DEATHPIT</span>
@@ -130,10 +130,10 @@
 		<span>&ndash;</span>
 		<span>trigger some kind of event when entered, like enemies appearing, or a door opening</span>
 	</li>
-	<li>
-		<span>AAF_REPEATABLE</span><!-- hub key panels, button on level 2 also plays sound every time you step on it, even though it doesn't have this, buttons at beginning of catacombs can be pressed again after resetting without this -->
-		<span></span>
-		<span></span>
+	<li class="void">
+		<span>AAF_REPEATABLE</span>
+		<span>&ndash;</span>
+		<span>[unused]</span>
 	<li id="AAF_TELEPORT">
 		<span>AAF_TELEPORT</span>
 		<span>&ndash;</span>
@@ -160,9 +160,9 @@
 		<span>floor slows player down when combined with <code>AAF_DAMAGE</code></span>
 	</li>
 	<li>
-		<span>AAF_EVENTSOUND</span><!-- buttons on level 2, but not level 1 -->
-		<span></span>
-		<span></span>
+		<span>AAF_EVENTSOUND</span>
+		<span>&ndash;</span>
+		<span>play a sound when entered by the player (paired with <code>AAF_EVENT</code>)</span>
 	</li>
 	<li>
 		<span>AAF_ANTIGRAVITY</span>
@@ -184,10 +184,10 @@
 		<span>&ndash;</span>
 		<span>save totem</span>
 	</li>
-	<li>
+	<li class="void">
 		<span>AAF_WARPRETURN</span>
-		<span></span>
-		<span></span>
+		<span>&ndash;</span>
+		<span>[unused]</span>
 	</li>
 	<li id="AAF_SHALLOWWATER">
 		<span>AAF_SHALLOWWATER</span>
@@ -201,6 +201,11 @@
 		<span>AAF_DRAWSUN</span>
 		<span>&ndash;</span>
 		<span>render the sun (and <a href="console.html#lightScatter">light scatter</a>, if enabled)</span>
+	</li>
+	<li class="void">
+		<span>1 &lt;&lt; 31</span>
+		<span>&ndash;</span>
+		<span>Store Warp Return [unused]</span>
 	</li>
 </ul>
 
@@ -225,7 +230,7 @@
 <p>typical <code>arg</code> usage:</p>
 <ol class="bold">
 	<li value="0">warp ID</li>
-	<li>warp level ID or trigger sound ID</li>
+	<li>warp level ID or event sound ID</li>
 	<li>checkpoint ID</li>
 	<li>tag ID</li>
 	<li>floor damage hit points</li>

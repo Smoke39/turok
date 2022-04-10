@@ -645,6 +645,8 @@
 
 <p>The <em>Hidden</em> flag works like another color &ndash; the edge will only be hidden if the hidden sector has the lower <em>Draw Order</em>.</p>
 
+<p>The <em>Toggle</em> flag allows <em>Block</em> sectors to be added to the automap like normal.</p>
+
 
 <h3 id="SectorFlags">Sector Flags</h3>
 
@@ -674,6 +676,15 @@
 </ul>
 <p>The <em>Lava</em> flag reduces the player's speed (only works in conjunction with <em>Damage</em> flag).</p>
 
+<h4 id="EventSound">Event Sound</h4>
+<ul>
+	<li><em>Arg 2</em>: sound ID, as defined in defs/fileLookup.txt
+		<ul>
+			<li><code>461</code> is the pressure plate click</li>
+		</ul>
+</ul>
+<p>When paired with the <em>Event</em> flag, plays a sound when the player enters the sector.</p>
+
 <h4 id="CheckpointSaveGame">Checkpoint &amp; Save Game</h4>
 <ul>
 	<li><em>Arg 3</em>: <em>TID</em> of WarpPoint player spawns at</li>
@@ -681,7 +692,7 @@
 <aside class="unimportant">WarpPoint <em>Target TID</em> is supposed to match the level's <a href="defs.html#mapid">mapid</a>, but in practice doesn't seem to matter?</aside>
 
 <h4 id="ShallowWater">Shallow Water</h4>
-<p>when paired with the <em>Water</em> flag, prevents the player from entering the swimming state, and allows enemies that can't swim to enter the sector</p>
+<p>When paired with the <em>Water</em> flag, prevents the player from entering the swimming state, and allows enemies that can't swim to enter the sector.</p>
 
 
 </div><!-- main -->
