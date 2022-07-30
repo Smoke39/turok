@@ -108,8 +108,10 @@
 <h4 class="funcDec">bool <strong>InstanceOf</strong>( <!--const --><a href="kStr.html">kStr</a>&amp;<!--in--> <em>className</em> )</h4>
 <p>returns whether this actor's associated <a href="scripts.html#NativeClasses">native object</a> is an instance of <code>className</code>, or a subclass thereof (this refers to kex-prefixed classes, not script classes)</p>
 
-<h4 class="funcDec collapse">kActor@ <strong>CastToActor</strong>()</h4>
+<h4 class="funcDec">kActor@ <strong>CastToActor</strong>()</h4>
+
 <h4 class="funcDec"><a href="kAI.html">kAI</a>@ <strong>CastToAI</strong>()</h4>
+<p>returns non-null even if actor isn't an AI; validate with <code>InstanceOf("kexAI")</code> if uncertain</p>
 
 <h4 id="GameTicks" class="funcDec"><!--const -->int <strong>GameTicks</strong>()</h4>
 <p>how many <a href="scripts.html#TickRate">ticks</a> the actor has existed for</p>
