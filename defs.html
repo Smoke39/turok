@@ -60,7 +60,10 @@
 <table>
 	<tr>
 		<td>damage</td>
-		<td>base damage</td>
+		<td>
+			<p>base damage</p>
+			<p>defaults to <code>1</code> if unspecified</p>
+		</td>
 	</tr>
 	<tr>
 		<td>randomFactor</td>
@@ -68,6 +71,7 @@
 			<p>minimum random damage scalar</p>
 			<p>damage will be randomized within the range <code>randomFactor*damage</code> to <code>damage</code></p>
 			<p>values &geq; <code>1.0</code> will always result in <code>damage</code></p>
+			<p>defaults to <code>1</code> if unspecified</p>
 		</td>
 	</tr>
 	<tr>
@@ -103,7 +107,7 @@
 	</tr>
 	<tr>
 		<td>bCauseSpecialAnimation</td>
-		<td></td>
+		<td>mantis and t-rex will sometimes recoil when hit with this</td>
 	</tr>
 	<tr>
 		<td>bKnockback</td>
@@ -118,7 +122,7 @@
 	</tr>
 	<tr>
 		<td>bShove</td>
-		<td></td>
+		<td>player is thrown into the air and away from point of impact if hit with this</td>
 	</tr>
 	<tr>
 		<td>bQuake</td>
