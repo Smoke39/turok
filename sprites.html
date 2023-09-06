@@ -30,6 +30,8 @@ sprite &lt;N&gt; &lt;x&gt; &lt;y&gt; &lt;width&gt; &lt;height&gt;</code></pre>
 
 <p>The top-left of the texture is at <code>0 0</code>, and width and height extend right and down.</p>
 
+<aside class="important">Sprites with the same name will be treated as the same sprite.  For example, particles that refer to <span style="display:inline-block">"sprites/things/somesprite"</span> and <span style="display:inline-block">"sprites/stuff/somesprite"</span> will both use the same sprite.  Whichever sprite the engine tries to use first will take precedence.</aside>
+
 <h3></h3>
 <img style="float:right; margin:0 0 1em 1em;" src="sprite1 in-game.png">
 <p>Coordinates refer to the top-left corner of texels, rather than their center.  For example, this texture and definition should result in a white square that fades to transparent at its edges, but instead it appears in-game as the screenshot on the right:</p>

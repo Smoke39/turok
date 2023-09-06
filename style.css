@@ -218,6 +218,10 @@ ol.alpha
 {
 	background-color: #E5E5AA;
 }
+.important pre code
+{
+	box-shadow: 3px 3px 0 #D5D5AA;
+}
 
 .unimportant
 {

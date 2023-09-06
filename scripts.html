@@ -134,6 +134,14 @@ if ( h is b )     // "h refers to b" (false)
 if ( h !is null ) // "h refers to something" (true)</code></pre>
 
 
+<h4 id="Includes">Includes</h3>
+
+<aside class="important"><p>Files with the same name are treated as the same file.  Whichever one gets processed first will take precedence.</p>
+<pre><code>#include "scripts/things/code.txt"
+#include "scripts/stuff/code.txt" // ignored
+</code></pre></aside>
+
+
 <h4 id="BitFields">Bit Fields</h3>
 
 <p>Turok EX uses bit fields for a variety of things, so here's a very quick primer on them.</p>
