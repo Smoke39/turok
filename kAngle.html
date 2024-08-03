@@ -25,7 +25,7 @@
 <h2><span class="breadcrumb"><a href="scripts.html">Scripts</a></span> kAngle</h2>
 
 <p>A kAngle is simply a float that stays within <code>&plusmn;&pi;</code>.  Values outside the range aren't simply clamped, but rather converted to an equivalent angle within the range.</p>
-<p>This saves you from having to worry about things like equivalent angles offset by multiples of 2&pi;, and the difference between two angles will always be the shorter offset.  For example, <code>-0.75&pi; - 0.75&pi;</code> will return <code>&pi;</code>, not <code>-1.5&pi;</code>.</p>
+<p>This saves you from having to worry about things like equivalent angles offset by multiples of 2&pi;, and the difference between two angles will always be the shorter offset.  For example, <code>-0.75&pi; - 0.75&pi;</code> will return <code>0.5&pi;</code>, not <code>-1.5&pi;</code>.</p>
 
 
 <h3 id="Constructors">Constructors</h3>
