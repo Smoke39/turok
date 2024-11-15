@@ -415,7 +415,7 @@
 	this seems to update the actor's <a href="kWorld.html#MapStructure">sector</a> more reliably than modifying <code><a href="#Origin">Origin()</a></code>
 </aside>
 
-<h4 class="funcDec collapse"><a href="kAngle.html">kAngle</a>&amp; <strong>Yaw</strong>()</h4>
+<h4 id="Yaw" class="funcDec collapse"><a href="kAngle.html">kAngle</a>&amp; <strong>Yaw</strong>()</h4>
 <h4 class="funcDec collapse"><a href="kAngle.html">kAngle</a>&amp; <strong>Pitch</strong>()</h4>
 <h4 class="funcDec"><a href="kAngle.html">kAngle</a>&amp; <strong>Roll</strong>()</h4>
 <p>orientation of the actor, applied in the order listed</p>
@@ -693,6 +693,8 @@
 <p>for the player, this doesn't take view pitch into account; for other actors, it does take slope tilt into account</p>
 
 <h4 class="funcDec">float <strong>GetTurnYaw</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
+<p>offset from current <code><a href="#Yaw">Yaw()</a></code> to face global point <code>v</code></p>
+
 <h4 class="funcDec">float <strong>GetAvoidanceAngle</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em>, <!--const -->float <em>f</em> )</h4>
 
 <h4 class="funcDec collapse">float <strong>DistanceToPoint</strong>( <!--const --><a href="kVec3.html">kVec3</a>&amp;<!--in--> <em>v</em> )</h4>
