@@ -125,6 +125,8 @@
 <ul class="enum">
 	<li>
 		<span>AF_SOLID</span>
+		<span>&ndash;</span>
+		<span>block other actors, and enable particle collision</span>
 	</li>
 	<li>
 		<span>AF_DORMANT</span>
@@ -185,6 +187,11 @@
 	</li>
 	<li>
 		<span>AF_DEAD</span>
+		<span>&ndash;</span>
+		<span>
+			enables particle collision even if <code>AF_SOLID</code> is not set<br>
+			set automatically when health is depleted by damage (but not by manually decrementing <code><a href="#Health">Health()</a></code>)
+		</span>
 	</li>
 	<li>
 		<span>AF_STATIONARY</span>
@@ -208,6 +215,11 @@
 	</li>
 	<li>
 		<span>AF_CANBETOUCHED</span>
+		<span>&ndash;</span>
+		<span>
+			enables <code><a href="ScriptObject.html#OnTouch">ScriptObject::OnTouch()</a></code><br>
+			negates <code>AF_SOLID</code>
+		</span>
 	</li>
 	<li>
 		<span>AF_IGNORESOUNDEVENTS</span>
